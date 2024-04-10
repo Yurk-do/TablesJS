@@ -1,0 +1,107 @@
+import { Column } from "../types/table";
+
+export const TABLE_COLUMNS: Column[] = [
+    {
+        width: '60px',
+        align: 'center',
+        type: 'html',
+        title: ' ',
+    },
+    { width: '220px', align: 'left', type: 'text', title: ' ' },
+    {
+        width: '50px',
+        align: 'right',
+        type: 'numeric',
+        title: 'M/Q',
+        mask: '#.##0,0',
+    },
+    {
+        width: '50px',
+        align: 'right',
+        type: 'numeric',
+        title: 'T/D',
+        mask: '#.##0,0',
+    },
+    {
+        width: '70px',
+        align: 'right',
+        type: 'numeric',
+        mask: '#.##0',
+        title: 'TOTAL €',
+        readOnly: true,
+    },
+    {
+        width: '50px',
+        align: 'right',
+        type: 'numeric',
+        title: 'M/Q',
+        mask: '#.##0,0',
+    },
+    {
+        width: '50px',
+        align: 'right',
+        type: 'numeric',
+        title: 'T/D',
+        mask: '#.##0,0',
+    },
+    {
+        width: '70px',
+        align: 'right',
+        type: 'numeric',
+        title: '€',
+        readOnly: true,
+        mask: '#.##0,0',
+    },
+    {
+        width: '50px',
+        align: 'right',
+        type: 'numeric',
+        title: 'OT €',
+        mask: '#.##0',
+        readOnly: true,
+    },
+    {
+        width: '70px',
+        align: 'right',
+        type: 'numeric',
+        title: 'TOTAL €',
+        readOnly: true,
+        mask: '#.##0',
+    },
+    {
+        width: '100px',
+        align: 'right',
+        type: 'numeric',
+        title: '∑ €',
+        readOnly: true,
+        mask: '#.##0',
+    },
+    {
+        width: '140px',
+        align: 'left',
+        type: 'numeric',
+        title: 'Bemerkung',
+    },
+    {
+        type: 'dropdown',
+        width: '40px',
+        source: [1, 2, 3],
+        align: 'center',
+        title: '#',
+    },
+    {
+        type: 'checkbox',
+        width: '65px',
+        align: 'center',
+        title: 'Splitten',
+    },
+    {
+        width: '740px',
+        align: 'left',
+        type: 'text',
+        title: 'Text im Anschreiben EN',
+        readOnly: true,
+    },
+];
+export const TABLE_COLUMN_NAMES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
+export const CATEGORY_ROW_STYLES = 'background-color: #35354e; border-top: 1px solid #232337; border-left: 1px solid #232337 !important;';

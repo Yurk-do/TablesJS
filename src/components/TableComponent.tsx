@@ -17,7 +17,7 @@ type PropsType = {
 }
 
 const StyleTableComponent = styled.div`
- 
+  position: relative;
 `;
 
 jspreadsheet.setLicense(license)

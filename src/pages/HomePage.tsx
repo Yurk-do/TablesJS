@@ -7,6 +7,7 @@ import { HIDDEN_CATEGORIES } from "../mocks/hidden-categories";
 
 export const HomePage = () => {
     const hiddenCategories = _.cloneDeep(HIDDEN_CATEGORIES);
+
     const createDataForVizual = (): IDataForVizual => {
         const result = _.cloneDeep(chapterList).reduce<Record<string, any>>((result, chapter) => {
             result[chapter.name] = {
@@ -60,13 +61,16 @@ export const HomePage = () => {
     }
         return (
       <div>
-        <TableComponent
-          categories={CHAPTERS[0].categories}
-          dataForVizual={createDataForVizual()}
-          editable={true}
-          isShowFormulas={true}
-          isShowZeroValues={true}
-        />
+          {CHAPTERS.map((chapter) =>
+            <TableComponent
+              key={chapter.name}
+              categories={chapter.categories}
+              dataForVizual={createDataForVizual()}
+              editable={true}
+              isShowFormulas={true}
+              isShowZeroValues={true}
+            />
+          )}
       </div>
   );
 };

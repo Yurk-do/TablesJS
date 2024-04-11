@@ -1282,5 +1282,5 @@
 
 /* TODO: разобраться в проблеме и убрать*/
 .jss_scroll {
-  display: none;
+  height: auto !important;
 }

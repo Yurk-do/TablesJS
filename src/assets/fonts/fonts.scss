@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "Inter Regular";
+  font-weight: normal;
+  src: local("Inter"), url("inter.ttf") format("truetype");
+}
+
+$mainFont: Inter, sans-serif !important;

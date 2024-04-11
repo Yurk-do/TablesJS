@@ -1,5 +1,5 @@
-import { Chapter } from "../types/chapter";
-export const chapterList: Chapter[] = [
+import { IChapter } from "../types/chapter";
+export const chaptersList: IChapter[] = [
   {
     id: 1,
     name: 'Pre-production',

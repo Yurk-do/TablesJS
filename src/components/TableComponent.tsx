@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { jspreadsheet } from "@jspreadsheet/react";
 import { license } from "../constants";
-import styled from "styled-components";
 import _ from "lodash";
 import { CATEGORY_ROW_STYLES, TABLE_COLUMN_NAMES, TABLE_COLUMNS } from "../constants/columns";
 import { ITableData, RowModel } from "../types/table";
 import { FORMULAS_COLUMN_INDEX, INIT_CONFIG } from "./constants";
 import { ICategoryDataForVizual } from "../types/chapter";
+import styled from "@emotion/styled";
 
 type PropsType = {
   categories: ITableData[];

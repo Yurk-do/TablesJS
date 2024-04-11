@@ -20,7 +20,7 @@ export interface IDataForVizual {
     [key: string]: IChapterConf;
 }
 
-export interface Chapter {
+export interface IChapter {
     id: number;
     name: string;
     completed: boolean;

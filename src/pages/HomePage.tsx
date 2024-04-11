@@ -37,6 +37,7 @@ export const HomePage = () => {
     const [activeFullScreenChapter, setActiveFullScreenChapter] = useState<IChapterInfo  | null>(null);
 
     const createDataForVizual = (): IDataForVizual => {
+        console.log('createDataForVizual');
         const result = chapterList.reduce<Record<string, any>>((result, chapter) => {
             result[chapter.name] = {
                 name: chapter.name,
@@ -90,8 +91,7 @@ export const HomePage = () => {
 
     const [isFullScreenMode, setIsFullScreenMode] = useState(false);
 
-    const [dataForVizual, setDataForVizual] = useState(createDataForVizual());
-
+    const [dataForVizual, setDataForVizual] = useState(() => createDataForVizual());
 
     const changeChapterInitOpen = (chapter: IChapterConf) => {
         setDataForVizual({
@@ -117,6 +117,16 @@ export const HomePage = () => {
         },
         [dataForVizual]
     );
+
+    const updateChapterTotal = (chapterName: string, total: number)=> {
+        setDataForVizual((prevData) => ({
+            ...prevData,
+            [chapterName]: {
+                ...prevData[chapterName],
+                'total': total,
+            },
+        }));
+    };
     return (
       <div>
           <StyledMainCounterContainer>
@@ -152,10 +162,11 @@ export const HomePage = () => {
                           <TableComponent
                               key={chapter.name}
                               categories={chapter.categories}
-                              dataForVizual={createDataForVizual()}
+                              dataForVizual={dataForVizual[chapter.name].categories}
                               editable={true}
                               isShowFormulas={true}
                               isShowZeroValues={true}
+                              updateChapterTotal={(total) => updateChapterTotal(chapter.name, total)}
                           />
                       </div>
                   </div>}

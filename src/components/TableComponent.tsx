@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { jspreadsheet } from "@jspreadsheet/react";
 import { license } from "../constants";
 import _ from "lodash";
@@ -14,6 +14,7 @@ type PropsType = {
   editable: boolean;
   isShowFormulas: boolean;
   isShowZeroValues: boolean;
+  updateChapterTotal: (total: number) => void;
 }
 
 const StyleTableComponent = styled.div`
@@ -43,7 +44,8 @@ export const TableComponent = ({
   dataForVizual,
   editable,
   isShowFormulas,
-  isShowZeroValues
+  isShowZeroValues,
+  updateChapterTotal
 }: PropsType) => {
   const jssRef = useRef<any | null>(null);
 
@@ -133,6 +135,12 @@ export const TableComponent = ({
     return { rows: result, categoryRows, cells, styles, mergeCells }
   };
 
+  const [tableData, setTableData] = useState(!categories ? initialTableData : getTableData(categories));
+
+  useEffect(() => {
+    setTableData(!categories ? initialTableData : getTableData(categories));
+  }, [categories, dataForVizual, isShowFormulas, isShowZeroValues]);
+
   const getColumnsConfig = (editMode: boolean) => {
     return columns.map((column: any, index: number) => {
       if (FORMULAS_COLUMN_INDEX.includes(index)) {
@@ -142,9 +150,18 @@ export const TableComponent = ({
     });
   };
 
-  useEffect(() => {
-    const tableData = !categories ? initialTableData : getTableData(categories);
+  const updateTotal = (worksheet: jspreadsheet.worksheetInstance) => {
+    const result = +tableData.categoryRows
+        // @ts-ignore
+        .reduce((cur, categoryRow) => {
+          let value: any = worksheet.getValue(`K${categoryRow.rowIndex}`, true);
+          return cur + +value.replaceAll('.', '');
+        }, 0)
+        .toFixed(2);
+    updateChapterTotal(result);
+  }
 
+  useEffect(() => {
     jssRef.current?.jspreadsheet?.[0]?.deleteWorksheet(0);
 
     jspreadsheet(jssRef.current, {
@@ -159,8 +176,11 @@ export const TableComponent = ({
             mergeCells: tableData.mergeCells,
           },
         ] as any[],
+        onafterchanges: (worksheet) => {
+        updateTotal(worksheet);
+      },
       });
-  }, [categories, dataForVizual, isShowFormulas, isShowZeroValues]);
+  }, [tableData]);
 
   return <StyleTableComponent ref={jssRef}></StyleTableComponent>;
 };

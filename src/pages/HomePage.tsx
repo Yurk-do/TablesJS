@@ -3,31 +3,182 @@ import { CHAPTERS } from "../mocks/chapters";
 import _, {isNil} from "lodash";
 import { HIDDEN_CATEGORIES } from "../mocks/hidden-categories";
 import { Chapter } from "../components/Chapter";
-import {useMemo, useState} from "react";
-import { IChapterInfo } from "../types/table";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {IChapterInfo, ScrollConfig} from "../types/table";
 import { IChapter, IChapterConf, IDataForVizual } from "../types/chapter";
 import { chaptersList } from "../mocks/chapter-mocks";
 import styled from "@emotion/styled";
+import {jspreadsheet} from "@jspreadsheet/react";
+import openArrows from 'assets/open-arrows.svg';
+import closeArrow from 'assets/close-arrows.svg';
+import {
+  AppBar,
+  Box,
+  Button,
+  Card,
+  CardHeader,
+  Drawer,
+  IconButton, Modal,
+  Tab,
+  Tabs,
+  Toolbar,
+} from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import HistoryIcon from '@mui/icons-material/History';
+import {NavigationDrawer} from "../components/NavigationDrawer/NavigationDrawer";
+import {useLayout} from "../components/NavigationDrawer/useLayout";
 
-const StyledMainCounterContainer = styled.div`
-   width: 200px;
-   height: 200px;
-   border-radius: 50%;
-   background-color: black;
-   display: flex;
-   align-items: center;
-   justify-content: center; 
-    margin-bottom: 20px;
+const headerHeight=  48;
+
+const StyledHomePage = styled.div`
 `;
 
-const StyledMainCounter = styled.div`
-  font-size: 24px;  
-  color: white;
+const StyledAppBar = styled(AppBar)`
+  background-color: #DEECF9;
+  color: black;
+`;
+
+const StyledCard = styled(Card)`
+    &.MuiCard-root {
+        border-radius: 12px;
+        box-shadow: none;
+        border: 1px solid #8484AB;
+    }   
+    & .MuiCardHeader-content > span {
+        text-align: start;
+    }   
+    
+    & .MuiCardHeader-content > .MuiCardHeader-title {
+        font-size: 18px;
+    }    
+    
+    & .MuiCardHeader-content > .MuiCardHeader-subheader {
+        color: #027472;
+    }
+`;
+
+const StyledHeaderToolbar = styled(Toolbar)`
+    &.MuiToolbar-root {
+      min-height: ${headerHeight}px;
+    }
+`;
+
+const StyledTabs = styled(Tabs)`
+  background-color: #DEECF9;
+  color: black;
+`;
+
+const StyledLogo = styled.div`
+`;
+
+const StyledDrawer = styled(Drawer)`
+  & > .MuiDrawer-paperAnchorDockedRight {
+    border: none;
+    top: ${headerHeight}px;
+  }
+`;
+
+const StyledTablesContainer = styled.div<{ width: string }>`
+  margin: ${headerHeight}px 0 0 0;
+  width: ${({ width }) => width};
+`;
+
+
+const StyledRightPanelHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  
+  & > h2 {
+    margin: 0;
+  }
+`;
+
+const StyledCloseIcon = styled(CloseIcon)`
+  cursor: pointer;
+`;
+
+const StyledHistoryIcon = styled(HistoryIcon)`
+  cursor: pointer;
+`;
+
+const StyledToolbar = styled.div`
+  display: flex;
+  justify-content: space-between;  
+  padding: 10px;
+  align-items: center;
+`;
+
+
+const StyledModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledModalTitle = styled.div`
+  font-weight: bold;
+  font-size: 20px;
+`;
+
+const StyledChaptersContainer = styled.div<{drawerOpen: boolean}>`
+  max-height: calc(100vh - 282px);
+ 
+    scrollbar-color: #9d9d9d transparent;
+    scrollbar-width: auto;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        margin-top: 5px;
+        width: 6px;
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar:horizontal {
+        height: 7px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #9d9d9d;
+        border: transparent;
+        border-radius: 20px;
+    }
+
+    &:hover {
+        scrollbar-color: #9d9d9d transparent;
+        scrollbar-width: auto;
+    }
+`;
+
+const StyledCommonCounter = styled.div`
+  display: flex;
+  color: black;
+    line-height: 24px;
+    padding: 6px 8px;
   
   & > p {
     margin: 0;
   }
 `;
+
+const StyledModalContent = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: white;
+    border: 2px solid #000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px
+`
 
 export const HomePage = () => {
     const hiddenCategories = _.cloneDeep(HIDDEN_CATEGORIES);
@@ -35,82 +186,94 @@ export const HomePage = () => {
     const chapters: IChapterInfo[] = _.cloneDeep(CHAPTERS);
 
     const [activeFullScreenChapter, setActiveFullScreenChapter] = useState<IChapterInfo  | null>(null);
-
-    const createDataForVizual = (): IDataForVizual => {
-        console.log('createDataForVizual');
-        const result = chapterList.reduce<Record<string, any>>((result, chapter) => {
-            result[chapter.name] = {
-                name: chapter.name,
-                color: chapter.indicatorColor,
-                completed: chapter.completed,
-                categories: {},
-                total: 0,
-                initOpen: chapter.initOpen,
-            };
-            return result;
-        }, {});
-
-        chapters.forEach((chapter) => {
-            let total = 0;
-            result[chapter.name].categories = chapter.categories.reduce<Record<string, any>>(
-                (obj, category) => {
-                    const isCategoryCompleted = !hiddenCategories.includes(
-                        category.name
-                    );
-                    obj[category.name] = {
-                        name: category.name,
-                        completed: isCategoryCompleted,
-                    };
-                    total =
-                        total +
-                        +category.data
-                            .reduce((acc, row) => {
-                                const totalLeft = Math.round(
-                                    (row.nationalMQ * row.nationalTD * row.price +
-                                        row.nationalOT) *
-                                    1.25
-                                );
-                                const totalRight = Math.round(
-                                    (row.internationalMQ *
-                                        row.internationalTD *
-                                        row.internationalRate +
-                                        row.internationalOT) *
-                                    1.25
-                                );
-                                return acc + Math.round(totalLeft + totalRight);
-                            }, 0)
-                            .toFixed(2);
-                    return obj;
-                },
-                {}
-            );
-            result[chapter.name].total = total;
-        });
-        return result;
-    };
+    const chaptersContainer = useRef<HTMLDivElement | null>(null);
 
     const [isFullScreenMode, setIsFullScreenMode] = useState(false);
 
-    const [dataForVizual, setDataForVizual] = useState(() => createDataForVizual());
+  const createDataForVizual = (): IDataForVizual => {
+    const result = chapterList.reduce<Record<string, any>>((result, chapter) => {
+      result[chapter.name] = {
+        name: chapter.name,
+        color: chapter.indicatorColor,
+        completed: chapter.completed,
+        categories: {},
+        total: 0,
+        initOpen: chapter.initOpen,
+      };
+      return result;
+    }, {});
 
-    const changeChapterInitOpen = (chapter: IChapterConf) => {
-        setDataForVizual({
-            ...dataForVizual,
-            [chapter.name]: {
-                ...dataForVizual[chapter.name],
-                initOpen: false,
-            },
-        });
-    };
+    chapters.forEach((chapter) => {
+      let total = 0;
+      result[chapter.name].categories = chapter.categories.reduce<Record<string, any>>(
+        (obj, category) => {
+          const isCategoryCompleted = !hiddenCategories.includes(
+            category.name
+          );
+          obj[category.name] = {
+            name: category.name,
+            completed: isCategoryCompleted,
+          };
+          total =
+            total +
+            +category.data
+              .reduce((acc, row) => {
+                const totalLeft = Math.round(
+                  (row.nationalMQ * row.nationalTD * row.price +
+                    row.nationalOT) *
+                  1.25
+                );
+                const totalRight = Math.round(
+                  (row.internationalMQ *
+                    row.internationalTD *
+                    row.internationalRate +
+                    row.internationalOT) *
+                  1.25
+                );
+                return acc + Math.round(totalLeft + totalRight);
+              }, 0)
+              .toFixed(2);
+          return obj;
+        },
+        {}
+      );
+      result[chapter.name].total = total;
+    });
+    return result;
+  };
+
+  const [dataForVizual, setDataForVizual] = useState(() => createDataForVizual());
+
+  const { drawerWidth, openedDrawer, toggleDrawer } = useLayout();
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const changeChapterInitOpen = (chapter: IChapterConf) => {
+    setDataForVizual({
+      ...dataForVizual,
+      [chapter.name]: {
+        ...dataForVizual[chapter.name],
+        initOpen: false,
+      },
+    });
+  };
 
     const changeFullScreenMode = (chapter: IChapterInfo | null) => {
-        const chapterData = chapter ? dataForVizual[chapter.name] : null;
+      const chapterData = chapter ? dataForVizual[chapter.name] : null;
         setIsFullScreenMode(!!chapter);
         setActiveFullScreenChapter(chapter);
         // screenModeService.changeScreenMode(this.isFullScreenMode, chapterData);
     }
 
-    const mainCounter = useMemo(
+    const commonCounter = useMemo(
         () => {
           const total = Object.values(dataForVizual).reduce((result, item) => result + item.total,0);
           return Number(isNil(total) ? 0 : total).toLocaleString('de-DE');
@@ -127,53 +290,179 @@ export const HomePage = () => {
             },
         }));
     };
-    return (
-      <div>
-          <StyledMainCounterContainer>
-            <StyledMainCounter>
-                <p>TOTAL:</p>
-                <p>{mainCounter}</p>
-            </StyledMainCounter>
-          </StyledMainCounterContainer>
-          {CHAPTERS.map((chapter) =>
-              <Chapter
-                  chapter={dataForVizual[chapter.name]}
-                  isFullScreenMode={isFullScreenMode}
-                  changeChapterInitOpen={changeChapterInitOpen}
-                  children={<div>
-                      <div className="chapter-action-panel">
-                          {isFullScreenMode ? (
-                              <img
-                                  onClick={() => changeFullScreenMode(chapter)}
-                                  src="assets/open-arrows.svg"
-                                  alt=""
-                              />
-                          ) : (
-                              <img
-                                  onClick={() => changeFullScreenMode(null)}
-                                  src="assets/close-arrows.svg"
-                                  alt=""
-                              />
-                          )}
-                          <div className="category-menu">
-                          </div>
-                      </div>
-                      <div className="tables-container">
-                          <TableComponent
-                              key={chapter.name}
-                              categories={chapter.categories}
-                              dataForVizual={dataForVizual[chapter.name].categories}
-                              editable={true}
-                              isShowFormulas={true}
-                              isShowZeroValues={true}
-                              updateChapterTotal={(total) => updateChapterTotal(chapter.name, total)}
-                          />
-                      </div>
-                  </div>}
-              />
-          )
-          }
-      </div>
+
+    const checkNeedScrolling = (element: Element): ScrollConfig => {
+        const elementBCR = element.getBoundingClientRect();
+        const containerBCR =
+            chaptersContainer.current?.getBoundingClientRect() as DOMRect;
+
+        return {
+            needBottom: elementBCR.bottom - containerBCR.bottom,
+            needTop: containerBCR.top - elementBCR.top,
+            needRight: elementBCR.right - containerBCR.right,
+            needLeft: containerBCR.left - elementBCR.left,
+        };
+    }
+
+    const selectCell = (activeCell: any, worksheet: jspreadsheet.worksheetInstance) => {
+        const { needBottom, needTop, needRight, needLeft } =
+            checkNeedScrolling(activeCell);
+        const chapterContainer = worksheet.table.closest('.tables-container');
+
+        if (needTop > 0) {
+        chaptersContainer.current?.scrollBy(0, -needTop);
+    } else if (needBottom > 0) {
+        chaptersContainer.current?.scrollBy(0, needBottom);
+    }
+    if (needRight > 0) {
+        chapterContainer?.scrollBy(needRight, 0);
+    } else if (needLeft > 0) {
+        chapterContainer?.scrollBy(-needLeft, 0);
+    }
+}
+
+const chaptersArray = useMemo(() =>
+  CHAPTERS.map((chapter) => (
+         <Chapter
+           hide={!!(activeFullScreenChapter && activeFullScreenChapter?.name !== chapter.name)}
+           key={chapter.name}
+           chapter={dataForVizual[chapter.name]}
+           isFullScreenMode={activeFullScreenChapter?.name === chapter.name}
+           actions={
+             <div className="chapter-action-panel">
+               {!isFullScreenMode ? (
+                 <img
+                   onClick={() => changeFullScreenMode(chapter)}
+                   src={openArrows}
+                   alt=""
+                   style={{ cursor: 'pointer' }}
+                 />
+               ) : (
+                 <img
+                   onClick={() => changeFullScreenMode(null)}
+                   src={closeArrow}
+                   style={{ cursor: 'pointer' }}
+                   alt=""
+                 />
+               )}
+               <div className="category-menu">
+               </div>
+             </div>
+           }
+           details={
+             <div className="tables-container">
+               <TableComponent
+                 key={chapter.name}
+                 categories={chapter.categories}
+                 dataForVizual={dataForVizual[chapter.name].categories}
+                 editable={true}
+                 isShowFormulas={true}
+                 isShowZeroValues={true}
+                 updateChapterTotal={(total) => updateChapterTotal(chapter.name, total)}
+                 selectCell={selectCell}
+               />
+             </div>
+           }
+         />
+    )), [activeFullScreenChapter, isFullScreenMode, dataForVizual]
+  );
+
+  const versions = [
+    {id: 1, type: 'Current Version', date: new Date().toDateString(), modified: 'Ralph Edwards'},
+    {id: 2, type: 'Before restoring Version 2', date: new Date().toDateString(), modified: 'Kristian Watson'},
+    {id: 3, type: 'Print cover letter', date: new Date().toDateString(), modified: 'Ralph Edwards'},
+    {id: 4, type: 'Sent for approval', date: new Date().toDateString(), modified: 'Kristian Watson'},
+    {id: 5, type: 'Current Version', date: new Date().toDateString(), modified: 'Ralph Edwards'},
+    {id: 6, type: 'Before restoring Version 2', date: new Date().toDateString(), modified: 'Kristian Watson'},
+    {id: 7, type: 'Print cover letter', date: new Date().toDateString(), modified: 'Ralph Edwards'},
+    {id: 8, type: 'Sent for approval', date: new Date().toDateString(), modified: 'Kristian Watson'},
+    {id: 9, type: 'Current Version', date: new Date().toDateString(), modified: 'Ralph Edwards'},
+    {id: 10, type: 'Before restoring Version 2', date: new Date().toDateString(), modified: 'Kristian Watson'},
+    {id: 11, type: 'Print cover letter', date: new Date().toDateString(), modified: 'Ralph Edwards'},
+    {id: 12, type: 'Sent for approval', date: new Date().toDateString(), modified: 'Kristian Watson'},
+  ]
+
+  const rightPanel = useMemo(
+    () => <Box role="presentation" style={{ width: '300px', marginTop: '50px' }}>
+      <StyledRightPanelHeader>
+        <h2>Version history</h2>
+        <StyledCloseIcon onClick={toggleDrawer} sx={{ cursor: 'pointer' }}/>
+      </StyledRightPanelHeader>
+      <Box display="flex" flexDirection="column" gap="12px">
+        {versions.map((version) => <StyledCard>
+          <CardHeader
+            key={version.id}
+            action={
+              <IconButton aria-label="settings">
+                <MoreVertIcon/>
+              </IconButton>
+            }
+            title={`Version ${version.id}`}
+            subheader={version.date}
+          />
+        </StyledCard>)}
+      </Box>
+    </Box>, []
+  );
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const tableWidth = useMemo(() => openedDrawer ? `${document.body.clientWidth - drawerWidth}px` : '100%', [drawerWidth, openedDrawer])
+
+  return (
+    <StyledHomePage>
+      <StyledAppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
+        <StyledHeaderToolbar>
+          <StyledLogo>
+            SCoPE X
+          </StyledLogo>
+          <StyledTabs value={value} onChange={handleChange} centered>
+              <Tab label="Key Parameters" />
+              <Tab label="Summary" />
+              <Tab label="Calculations" />
+              <Tab label="Cover Letter" />
+            </StyledTabs>
+          <StyledHistoryIcon onClick={toggleDrawer} color={openedDrawer ? 'secondary' : 'primary'}/>
+          </StyledHeaderToolbar>
+        </StyledAppBar>
+        <StyledTablesContainer width={tableWidth}>
+          {!isFullScreenMode && <StyledToolbar>
+              <StyledCommonCounter>
+                  <p>TOTAL:</p>
+                  <p>{commonCounter}</p>
+              </StyledCommonCounter>
+            {!openedDrawer && <Button variant="contained" color="primary" onClick={openModal} sx={{ cursor: 'pointer' }}>Create Project</Button>}
+          </StyledToolbar>}
+          <StyledChaptersContainer ref={chaptersContainer} drawerOpen={openedDrawer}>
+            {chaptersArray}
+          </StyledChaptersContainer>
+          <NavigationDrawer
+            navigationDrawerContent={rightPanel}
+            resizable
+          />
+        </StyledTablesContainer>
+      <Modal
+        open={modalIsOpen}
+        onClose={closeModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <StyledModalContent>
+          <StyledModalHeader>
+            <StyledModalTitle>
+              Create Project
+            </StyledModalTitle>
+            <StyledCloseIcon onClick={closeModal}></StyledCloseIcon>
+          </StyledModalHeader>
+          <Box display="flex" flexDirection="column">
+          </Box>
+        </StyledModalContent>
+      </Modal>
+      </StyledHomePage>
     )
         ;
 };

@@ -133,19 +133,26 @@
   border-left: 1px solid var(--header_border_color);
   border-right: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  background-color: var(--header_background);
+  background-color: var(--header_background) !important;
   padding: 6px;
   cursor: pointer;
   box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;
-  position: sticky;
   top: 0;
   z-index: 1;
   background-repeat: no-repeat;
   background-position: center right 0;
   line-height: 1em;
   color: var(--content_color);
+}
+
+.jss > thead > tr > th {
+  background-color: var(--header_background) !important;
+}
+
+.jss > tbody > tr > td.jss_row {
+  background-color: #232332 !important;
 }
 
 @supports (-ms-ime-align:auto) {

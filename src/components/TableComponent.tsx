@@ -4,9 +4,11 @@ import { license } from "../constants";
 import _ from "lodash";
 import { CATEGORY_ROW_STYLES, TABLE_COLUMN_NAMES, TABLE_COLUMNS } from "../constants/columns";
 import { ITableData, RowModel } from "../types/table";
-import { FORMULAS_COLUMN_INDEX, INIT_CONFIG } from "./constants";
+import {ARROW_KEYS, FORMULAS_COLUMN_INDEX, INIT_CONFIG, UPDATE_COLUMN_INDEX_FOR_SUM} from "./constants";
 import { ICategoryDataForVizual } from "../types/chapter";
 import styled from "@emotion/styled";
+import "jsuites/dist/jsuites.css";
+import "jspreadsheet/dist/jspreadsheet.css";
 
 type PropsType = {
   categories: ITableData[];
@@ -15,10 +17,63 @@ type PropsType = {
   isShowFormulas: boolean;
   isShowZeroValues: boolean;
   updateChapterTotal: (total: number) => void;
+  selectCell: (activeCell:  HTMLElement | null, worksheet: jspreadsheet.worksheetInstance) => void
 }
 
 const StyleTableComponent = styled.div`
   position: relative;
+
+  & .jcontextmenu {
+          position: fixed;
+          z-index:10000;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+          padding-top:4px;
+          padding-bottom:4px;
+          margin:0px;
+          outline:none;
+      
+        background: black;
+        color: white;
+        border: 1px solid #35354e;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        div:hover {
+          background-color: #7c7c80;
+        }
+        hr {
+            border-bottom: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+      
+      [data-icon='red'], [data-icon='blue'], [data-icon='green'] {
+          margin: 5px;
+          padding: 0;
+          display: inline-flex;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          cursor: pointer;
+          
+          &::before {
+             display: none;
+          }
+      }       
+      
+      [data-icon='red'], [data-icon='red']:hover {
+          background-color: red;
+      }  
+      [data-icon='blue'], [data-icon='blue']:hover {
+          background-color: blue;
+      }  
+      [data-icon='green'], [data-icon='green']:hover {
+          background-color: green;
+      }
+    }  
+    
 `;
 
 jspreadsheet.setLicense(license)
@@ -45,9 +100,11 @@ export const TableComponent = ({
   editable,
   isShowFormulas,
   isShowZeroValues,
-  updateChapterTotal
+  updateChapterTotal,
+  selectCell,
 }: PropsType) => {
   const jssRef = useRef<any | null>(null);
+  let keydownListener: null | any = null;
 
   const columns = _.cloneDeep(TABLE_COLUMNS);
 
@@ -81,7 +138,7 @@ export const TableComponent = ({
       row.remark || '', //L  Bemerkung
       row.count, //M  #
       row.splitting, //N  Splitten
-      `=IF(C${rowIndex}+F${rowIndex}=0, "", IF(C${rowIndex}=0, F${rowIndex} + " x " + B${rowIndex} + IF(M${rowIndex}=1, " for " + G${rowIndex} + " days (Abroad)", IF(M${rowIndex}=2, " for " + G${rowIndex} + " weeks (Abroad)", " (Abroad)")), IF(F${rowIndex}=0, IF(M${rowIndex}=1, " for " + D${rowIndex} + " days (Germany)", IF(M${rowIndex}=2, " for " + D${rowIndex} + " weeks (Germany)", " (Germany)")), IF(N${rowIndex}=0, C${rowIndex}+F${rowIndex} + " x " + B${rowIndex} + IF(M${rowIndex}=1, " for " + (D${rowIndex}+G${rowIndex}) + " days", IF(M${rowIndex}=2, " for " + (D${rowIndex}+G${rowIndex}) + " weeks", "")), C${rowIndex} + " x " + B${rowIndex} + IF(M${rowIndex}=1, " for " + D${rowIndex} + " days (Germany)", IF(M${rowIndex}=2, " for " + D${rowIndex} + " weeks (Germany)", " (Germany)")) + " and " + F${rowIndex} + " x " + B${rowIndex} + IF(M${rowIndex}=1, " for " + G${rowIndex} + " days (Abroad)", IF(M${rowIndex}=2, " for " + G${rowIndex} + " weeks (Abroad)", " (Abroad)"))))))`,
+      `=IF(C${rowIndex}+F${rowIndex}==0, "", IF(C${rowIndex}==0, F${rowIndex} + " x " + B${rowIndex} + IF(M${rowIndex}==1, " for " + G${rowIndex} + " days (Abroad)", IF(M${rowIndex}==2, " for " + G${rowIndex} + " weeks (Abroad)", " (Abroad)")), IF(F${rowIndex}==0, IF(M${rowIndex}==1, " for " + D${rowIndex} + " days (Germany)", IF(M${rowIndex}==2, " for " + D${rowIndex} + " weeks (Germany)", " (Germany)")), IF(N${rowIndex}==0, C${rowIndex}+F${rowIndex} + " x " + B${rowIndex} + IF(M${rowIndex}==1, " for " + (D${rowIndex}+G${rowIndex}) + " days", IF(M${rowIndex}==2, " for " + (D${rowIndex}+G${rowIndex}) + " weeks", "")), C${rowIndex} + " x " + B${rowIndex} + IF(M${rowIndex}==1, " for " + D${rowIndex} + " days (Germany)", IF(M${rowIndex}==2, " for " + D${rowIndex} + " weeks (Germany)", " (Germany)")) + " and " + F${rowIndex} + " x " + B${rowIndex} + IF(M${rowIndex}==1, " for " + G${rowIndex} + " days (Abroad)", IF(M${rowIndex}==2, " for " + G${rowIndex} + " weeks (Abroad)", " (Abroad)"))))))`,
     ];
   }
 
@@ -98,6 +155,7 @@ export const TableComponent = ({
       const endRowIndex = category.data.length + rowIndex + 1;
       categoryRows.push({ rowIndex, endRowIndex, name: category.name });
       cells = { ...generateCategoryCells(rowIndex), ...cells };
+
       styles = { ...generateCategoryRow(rowIndex), ...styles };
       rowIndex = ++rowIndex;
       result.push([
@@ -137,6 +195,11 @@ export const TableComponent = ({
 
   const [tableData, setTableData] = useState(!categories ? initialTableData : getTableData(categories));
 
+  const style = {
+    A1:'background-color: orange;',
+    B1:'background-color: orange;',
+  };
+
   useEffect(() => {
     setTableData(!categories ? initialTableData : getTableData(categories));
   }, [categories, dataForVizual, isShowFormulas, isShowZeroValues]);
@@ -159,7 +222,11 @@ export const TableComponent = ({
         }, 0)
         .toFixed(2);
     updateChapterTotal(result);
-  }
+  };
+
+  const checkIfIsCategoryRow = (checkIndex: number) => tableData.categoryRows.some(
+    (row) => row.rowIndex === checkIndex
+  );
 
   useEffect(() => {
     jssRef.current?.jspreadsheet?.[0]?.deleteWorksheet(0);
@@ -177,10 +244,112 @@ export const TableComponent = ({
           },
         ] as any[],
         onafterchanges: (worksheet) => {
-        updateTotal(worksheet);
+          updateTotal(worksheet);
+        },
+      onerror: (err) => {
+          console.log(err);
+      },
+        oneditionend: (worksheet, cell, x, y, newValue) => {
+          if (UPDATE_COLUMN_INDEX_FOR_SUM.includes(x) && !_.isNil(newValue)) {
+            const convertValue = newValue.replaceAll('.', '').replace(',', '.');
+            if (Number.parseFloat(convertValue) === 0) {
+              worksheet.setValueFromCoords(x, y, '');
+            }
+          }
+
+          keydownListener && document.removeEventListener('keydown', keydownListener);
+        },
+        onchangestyle: (
+          worksheet: jspreadsheet.worksheetInstance,
+          newValue: object,
+        ) => {
+          console.log(worksheet.getStyle());
+
+          Object.entries(newValue).forEach((el) => {
+            const newValueRowIndex = Number(el[0].slice(1, el[0].length));
+            const isCategoryCell = checkIfIsCategoryRow(newValueRowIndex);
+            // !isCategoryCell && worksheet.resetStyle(el[0]);
+          });
+        },
+        onselection: (
+          worksheet: jspreadsheet.worksheetInstance,
+          px: number,
+          py: number,
+          ux: number,
+          uy: number,
+          origin?: object
+      ) => {
+        if (!origin) {
+          selectCell(worksheet.getCellFromCoords(px, py), worksheet);
+        }
+      },
+      contextMenu: (o, x, y, e, items, section, section_argument1, section_argument2) => {
+
+       const changeCellColor = (spreadsheet: jspreadsheet.worksheetInstance, color: string) => {
+           const cells = spreadsheet.getSelected();
+
+           if (cells.length) {
+             cells.forEach((cell) => {
+               spreadsheet.setStyle(`${TABLE_COLUMN_NAMES[cell.x]}${cell.y + 1}`, 'background-color',  color);
+               // cell.element.style.backgroundColor = color;
+             })
+         }
+       };
+
+       items.push({ type: 'divisor'} as jspreadsheet.ContextmenuItem);
+
+       const colors: jspreadsheet.ContextmenuItem[] = ['red', 'green', 'blue'].map((color) => ({ title: '', onclick: () => changeCellColor(o, color), icon: color, }))
+
+       items = [...items, ...colors];
+         return  items;
+      },
+      oncreateeditor: (
+          worksheet: jspreadsheet.worksheetInstance,
+          cell: HTMLElement,
+          x: number,
+          y: number,
+          element: HTMLElement
+      ) => {
+        const cellClass = cell.getAttribute('class');
+        if (cellClass && cellClass.includes('jss_richtext')) {
+          const parentValues = worksheet.parent.element.getBoundingClientRect();
+          const elementValues = element.getBoundingClientRect();
+          const cellValues = cell.getBoundingClientRect();
+          const calcTop =
+              elementValues.top -
+              parentValues.top +
+              1 -
+              elementValues.height +
+              cellValues.height;
+          element.style.top = calcTop > 0 ? `${calcTop}px` : '0px';
+        } else {
+          keydownListener = (event: KeyboardEvent) => {
+            const selection = window.getSelection();
+            const worksheet = jssRef.current?.jspreadsheet?.[0];
+            if ([ARROW_KEYS.UP, ARROW_KEYS.DOWN].includes(event.code)) {
+              worksheet.closeEditor(cell, true);
+            } else if (
+                event.code === ARROW_KEYS.LEFT &&
+                selection?.focusOffset === 0
+            ) {
+              worksheet.closeEditor(cell, true);
+            } else if (
+                event.code === ARROW_KEYS.RIGHT &&
+                selection?.anchorNode?.textContent?.length ===
+                selection?.focusOffset
+            ) {
+              worksheet.closeEditor(cell, true);
+            }
+          };
+          document.addEventListener('keydown', keydownListener);
+        }
       },
       });
+    // jssRef.current?.jspreadsheet?.[0]?.hideIndex();
+    jssRef.current?.jspreadsheet?.[0]?.getData();
+
   }, [tableData]);
+
 
   return <StyleTableComponent ref={jssRef}></StyleTableComponent>;
 };

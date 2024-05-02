@@ -1,13 +1,14 @@
 import { IChapterConf } from "../types/chapter";
 import React, {ReactNode, useEffect, useMemo, useState} from "react";
 import _, {isNil} from "lodash";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {Accordion, AccordionActions, AccordionDetails, AccordionSummary} from "@mui/material";
 import styled from "@emotion/styled";
  type PropsType = {
+   hide: boolean;
    chapter: IChapterConf;
    isFullScreenMode?: boolean;
-   changeChapterInitOpen: (chapter: IChapterConf) => void;
-   children: ReactNode;
+   actions: ReactNode;
+   details: ReactNode;
  };
 
  const StyledAccordionSummary = styled(AccordionSummary)`
@@ -18,6 +19,11 @@ import styled from "@emotion/styled";
        display: flex;
        justify-content: space-between;
      }
+ `;
+
+
+ const StyledAccordionDetails = styled(AccordionDetails)`
+   overflow-y: auto;
  `;
 
  const StyledAccordionTitleContainer = styled.div`
@@ -69,11 +75,16 @@ import styled from "@emotion/styled";
      font-size: 14px;  
  `;
 
+ const StyledAccordionActions = styled(AccordionActions)`
+   background-color: #232337;
+ `;
+
 export const Chapter = ({
+  hide,
   chapter,
-  isFullScreenMode = true,
-  changeChapterInitOpen,
-  children
+  isFullScreenMode = false,
+  actions,
+  details
 }: PropsType) => {
 
   const getChapterTotalCount = (chapter: IChapterConf): number => _.values(chapter?.categories).filter((item) => item.completed).length;
@@ -87,13 +98,24 @@ export const Chapter = ({
       [chapter.total]
   );
 
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = () => {
+    if (!isFullScreenMode) {
+      setExpanded(prev => !prev);
+    }
+  }
+
     useEffect(() => {
       setTotalCount(getChapterTotalCount(chapter));
     }, [chapter]);
 
   return (
-    <div>
-        <Accordion>
+    <div style={{ display: hide ? 'none' : 'block'}}>
+        <Accordion
+          onChange={handleChange}
+          expanded={isFullScreenMode || expanded}
+        >
             <StyledAccordionSummary>
               <StyledAccordionTitleContainer>
                  {chapter?.color && <StyledAccordionTitleColorIndicator color={chapter.color}/>}
@@ -109,9 +131,12 @@ export const Chapter = ({
                   </StyledDescriptionCurrency>
                 </StyledDescriptionContainer>
             </StyledAccordionSummary>
-            <AccordionDetails>
-              {children}
-            </AccordionDetails>
+            <StyledAccordionActions>
+              {actions}
+            </StyledAccordionActions>
+            <StyledAccordionDetails>
+              {details}
+            </StyledAccordionDetails>
         </Accordion>
     </div>
   );

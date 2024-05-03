@@ -5,14 +5,14 @@ import _ from "lodash";
 import { CATEGORY_ROW_STYLES, TABLE_COLUMN_NAMES, TABLE_COLUMNS } from "../constants/columns";
 import { ITableData, RowModel } from "../types/table";
 import {ARROW_KEYS, FORMULAS_COLUMN_INDEX, INIT_CONFIG, UPDATE_COLUMN_INDEX_FOR_SUM} from "./constants";
-import { ICategoryDataForVizual } from "../types/chapter";
 import styled from "@emotion/styled";
 import "jsuites/dist/jsuites.css";
 import "jspreadsheet/dist/jspreadsheet.css";
 
 type PropsType = {
   categories: ITableData[];
-  dataForVizual: ICategoryDataForVizual;
+  visibleCategories: string[] | null;
+  visibleRowsIds: number[] | null;
   editable: boolean;
   isShowFormulas: boolean;
   isShowZeroValues: boolean;
@@ -96,7 +96,8 @@ const initialTableData: InitialTableDataType = {
 
 export const TableComponent = ({
   categories,
-  dataForVizual,
+  visibleCategories,
+  visibleRowsIds,
   editable,
   isShowFormulas,
   isShowZeroValues,
@@ -150,7 +151,12 @@ export const TableComponent = ({
     let mergeCells = {};
 
     let rowIndex = index;
-    categories.forEach((category) => {
+
+    const filteredCategories = visibleCategories
+      ? categories.filter((category) => visibleCategories.includes(category.name))
+      : categories;
+
+    filteredCategories.forEach((category) => {
       // +1 - rich text
       const endRowIndex = category.data.length + rowIndex + 1;
       categoryRows.push({ rowIndex, endRowIndex, name: category.name });
@@ -171,7 +177,12 @@ export const TableComponent = ({
         `=SUM(J${rowIndex}:J${endRowIndex})`,
         `=SUM(K${rowIndex}:K${endRowIndex})`,
       ]);
-      const _rows = category.data.map((row) => {
+
+      const filteredRows = visibleRowsIds
+        ? category.data.filter((row) => visibleRowsIds.includes(row.id))
+        : category.data;
+
+      const _rows = filteredRows.map((row) => {
         const rowData = getRowData(row, rowIndex);
         _.set(cells, `A${rowIndex}`, {
           readOnly: true,
@@ -181,6 +192,7 @@ export const TableComponent = ({
         rowIndex = ++rowIndex;
         return rowData;
       });
+
       result.push(..._rows);
 
       //rich text editor
@@ -193,7 +205,7 @@ export const TableComponent = ({
     return { rows: result, categoryRows, cells, styles, mergeCells }
   };
 
-  const [tableData, setTableData] = useState(!categories ? initialTableData : getTableData(categories));
+  const [tableData, setTableData] = useState(() => !categories ? initialTableData : getTableData(categories));
 
   const style = {
     A1:'background-color: orange;',
@@ -202,7 +214,7 @@ export const TableComponent = ({
 
   useEffect(() => {
     setTableData(!categories ? initialTableData : getTableData(categories));
-  }, [categories, dataForVizual, isShowFormulas, isShowZeroValues]);
+  }, [categories, isShowFormulas, isShowZeroValues, visibleCategories, visibleRowsIds]);
 
   const getColumnsConfig = (editMode: boolean) => {
     return columns.map((column: any, index: number) => {
@@ -242,7 +254,7 @@ export const TableComponent = ({
             style: tableData.styles,
             mergeCells: tableData.mergeCells,
           },
-        ] as any[],
+        ] as jspreadsheet.Worksheet[],
         onafterchanges: (worksheet) => {
           updateTotal(worksheet);
         },
@@ -263,8 +275,6 @@ export const TableComponent = ({
           worksheet: jspreadsheet.worksheetInstance,
           newValue: object,
         ) => {
-          console.log(worksheet.getStyle());
-
           Object.entries(newValue).forEach((el) => {
             const newValueRowIndex = Number(el[0].slice(1, el[0].length));
             const isCategoryCell = checkIfIsCategoryRow(newValueRowIndex);
@@ -285,12 +295,12 @@ export const TableComponent = ({
       },
       contextMenu: (o, x, y, e, items, section, section_argument1, section_argument2) => {
 
-       const changeCellColor = (spreadsheet: jspreadsheet.worksheetInstance, color: string) => {
-           const cells = spreadsheet.getSelected();
+       const changeCellColor = (worksheet: jspreadsheet.worksheetInstance, color: string) => {
+           const cells = worksheet.getSelected();
 
            if (cells.length) {
              cells.forEach((cell) => {
-               spreadsheet.setStyle(`${TABLE_COLUMN_NAMES[cell.x]}${cell.y + 1}`, 'background-color',  color);
+               worksheet.setStyle(`${TABLE_COLUMN_NAMES[cell.x]}${cell.y + 1}`, 'background-color',  color);
                // cell.element.style.backgroundColor = color;
              })
          }

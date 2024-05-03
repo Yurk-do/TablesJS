@@ -1,6 +1,8 @@
 interface ICategoryConf {
     name: string;
     completed: boolean;
+    visibleRows?: string[];
+    hidden?: boolean;
 }
 
 export interface ICategoryDataForVizual {
@@ -14,6 +16,7 @@ export interface IChapterConf {
     color: string;
     total: number;
     initOpen: boolean;
+    hidden?: boolean;
 }
 
 export interface IDataForVizual {

@@ -3,33 +3,50 @@ import { CHAPTERS } from "../mocks/chapters";
 import _, {isNil} from "lodash";
 import { HIDDEN_CATEGORIES } from "../mocks/hidden-categories";
 import { Chapter } from "../components/Chapter";
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import {IChapterInfo, ScrollConfig} from "../types/table";
-import { IChapter, IChapterConf, IDataForVizual } from "../types/chapter";
+import { IChapter, IDataForVizual } from "../types/chapter";
 import { chaptersList } from "../mocks/chapter-mocks";
 import styled from "@emotion/styled";
-import {jspreadsheet} from "@jspreadsheet/react";
+import { jspreadsheet } from "@jspreadsheet/react";
 import openArrows from 'assets/open-arrows.svg';
 import closeArrow from 'assets/close-arrows.svg';
 import {
   AppBar,
   Box,
   Button,
-  Card,
-  CardHeader,
   Drawer,
-  IconButton, Modal,
+  Modal,
   Tab,
   Tabs,
   Toolbar,
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import HistoryIcon from '@mui/icons-material/History';
-import {NavigationDrawer} from "../components/NavigationDrawer/NavigationDrawer";
-import {useLayout} from "../components/NavigationDrawer/useLayout";
+import { NavigationDrawer } from "../components/NavigationDrawer/NavigationDrawer";
+import { useLayout } from "../components/NavigationDrawer/useLayout";
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import { OrderComponent } from "../components/OrderComponent";
+import { VersionComponent } from "../components/VersionComponent";
 
 const headerHeight=  48;
+
+type DrawerContentType = 'versions-history' | 'client-orders';
+
+type VisibilityConfig = {
+  visibleRowsIds: number[];
+  visibleChapters: string[];
+  visibleCategories: string[];
+};
+
+type OrderType = {
+  id: number;
+  name: string;
+  date: string;
+  cost: string;
+  modified: string;
+  visibilityConfig: VisibilityConfig,
+};
 
 const StyledHomePage = styled.div`
 `;
@@ -37,25 +54,6 @@ const StyledHomePage = styled.div`
 const StyledAppBar = styled(AppBar)`
   background-color: #DEECF9;
   color: black;
-`;
-
-const StyledCard = styled(Card)`
-    &.MuiCard-root {
-        border-radius: 12px;
-        box-shadow: none;
-        border: 1px solid #8484AB;
-    }   
-    & .MuiCardHeader-content > span {
-        text-align: start;
-    }   
-    
-    & .MuiCardHeader-content > .MuiCardHeader-title {
-        font-size: 18px;
-    }    
-    
-    & .MuiCardHeader-content > .MuiCardHeader-subheader {
-        color: #027472;
-    }
 `;
 
 const StyledHeaderToolbar = styled(Toolbar)`
@@ -96,11 +94,7 @@ const StyledRightPanelHeader = styled.div`
   }
 `;
 
-const StyledCloseIcon = styled(CloseIcon)`
-  cursor: pointer;
-`;
-
-const StyledHistoryIcon = styled(HistoryIcon)`
+const StyledIconWrapper = styled.span`
   cursor: pointer;
 `;
 
@@ -243,8 +237,25 @@ export const HomePage = () => {
   };
 
   const [dataForVizual, setDataForVizual] = useState(() => createDataForVizual());
+  const [visibilityConfig, setVisibilityConfig] = useState<VisibilityConfig | null>(null);
 
-  const { drawerWidth, openedDrawer, toggleDrawer } = useLayout();
+  const { drawerWidth, openedDrawer, openDrawer, closeDrawer } = useLayout();
+  const [ drawerContentType, setDrawerContentType ] = useState<DrawerContentType | null>(null);
+
+  const closeRightPanel = () => {
+    setDrawerContentType(null);
+    setVisibilityConfig(null);
+    closeDrawer();
+  };
+
+  const toggleRightPanel = (contentType: DrawerContentType) => {
+    if (drawerContentType && contentType === drawerContentType) {
+      closeRightPanel();
+    } else {
+      setDrawerContentType(contentType);
+      openDrawer();
+    }
+  };
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -256,15 +267,15 @@ export const HomePage = () => {
     setModalIsOpen(false);
   };
 
-  const changeChapterInitOpen = (chapter: IChapterConf) => {
-    setDataForVizual({
-      ...dataForVizual,
-      [chapter.name]: {
-        ...dataForVizual[chapter.name],
-        initOpen: false,
-      },
-    });
-  };
+  // const changeChapterInitOpen = (chapter: IChapterConf) => {
+  //   setDataForVizual({
+  //     ...dataForVizual,
+  //     [chapter.name]: {
+  //       ...dataForVizual[chapter.name],
+  //       initOpen: false,
+  //     },
+  //   });
+  // };
 
     const changeFullScreenMode = (chapter: IChapterInfo | null) => {
       const chapterData = chapter ? dataForVizual[chapter.name] : null;
@@ -319,52 +330,55 @@ export const HomePage = () => {
     } else if (needLeft > 0) {
         chapterContainer?.scrollBy(-needLeft, 0);
     }
-}
+};
 
-const chaptersArray = useMemo(() =>
-  CHAPTERS.map((chapter) => (
-         <Chapter
-           hide={!!(activeFullScreenChapter && activeFullScreenChapter?.name !== chapter.name)}
-           key={chapter.name}
-           chapter={dataForVizual[chapter.name]}
-           isFullScreenMode={activeFullScreenChapter?.name === chapter.name}
-           actions={
-             <div className="chapter-action-panel">
-               {!isFullScreenMode ? (
-                 <img
-                   onClick={() => changeFullScreenMode(chapter)}
-                   src={openArrows}
-                   alt=""
-                   style={{ cursor: 'pointer' }}
-                 />
-               ) : (
-                 <img
-                   onClick={() => changeFullScreenMode(null)}
-                   src={closeArrow}
-                   style={{ cursor: 'pointer' }}
-                   alt=""
-                 />
-               )}
-               <div className="category-menu">
-               </div>
-             </div>
-           }
-           details={
-             <div className="tables-container">
-               <TableComponent
-                 key={chapter.name}
-                 categories={chapter.categories}
-                 dataForVizual={dataForVizual[chapter.name].categories}
-                 editable={true}
-                 isShowFormulas={true}
-                 isShowZeroValues={true}
-                 updateChapterTotal={(total) => updateChapterTotal(chapter.name, total)}
-                 selectCell={selectCell}
-               />
-             </div>
-           }
-         />
-    )), [activeFullScreenChapter, isFullScreenMode, dataForVizual]
+
+const chaptersArray = useMemo(() => {
+  return CHAPTERS.map((chapter) => (
+    <Chapter
+      hide={!!(activeFullScreenChapter && activeFullScreenChapter?.name !== chapter.name) || (!!visibilityConfig && !visibilityConfig?.visibleChapters.includes(chapter.name))}
+      key={chapter.name}
+      chapter={dataForVizual[chapter.name]}
+      isFullScreenMode={activeFullScreenChapter?.name === chapter.name}
+      actions={
+        <div className="chapter-action-panel">
+          {!isFullScreenMode ? (
+            <img
+              onClick={() => changeFullScreenMode(chapter)}
+              src={openArrows}
+              alt=""
+              style={{cursor: 'pointer'}}
+            />
+          ) : (
+            <img
+              onClick={() => changeFullScreenMode(null)}
+              src={closeArrow}
+              style={{cursor: 'pointer'}}
+              alt=""
+            />
+          )}
+          <div className="category-menu">
+          </div>
+        </div>
+      }
+      details={
+        <div className="tables-container">
+          <TableComponent
+            key={chapter.name}
+            visibleCategories={visibilityConfig?.visibleCategories || null}
+            visibleRowsIds={visibilityConfig?.visibleRowsIds || null}
+            categories={chapter.categories}
+            editable={true}
+            isShowFormulas={true}
+            isShowZeroValues={true}
+            updateChapterTotal={(total) => updateChapterTotal(chapter.name, total)}
+            selectCell={selectCell}
+          />
+        </div>
+      }
+    />
+  )
+)}, [activeFullScreenChapter, isFullScreenMode, dataForVizual, visibilityConfig?.visibleChapters]
   );
 
   const versions = [
@@ -380,29 +394,78 @@ const chaptersArray = useMemo(() =>
     {id: 10, type: 'Before restoring Version 2', date: new Date().toDateString(), modified: 'Kristian Watson'},
     {id: 11, type: 'Print cover letter', date: new Date().toDateString(), modified: 'Ralph Edwards'},
     {id: 12, type: 'Sent for approval', date: new Date().toDateString(), modified: 'Kristian Watson'},
-  ]
+  ];
 
-  const rightPanel = useMemo(
+  const orders: OrderType[] = [
+    {
+      id: 1,
+      name: 'Shooting in Chicago',
+      date: '09.04.2024',
+      cost: '€ 1.858.234',
+      modified: 'Ralph Edwards',
+      visibilityConfig: {
+        visibleRowsIds: [2102, 2103, 2105, 1301, 1302, 3405, 3406, 3407],
+        visibleCategories: ['CAMERA CREW', 'PPM | TRAVELCOST', 'PRINCIPALS'],
+        visibleChapters: ['Pre-production', 'Salaries', 'Cast'],
+      }},
+    {
+      id: 2,
+      name: 'Shooting in Milan',
+      date: '02.03.2024',
+      cost: '€ 2.000.000',
+      modified: 'Ralph Edwards',
+      visibilityConfig: {
+        visibleRowsIds: [2101, 2105, 4107, 4108, 4111, 4112],
+        visibleCategories: ['CAMERA EQUIPMENT', 'LIGHTNING', 'PRINCIPALS'],
+        visibleChapters: ['Cast', 'Equipment'],
+      },
+     },
+    {
+      id: 3,
+      name: 'Shooting in New York',
+      date: '02.05.2024',
+      cost: '€ 2.350.000',
+      modified: 'Ralph Edwards',
+      visibilityConfig: {
+        visibleRowsIds: [2101, 2105, 2106, 4114, 4115, 4305, 4306, 5104, 5105],
+        visibleCategories: ['CAMERA EQUIPMENT', 'LIGHTNING', 'PRINCIPALS', 'CREW'],
+        visibleChapters: ['Cast', 'Equipment', 'Art Department'],
+      },
+    },
+    {
+      id: 4,
+      name: 'Shooting in Paris',
+      date: '01.02.2024',
+      cost: '€ 2.250.000',
+      modified: 'Ralph Edwards',
+      visibilityConfig: {
+        visibleRowsIds: [2102, 2103, 2104, 4104, 4105, 4106, 4307, 4308, 4309, 5201, 5202, 5203],
+        visibleCategories: ['CAMERA EQUIPMENT', 'LIGHTNING', 'PRINCIPALS', 'PROPS + MATERIALS'],
+        visibleChapters: ['Cast', 'Equipment', 'Art Department'],
+      },
+    }
+  ];
+
+  const selectOrder = (order: OrderType) => {
+      setVisibilityConfig(order.visibilityConfig);
+  };
+
+  const drawerContent = useMemo(
     () => <Box role="presentation" style={{ width: '300px', marginTop: '50px' }}>
       <StyledRightPanelHeader>
-        <h2>Version history</h2>
-        <StyledCloseIcon onClick={toggleDrawer} sx={{ cursor: 'pointer' }}/>
+        {drawerContentType && <h2>{drawerContentType === 'versions-history' ? 'Version history' : 'Client orders'}</h2>}
+        <StyledIconWrapper>
+          <CloseIcon onClick={closeRightPanel} sx={{ cursor: 'pointer' }}/>
+        </StyledIconWrapper>
       </StyledRightPanelHeader>
       <Box display="flex" flexDirection="column" gap="12px">
-        {versions.map((version) => <StyledCard>
-          <CardHeader
-            key={version.id}
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon/>
-              </IconButton>
-            }
-            title={`Version ${version.id}`}
-            subheader={version.date}
-          />
-        </StyledCard>)}
+        {
+          drawerContentType === 'versions-history'
+            ? versions.map((version) => (<VersionComponent id={version.id} date={version.date} key={version.id}/>))
+            : orders.map((order) => (<OrderComponent key={order.id} name={order.name} date={order.date} cost={order.cost } onSelectOrder={() => selectOrder(order)}/>))
+        }
       </Box>
-    </Box>, []
+    </Box>, [drawerContentType]
   );
 
   const [value, setValue] = React.useState(0);
@@ -426,7 +489,12 @@ const chaptersArray = useMemo(() =>
               <Tab label="Calculations" />
               <Tab label="Cover Letter" />
             </StyledTabs>
-          <StyledHistoryIcon onClick={toggleDrawer} color={openedDrawer ? 'secondary' : 'primary'}/>
+          <StyledIconWrapper>
+            <HistoryIcon onClick={() => toggleRightPanel('versions-history')} color={openedDrawer && drawerContentType === 'versions-history' ? 'secondary' : 'primary'}/>
+          </StyledIconWrapper>
+          <StyledIconWrapper>
+            <AccountBalanceWalletIcon onClick={() => toggleRightPanel('client-orders')} color={openedDrawer && drawerContentType === 'client-orders' ? 'secondary' : 'primary'}/>
+          </StyledIconWrapper>
           </StyledHeaderToolbar>
         </StyledAppBar>
         <StyledTablesContainer width={tableWidth}>
@@ -441,7 +509,7 @@ const chaptersArray = useMemo(() =>
             {chaptersArray}
           </StyledChaptersContainer>
           <NavigationDrawer
-            navigationDrawerContent={rightPanel}
+            navigationDrawerContent={drawerContent}
             resizable
           />
         </StyledTablesContainer>
@@ -456,7 +524,9 @@ const chaptersArray = useMemo(() =>
             <StyledModalTitle>
               Create Project
             </StyledModalTitle>
-            <StyledCloseIcon onClick={closeModal}></StyledCloseIcon>
+            <StyledIconWrapper>
+              <CloseIcon onClick={closeModal}></CloseIcon>
+            </StyledIconWrapper>
           </StyledModalHeader>
           <Box display="flex" flexDirection="column">
           </Box>

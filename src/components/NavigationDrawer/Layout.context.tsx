@@ -2,7 +2,8 @@ import { createContext, ReactNode, useState } from "react";
 
 export interface IDrawerContext {
   openedDrawer: boolean;
-  toggleDrawer: () => void;
+  openDrawer: () => void;
+  closeDrawer: () => void;
   drawerWidth: number;
   changeDrawerWidth: (width: number) => void;
 }
@@ -14,7 +15,8 @@ export const DrawerContext = createContext<IDrawerContext | undefined>(undefined
 export const DrawerProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [openedDrawer, setOpenedDrawer] = useState(false);
 
-  const toggleDrawer = () => setOpenedDrawer(!openedDrawer);
+  const openDrawer = () => setOpenedDrawer(true);
+  const closeDrawer = () => setOpenedDrawer(false);
 
   const [drawerWidth, setDrawerWidth] = useState(initialDrawerWidth);
 
@@ -24,7 +26,8 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     <DrawerContext.Provider
       value={{
         openedDrawer,
-        toggleDrawer,
+        openDrawer,
+        closeDrawer,
         drawerWidth,
         changeDrawerWidth,
       }}

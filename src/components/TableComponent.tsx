@@ -74,6 +74,11 @@ const StyleTableComponent = styled.div`
       }
     }  
     
+    & .jss_cursor {
+        background-color: #9187A1;
+    }
+
+
 `;
 
 jspreadsheet.setLicense(license)
@@ -260,6 +265,12 @@ export const TableComponent = ({
         },
       onerror: (err) => {
           console.log(err);
+      },
+      onredo: (worksheet, historyRecord) => {
+        console.log(worksheet, historyRecord);
+      },
+      onundo: (worksheet, historyRecord) => {
+         console.log(worksheet, historyRecord);
       },
         oneditionend: (worksheet, cell, x, y, newValue) => {
           if (UPDATE_COLUMN_INDEX_FOR_SUM.includes(x) && !_.isNil(newValue)) {

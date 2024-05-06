@@ -28,6 +28,9 @@ import { useLayout } from "../components/NavigationDrawer/useLayout";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { OrderComponent } from "../components/OrderComponent";
 import { VersionComponent } from "../components/VersionComponent";
+import UndoIcon from '@mui/icons-material/Undo';
+import RedoIcon from '@mui/icons-material/Redo';
+
 
 const headerHeight=  48;
 
@@ -474,7 +477,7 @@ const chaptersArray = useMemo(() => {
     setValue(newValue);
   };
 
-  const tableWidth = useMemo(() => openedDrawer ? `${document.body.clientWidth - drawerWidth}px` : '100%', [drawerWidth, openedDrawer])
+  const tableWidth = useMemo(() => openedDrawer ? `${document.body.clientWidth - drawerWidth}px` : '100%', [drawerWidth, openedDrawer]);
 
   return (
     <StyledHomePage>
@@ -499,10 +502,20 @@ const chaptersArray = useMemo(() => {
         </StyledAppBar>
         <StyledTablesContainer width={tableWidth}>
           {!isFullScreenMode && <StyledToolbar>
-              <StyledCommonCounter>
-                  <p>TOTAL:</p>
-                  <p>{commonCounter}</p>
-              </StyledCommonCounter>
+              <Box display="flex" gap="30px" alignItems="center">
+                  <StyledCommonCounter>
+                      <p>TOTAL:</p>
+                      <p>{commonCounter}</p>
+                  </StyledCommonCounter>
+                  <Box display="flex" gap="10px">
+                      <StyledIconWrapper>
+                          <UndoIcon onClick={() => jspreadsheet.history.undo()} />
+                      </StyledIconWrapper>
+                      <StyledIconWrapper>
+                          <RedoIcon onClick={() => jspreadsheet.history.redo()} />
+                      </StyledIconWrapper>
+                  </Box>
+              </Box>
             {!openedDrawer && <Button variant="contained" color="primary" onClick={openModal} sx={{ cursor: 'pointer' }}>Create Project</Button>}
           </StyledToolbar>}
           <StyledChaptersContainer ref={chaptersContainer} drawerOpen={openedDrawer}>

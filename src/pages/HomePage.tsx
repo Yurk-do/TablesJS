@@ -479,6 +479,15 @@ const chaptersArray = useMemo(() => {
 
   const tableWidth = useMemo(() => openedDrawer ? `${document.body.clientWidth - drawerWidth}px` : '100%', [drawerWidth, openedDrawer]);
 
+  const [undoDisable, setUndoDisable] = useState(true);
+
+  useEffect(() => {
+    console.log(jspreadsheet.history.index);
+    console.log(jspreadsheet.history.actions);
+    const index = jspreadsheet.history.actions.findIndex((item: { action: string }) => item.action !== 'deleteWorksheet');
+    setUndoDisable(index === -1 || jspreadsheet.history.index < index);
+  }, [jspreadsheet.history.index]);
+
   return (
     <StyledHomePage>
       <StyledAppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
@@ -509,10 +518,19 @@ const chaptersArray = useMemo(() => {
                   </StyledCommonCounter>
                   <Box display="flex" gap="10px">
                       <StyledIconWrapper>
-                          <UndoIcon onClick={() => jspreadsheet.history.undo()} />
+                          <UndoIcon onClick={
+                            () => {
+                              !undoDisable && jspreadsheet.history.undo();
+                            }}
+                            color={undoDisable ? 'disabled' : 'action'}
+                          />
                       </StyledIconWrapper>
                       <StyledIconWrapper>
-                          <RedoIcon onClick={() => jspreadsheet.history.redo()} />
+                          <RedoIcon
+                            onClick={() => {
+                              jspreadsheet.history.redo();
+                            }}
+                          />
                       </StyledIconWrapper>
                   </Box>
               </Box>
@@ -547,5 +565,5 @@ const chaptersArray = useMemo(() => {
       </Modal>
       </StyledHomePage>
     )
-        ;
+  ;
 };

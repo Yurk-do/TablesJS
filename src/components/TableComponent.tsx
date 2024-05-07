@@ -89,6 +89,7 @@ type InitialTableDataType = {
   cells: any,
   styles: any,
   mergeCells: any,
+  rowsSettings: any,
 }
 
 const initialTableData: InitialTableDataType = {
@@ -97,6 +98,7 @@ const initialTableData: InitialTableDataType = {
   cells: {},
   styles: {},
   mergeCells: {},
+  rowsSettings: {},
 };
 
 export const TableComponent = ({
@@ -205,9 +207,21 @@ export const TableComponent = ({
       rowIndex = ++rowIndex;
       const rCCellName = `A${result.length}`;
       _.set(styles, rCCellName, 'text-align: left;');
-      _.set(mergeCells, rCCellName, [columns.length, 1]);
+      _.set(mergeCells, rCCellName, [columns.length - 3, 1]);
     });
-    return { rows: result, categoryRows, cells, styles, mergeCells }
+
+    const rowsSettings: Record<number, jspreadsheet.Row> = {
+      5: {
+        readOnly: true,
+      },
+      6: {
+        readOnly: true,
+      }
+    };
+
+    _.set(mergeCells, 'B6', [5, 2])
+
+    return { rows: result, categoryRows, cells, styles, mergeCells, rowsSettings }
   };
 
   const [tableData, setTableData] = useState(() => !categories ? initialTableData : getTableData(categories));
@@ -255,12 +269,13 @@ export const TableComponent = ({
             ...INIT_CONFIG,
             columns: getColumnsConfig(isShowFormulas),
             data: tableData.rows,
+            rows: tableData.rowsSettings,
             cells: tableData.cells,
             style: tableData.styles,
             mergeCells: tableData.mergeCells,
           },
         ] as jspreadsheet.Worksheet[],
-        onafterchanges: (worksheet) => {
+        onafterchanges: (worksheet, records) => {
           updateTotal(worksheet);
         },
       onerror: (err) => {
@@ -306,23 +321,83 @@ export const TableComponent = ({
       },
       contextMenu: (o, x, y, e, items, section, section_argument1, section_argument2) => {
 
-       const changeCellColor = (worksheet: jspreadsheet.worksheetInstance, color: string) => {
-           const cells = worksheet.getSelected();
+      const cells = o.getSelected();
 
+      const getCellName = (cell: { x: number, y: number }) => `${TABLE_COLUMN_NAMES[cell.x]}${cell.y + 1}`;
+
+       const changeCellColor = (worksheet: jspreadsheet.worksheetInstance, cells: { x: number, y: number }[], color: string) => {
            if (cells.length) {
              cells.forEach((cell) => {
-               worksheet.setStyle(`${TABLE_COLUMN_NAMES[cell.x]}${cell.y + 1}`, 'background-color',  color);
+               worksheet.setStyle(getCellName(cell), 'background-color',  color);
                // cell.element.style.backgroundColor = color;
              })
          }
        };
 
+       items = [];
+
+       items.push({
+         title: 'insert row after',
+         onclick: () => {
+           const selectedRows = o.getSelectedRows();
+           let newRowNumber = y;
+
+           const lastSelectedRowNumber = selectedRows.at(-1) as number;
+
+           const lastSelectedRowData = o.getRow(lastSelectedRowNumber) as jspreadsheet.Row;
+
+           if (lastSelectedRowData.readOnly)
+            {
+              const allRows = o.rows as jspreadsheet.Row[];
+              for (let i = lastSelectedRowNumber; i <= allRows.length; i++) {
+                if (!allRows[i].readOnly) {
+                  newRowNumber = i - 1;
+                  break;
+                }
+                if (i === allRows.length) {
+                  newRowNumber = 0;
+                }
+              }
+            }
+           console.log(newRowNumber);
+           o.insertRow(0, newRowNumber);
+         }
+       })
+
        items.push({ type: 'divisor'} as jspreadsheet.ContextmenuItem);
 
-       const colors: jspreadsheet.ContextmenuItem[] = ['red', 'green', 'blue'].map((color) => ({ title: '', onclick: () => changeCellColor(o, color), icon: color, }))
+       const colors: jspreadsheet.ContextmenuItem[] = ['red', 'green', 'blue'].map((color) => ({ title: '', onclick: () => changeCellColor(o, cells, color), icon: color, }))
 
-       items = [...items, ...colors];
+       const readOnlyMode: jspreadsheet.ContextmenuItem = {
+         title: "read only",
+         onclick: () => {
+           if (cells.length) {
+             cells.forEach((cell) => {
+               o.setReadOnly(getCellName(cell), true);
+             })
+           }
+       },
+       };
+
+       const mergeCells: jspreadsheet.ContextmenuItem = {
+         title: "merge",
+         onclick: () => {
+           if (cells.length) {
+             o.setMerge(getCellName(cells[0]), cells.at(-1).x - cells[0].x + 1, cells.at(-1).y - cells[0].y + 1);
+           }
+       },
+       };
+
+       items = [...items, ...colors, readOnlyMode, mergeCells];
          return  items;
+      },
+      onbeforeinsertrow: (worksheet: jspreadsheet.worksheetInstance, newRow: jspreadsheet.newRow[]) => {
+        const newData = worksheet.getRowData((newRow[0].row as number) - 1, false).map((data, index) => FORMULAS_COLUMN_INDEX.includes(index) ? data : "");
+        console.log(newData);
+
+        return newRow.map((rows) => {
+          return { ...rows, data: newData }
+        });
       },
       oncreateeditor: (
           worksheet: jspreadsheet.worksheetInstance,
@@ -371,6 +446,5 @@ export const TableComponent = ({
 
   }, [tableData]);
 
-
-  return <StyleTableComponent ref={jssRef}></StyleTableComponent>;
+ return <StyleTableComponent ref={jssRef}></StyleTableComponent>;
 };

@@ -6,8 +6,8 @@ import { CATEGORY_ROW_STYLES, TABLE_COLUMN_NAMES, TABLE_COLUMNS } from "../const
 import { ITableData, RowModel } from "../types/table";
 import {ARROW_KEYS, FORMULAS_COLUMN_INDEX, INIT_CONFIG, UPDATE_COLUMN_INDEX_FOR_SUM} from "./constants";
 import styled from "@emotion/styled";
-import "jsuites/dist/jsuites.css";
-import "jspreadsheet/dist/jspreadsheet.css";
+// import "jsuites/dist/jsuites.css";
+// import "jspreadsheet/dist/jspreadsheet.css";
 
 type PropsType = {
   categories: ITableData[];
@@ -219,7 +219,8 @@ export const TableComponent = ({
       }
     };
 
-    _.set(mergeCells, 'B6', [5, 2])
+    /* нужно для эмуляции работы с добавлениеим нетепичных строк (может ломать фильрацию) */
+    // _.set(mergeCells, 'B6', [5, 2])
 
     return { rows: result, categoryRows, cells, styles, mergeCells, rowsSettings }
   };
@@ -393,7 +394,6 @@ export const TableComponent = ({
       },
       onbeforeinsertrow: (worksheet: jspreadsheet.worksheetInstance, newRow: jspreadsheet.newRow[]) => {
         const newData = worksheet.getRowData((newRow[0].row as number) - 1, false).map((data, index) => FORMULAS_COLUMN_INDEX.includes(index) ? data : "");
-        console.log(newData);
 
         return newRow.map((rows) => {
           return { ...rows, data: newData }

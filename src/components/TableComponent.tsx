@@ -3,11 +3,10 @@ import { jspreadsheet } from "@jspreadsheet/react";
 import { license } from "../constants";
 import _ from "lodash";
 import { CATEGORY_ROW_STYLES, TABLE_COLUMN_NAMES, TABLE_COLUMNS } from "../constants/columns";
-import { ITableData, RowModel } from "../types/table";
+import {CellCoords, ITableData, RowModel} from "../types/table";
 import {ARROW_KEYS, FORMULAS_COLUMN_INDEX, INIT_CONFIG, UPDATE_COLUMN_INDEX_FOR_SUM} from "./constants";
 import styled from "@emotion/styled";
-// import "jsuites/dist/jsuites.css";
-// import "jspreadsheet/dist/jspreadsheet.css";
+import {getCellName} from "../helpers/helpers";
 
 type PropsType = {
   categories: ITableData[];
@@ -17,8 +16,8 @@ type PropsType = {
   isShowFormulas: boolean;
   isShowZeroValues: boolean;
   updateChapterTotal: (total: number) => void;
-  selectCell: (activeCell:  HTMLElement | null, worksheet: jspreadsheet.worksheetInstance) => void
-}
+  selectCell: (coords: CellCoords, worksheet: jspreadsheet.worksheetInstance, tableName: string) => void;
+};
 
 const StyleTableComponent = styled.div`
   position: relative;
@@ -282,12 +281,6 @@ export const TableComponent = ({
       onerror: (err) => {
           console.log(err);
       },
-      onredo: (worksheet, historyRecord) => {
-        console.log(worksheet, historyRecord);
-      },
-      onundo: (worksheet, historyRecord) => {
-         console.log(worksheet, historyRecord);
-      },
         oneditionend: (worksheet, cell, x, y, newValue) => {
           if (UPDATE_COLUMN_INDEX_FOR_SUM.includes(x) && !_.isNil(newValue)) {
             const convertValue = newValue.replaceAll('.', '').replace(',', '.');
@@ -316,20 +309,24 @@ export const TableComponent = ({
           uy: number,
           origin?: object
       ) => {
+          const coords = {x: px, y: py};
+
+          const tableName = jssRef.current?.jspreadsheet?.[0].parent.name;
+
+          selectCell(coords, worksheet, tableName);
+
         if (!origin) {
-          selectCell(worksheet.getCellFromCoords(px, py), worksheet);
+          selectCell(coords, worksheet, tableName);
         }
       },
-      contextMenu: (o, x, y, e, items, section, section_argument1, section_argument2) => {
+      contextMenu: (worksheet, x, y, e, items, section, section_argument1, section_argument2) => {
 
-      const cells = o.getSelected();
+      const cells = worksheet.getSelected();
 
-      const getCellName = (cell: { x: number, y: number }) => `${TABLE_COLUMN_NAMES[cell.x]}${cell.y + 1}`;
-
-       const changeCellColor = (worksheet: jspreadsheet.worksheetInstance, cells: { x: number, y: number }[], color: string) => {
+       const changeCellColor = (worksh: jspreadsheet.worksheetInstance, cells: CellCoords[], color: string) => {
            if (cells.length) {
              cells.forEach((cell) => {
-               worksheet.setStyle(getCellName(cell), 'background-color',  color);
+               worksh.setStyle(getCellName(cell), 'background-color',  color);
                // cell.element.style.backgroundColor = color;
              })
          }
@@ -340,16 +337,16 @@ export const TableComponent = ({
        items.push({
          title: 'insert row after',
          onclick: () => {
-           const selectedRows = o.getSelectedRows();
+           const selectedRows = worksheet.getSelectedRows();
            let newRowNumber = y;
 
            const lastSelectedRowNumber = selectedRows.at(-1) as number;
 
-           const lastSelectedRowData = o.getRow(lastSelectedRowNumber) as jspreadsheet.Row;
+           const lastSelectedRowData = worksheet.getRow(lastSelectedRowNumber) as jspreadsheet.Row;
 
            if (lastSelectedRowData.readOnly)
             {
-              const allRows = o.rows as jspreadsheet.Row[];
+              const allRows = worksheet.rows as jspreadsheet.Row[];
               for (let i = lastSelectedRowNumber; i <= allRows.length; i++) {
                 if (!allRows[i].readOnly) {
                   newRowNumber = i - 1;
@@ -360,21 +357,20 @@ export const TableComponent = ({
                 }
               }
             }
-           console.log(newRowNumber);
-           o.insertRow(0, newRowNumber);
+           worksheet.insertRow(0, newRowNumber);
          }
        })
 
        items.push({ type: 'divisor'} as jspreadsheet.ContextmenuItem);
 
-       const colors: jspreadsheet.ContextmenuItem[] = ['red', 'green', 'blue'].map((color) => ({ title: '', onclick: () => changeCellColor(o, cells, color), icon: color, }))
+       const colors: jspreadsheet.ContextmenuItem[] = ['red', 'green', 'blue'].map((color) => ({ title: '', onclick: () => changeCellColor(worksheet, cells, color), icon: color, }))
 
        const readOnlyMode: jspreadsheet.ContextmenuItem = {
          title: "read only",
          onclick: () => {
            if (cells.length) {
              cells.forEach((cell) => {
-               o.setReadOnly(getCellName(cell), true);
+               worksheet.setReadOnly(getCellName(cell), true);
              })
            }
        },
@@ -384,7 +380,7 @@ export const TableComponent = ({
          title: "merge",
          onclick: () => {
            if (cells.length) {
-             o.setMerge(getCellName(cells[0]), cells.at(-1).x - cells[0].x + 1, cells.at(-1).y - cells[0].y + 1);
+             worksheet.setMerge(getCellName(cells[0]), cells.at(-1).x - cells[0].x + 1, cells.at(-1).y - cells[0].y + 1);
            }
        },
        };
@@ -441,9 +437,6 @@ export const TableComponent = ({
         }
       },
       });
-    // jssRef.current?.jspreadsheet?.[0]?.hideIndex();
-    jssRef.current?.jspreadsheet?.[0]?.getData();
-
   }, [tableData]);
 
  return <StyleTableComponent ref={jssRef}></StyleTableComponent>;

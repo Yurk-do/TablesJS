@@ -33,7 +33,7 @@ export const StyledDrawer = styled(Drawer)`
 `;
 
 export const StyledTablesContainer = styled.div<{ width: string }>`
-  margin: ${headerHeight}px 0 0 0;
+  margin: 0;
   width: ${({ width }) => width};
 `;
 
@@ -113,6 +113,10 @@ export const StyledCommonCounter = styled.div`
   & > p {
     margin: 0;
   }
+`;
+
+export const StyledContentHeaderWrapper = styled.div`
+  margin-top: ${headerHeight}px;  
 `;
 
 export const StyledModalContent = styled.div`

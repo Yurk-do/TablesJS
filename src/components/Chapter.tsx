@@ -104,7 +104,7 @@ export const Chapter = ({
     if (!isFullScreenMode) {
       setExpanded(prev => !prev);
     }
-  }
+  };
 
     useEffect(() => {
       setTotalCount(getChapterTotalCount(chapter));

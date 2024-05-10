@@ -4,7 +4,7 @@ import _, {isNil} from "lodash";
 import { HIDDEN_CATEGORIES } from "../mocks/hidden-categories";
 import { Chapter } from "../components/Chapter";
 import React, {useEffect, useMemo, useRef, useState} from "react";
-import {IChapterInfo, ScrollConfig} from "../types/table";
+import {CellCoords, IChapterInfo, ScrollConfig} from "../types/table";
 import { IChapter, IDataForVizual } from "../types/chapter";
 import { chaptersList } from "../mocks/chapter-mocks";
 import { jspreadsheet } from "@jspreadsheet/react";
@@ -13,6 +13,7 @@ import closeArrow from 'assets/close-arrows.svg';
 import {
   Box,
   Button,
+  FormControlLabel, Input,
   Modal,
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
@@ -26,7 +27,7 @@ import { versions } from "../mocks/versions";
 import { orders, OrderType, VisibilityConfig } from "../mocks/orders";
 import {
   StyledAppBar,
-  StyledChaptersContainer,
+  StyledChaptersContainer, StyledContentHeaderWrapper,
   StyledHomePage,
   StyledIconWrapper,
   StyledModalContent,
@@ -37,6 +38,26 @@ import {
 } from "./StyledHomePage";
 import { TablesContainerHeader } from "../components/TablesContainerHeader";
 import { MainHeader } from "../components/MainHeader";
+import {ContentHeader} from "../components/ContentHeader";
+import styled from "@emotion/styled";
+import formula from '@jspreadsheet/formula-pro';
+import {getCellName} from "../helpers/helpers";
+
+const StyledPicker = styled(Input)`
+  min-width: 320px;
+  margin-left: 10px;
+    text-align: start;
+    
+  &.input {
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 1em;
+      line-height: initial;
+      border-radius: 2px;
+  }  
+`;
+
+formula.license('YjQzMzdlOTRiOGY3ZTQ0ZDQ4ZTI1YWU3MDFjMDI0ZWJmOTNjODA');
 
 type DrawerContentType = 'versions-history' | 'client-orders';
 
@@ -49,6 +70,8 @@ export const HomePage = () => {
     const chaptersContainer = useRef<HTMLDivElement | null>(null);
 
     const [isFullScreenMode, setIsFullScreenMode] = useState(false);
+
+    const picker = useRef<HTMLDivElement | null>(null);
 
   const createDataForVizual = (): IDataForVizual => {
     const result = chapterList.reduce<Record<string, any>>((result, chapter) => {
@@ -107,6 +130,10 @@ export const HomePage = () => {
 
   const { drawerWidth, openedDrawer, openDrawer, closeDrawer } = useLayout();
   const [ drawerContentType, setDrawerContentType ] = useState<DrawerContentType | null>(null);
+
+  const [ showFormulas, setShowFormulas ] = useState(false);
+
+  const formulasVisibilityHandler = () => setShowFormulas(!showFormulas);
 
   const closeRightPanel = () => {
     setDrawerContentType(null);
@@ -181,7 +208,24 @@ export const HomePage = () => {
         };
     }
 
-    const selectCell = (activeCell: any, worksheet: jspreadsheet.worksheetInstance) => {
+    const [formula, setFormula] = useState<string>('');
+    const [activeTableName, setActiveTableName] = useState<string>('');
+    const [activeCellName, setActiveCellName] = useState<string>('');
+
+    const selectCell = (coords: { x: number, y: number }, worksheet: jspreadsheet.worksheetInstance, tableName: string) => {
+      const activeCell = worksheet.getCell(coords.x, coords.y) as HTMLElement;
+
+      const cellName = getCellName(coords);
+
+      const data = worksheet.getValue(cellName, false);
+
+      const formula = data.length && data.startsWith('=') ? data : '';
+
+      setActiveTableName(tableName);
+
+      setActiveCellName(cellName)
+      setFormula(formula);
+
         const { needBottom, needTop, needRight, needLeft } =
             checkNeedScrolling(activeCell);
         const chapterContainer = worksheet.table.closest('.tables-container');
@@ -197,7 +241,6 @@ export const HomePage = () => {
         chapterContainer?.scrollBy(-needLeft, 0);
     }
 };
-
 
 const chaptersArray = useMemo(() => {
   return CHAPTERS.map((chapter) => (
@@ -235,7 +278,7 @@ const chaptersArray = useMemo(() => {
             visibleRowsIds={visibilityConfig?.visibleRowsIds || null}
             categories={chapter.categories}
             editable={true}
-            isShowFormulas={true}
+            isShowFormulas={showFormulas}
             isShowZeroValues={true}
             updateChapterTotal={(total) => updateChapterTotal(chapter.name, total)}
             selectCell={selectCell}
@@ -244,7 +287,7 @@ const chaptersArray = useMemo(() => {
       }
     />
   )
-)}, [activeFullScreenChapter, isFullScreenMode, dataForVizual, visibilityConfig?.visibleChapters]
+)}, [activeFullScreenChapter, isFullScreenMode, showFormulas, dataForVizual, visibilityConfig?.visibleChapters]
   );
 
   const selectOrder = (order: OrderType) => {
@@ -278,6 +321,31 @@ const chaptersArray = useMemo(() => {
     setUndoDisable(index === -1 || jspreadsheet.history.index < index);
   }, [jspreadsheet.history.index]);
 
+
+  useEffect(() => {
+    if (picker.current) {
+      jspreadsheet.picker(picker.current, {
+        type: 'picker',
+        onchange: (element: any, event: any ) => {
+          console.log(element, event);
+        },
+        onupdate: (element: any, event: any ) => {
+          console.log(element, event);
+        },
+      });
+    }
+  });
+
+  const changeFormula = (e: any) => {
+    // @ts-ignore
+    const activeWorksheet: jspreadsheet.worksheetInstance = (jspreadsheet.spreadsheet as jspreadsheet.spreadsheetInstance[]).find(s => s.name === activeTableName).worksheets[0];
+
+    const value = e.target.value;
+
+    activeWorksheet.setValue(activeCellName, value, true);
+    setFormula(value);
+  };
+
   return (
     <StyledHomePage>
       <StyledAppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
@@ -300,26 +368,41 @@ const chaptersArray = useMemo(() => {
           }
         />
         </StyledAppBar>
-        <StyledTablesContainer width={tableWidth}>
-          {!isFullScreenMode && (
-            <TablesContainerHeader
-              undoDisable={undoDisable}
-              counter={commonCounter}
-              rightPart={!openedDrawer && (
-                <Button variant="contained" color="primary" onClick={openModal} sx={{ cursor: 'pointer' }}>
-                  Create Project
-                </Button>
-              )}
-            />
-          )}
-          <StyledChaptersContainer ref={chaptersContainer} drawerOpen={openedDrawer}>
-            {chaptersArray}
-          </StyledChaptersContainer>
-          <NavigationDrawer
-            navigationDrawerContent={drawerContent}
-            resizable
+      <StyledContentHeaderWrapper>
+        <ContentHeader
+          showFormulas={showFormulas}
+          formulasVisibilityHandler={formulasVisibilityHandler}
+        />
+      </StyledContentHeaderWrapper>
+      <Box display="flex" justifyContent="start" marginTop="10px">
+        <FormControlLabel
+          labelPlacement="start"
+          label="Fx"
+          control={
+            <StyledPicker id='picker' ref={picker} value={formula} onChange={changeFormula}/>
+          }
+        />
+      </Box>
+      <StyledTablesContainer width={tableWidth}>
+        {!isFullScreenMode && (
+          <TablesContainerHeader
+            undoDisable={undoDisable}
+            counter={commonCounter}
+            rightPart={!openedDrawer && (
+              <Button variant="contained" color="primary" onClick={openModal} sx={{ cursor: 'pointer' }}>
+                Create Project
+              </Button>
+            )}
           />
-        </StyledTablesContainer>
+        )}
+        <StyledChaptersContainer ref={chaptersContainer} drawerOpen={openedDrawer}>
+          {chaptersArray}
+        </StyledChaptersContainer>
+        <NavigationDrawer
+          navigationDrawerContent={drawerContent}
+          resizable
+        />
+      </StyledTablesContainer>
       <Modal
         open={modalIsOpen}
         onClose={closeModal}

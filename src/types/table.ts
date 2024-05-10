@@ -119,3 +119,8 @@ export interface ScrollConfig {
     needRight: number;
     needLeft: number;
 }
+
+export type CellCoords = {
+    x: number;
+    y: number;
+};

@@ -40,10 +40,10 @@ import { TablesContainerHeader } from "../components/TablesContainerHeader";
 import { MainHeader } from "../components/MainHeader";
 import {ContentHeader} from "../components/ContentHeader";
 import styled from "@emotion/styled";
-import formula from '@jspreadsheet/formula-pro';
 import {getCellName} from "../helpers/helpers";
+import {JModal} from "../components/JModal";
 
-const StyledPicker = styled(Input)`
+const StyledFormulaInput = styled(Input)`
   min-width: 320px;
   margin-left: 10px;
     text-align: start;
@@ -57,8 +57,6 @@ const StyledPicker = styled(Input)`
   }  
 `;
 
-formula.license('YjQzMzdlOTRiOGY3ZTQ0ZDQ4ZTI1YWU3MDFjMDI0ZWJmOTNjODA');
-
 type DrawerContentType = 'versions-history' | 'client-orders';
 
 export const HomePage = () => {
@@ -71,9 +69,7 @@ export const HomePage = () => {
 
     const [isFullScreenMode, setIsFullScreenMode] = useState(false);
 
-    const picker = useRef<HTMLDivElement | null>(null);
-
-  const createDataForVizual = (): IDataForVizual => {
+   const createDataForVizual = (): IDataForVizual => {
     const result = chapterList.reduce<Record<string, any>>((result, chapter) => {
       result[chapter.name] = {
         name: chapter.name,
@@ -242,6 +238,11 @@ export const HomePage = () => {
     }
 };
 
+const [isJModalOpen, setIsJModalOpen] = useState(false);
+
+const [invoiceData, setInvoiceData] = useState<any | null>(null);
+const [cellCoords, setCellCoords] = useState<CellCoords | null>(null);
+
 const chaptersArray = useMemo(() => {
   return CHAPTERS.map((chapter) => (
     <Chapter
@@ -273,7 +274,10 @@ const chaptersArray = useMemo(() => {
       details={
         <div className="tables-container">
           <TableComponent
+            setCellCoords={setCellCoords}
             key={chapter.name}
+            setRowData={setInvoiceData}
+            openJModal={() => setIsJModalOpen(true)}
             visibleCategories={visibilityConfig?.visibleCategories || null}
             visibleRowsIds={visibilityConfig?.visibleRowsIds || null}
             categories={chapter.categories}
@@ -322,20 +326,6 @@ const chaptersArray = useMemo(() => {
   }, [jspreadsheet.history.index]);
 
 
-  useEffect(() => {
-    if (picker.current) {
-      jspreadsheet.picker(picker.current, {
-        type: 'picker',
-        onchange: (element: any, event: any ) => {
-          console.log(element, event);
-        },
-        onupdate: (element: any, event: any ) => {
-          console.log(element, event);
-        },
-      });
-    }
-  });
-
   const changeFormula = (e: any) => {
     // @ts-ignore
     const activeWorksheet: jspreadsheet.worksheetInstance = (jspreadsheet.spreadsheet as jspreadsheet.spreadsheetInstance[]).find(s => s.name === activeTableName).worksheets[0];
@@ -345,6 +335,10 @@ const chaptersArray = useMemo(() => {
     activeWorksheet.setValue(activeCellName, value, true);
     setFormula(value);
   };
+
+  const closeJModal = (e: object, reason: string) => {
+    reason !== 'backdropClick' && setIsJModalOpen(false);
+  }
 
   return (
     <StyledHomePage>
@@ -379,7 +373,7 @@ const chaptersArray = useMemo(() => {
           labelPlacement="start"
           label="Fx"
           control={
-            <StyledPicker id='picker' ref={picker} value={formula} onChange={changeFormula}/>
+            <StyledFormulaInput value={formula} onChange={changeFormula}/>
           }
         />
       </Box>
@@ -422,6 +416,7 @@ const chaptersArray = useMemo(() => {
           </Box>
         </StyledModalContent>
       </Modal>
+      {isJModalOpen && <JModal data={invoiceData} onClose={closeJModal} startCoords={cellCoords || undefined}/>}
       </StyledHomePage>
     )
   ;

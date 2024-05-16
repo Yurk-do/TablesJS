@@ -4,7 +4,13 @@ import { license } from "../constants";
 import _ from "lodash";
 import { CATEGORY_ROW_STYLES, TABLE_COLUMN_NAMES, TABLE_COLUMNS } from "../constants/columns";
 import {CellCoords, ITableData, RowModel} from "../types/table";
-import {ARROW_KEYS, FORMULAS_COLUMN_INDEX, INIT_CONFIG, UPDATE_COLUMN_INDEX_FOR_SUM} from "./constants";
+import {
+  ARROW_KEYS,
+  FORMULAS_COLUMN_INDEX,
+  INIT_CONFIG,
+  INVOICE_COLUMN_INDEX,
+  UPDATE_COLUMN_INDEX_FOR_SUM
+} from "./constants";
 import styled from "@emotion/styled";
 import {getCellName} from "../helpers/helpers";
 
@@ -15,7 +21,10 @@ type PropsType = {
   editable: boolean;
   isShowFormulas: boolean;
   isShowZeroValues: boolean;
+  setRowData: (data: any) => void;
+  setCellCoords: (coords: CellCoords) => void;
   updateChapterTotal: (total: number) => void;
+  openJModal: () => void;
   selectCell: (coords: CellCoords, worksheet: jspreadsheet.worksheetInstance, tableName: string) => void;
 };
 
@@ -76,8 +85,6 @@ const StyleTableComponent = styled.div`
     & .jss_cursor {
         background-color: #9187A1;
     }
-
-
 `;
 
 jspreadsheet.setLicense(license)
@@ -109,6 +116,9 @@ export const TableComponent = ({
   isShowZeroValues,
   updateChapterTotal,
   selectCell,
+  openJModal,
+  setRowData,
+  setCellCoords,
 }: PropsType) => {
   const jssRef = useRef<any | null>(null);
   let keydownListener: null | any = null;
@@ -335,6 +345,25 @@ export const TableComponent = ({
        items = [];
 
        items.push({
+         title: 'add invoice',
+         onclick: (instance, e) => {
+           const cell = worksheet.getSelected()[0];
+           const rowData = worksheet.getRowData(cell.y, true);
+           const rect = worksheet.getCell(cell.x, cell.y)?.getBoundingClientRect();
+
+           if (rect) {
+             setCellCoords({
+               x: rect.x,
+               y: rect.y,
+             });
+           }
+
+           setRowData(rowData);
+           openJModal();
+         }
+       });
+
+       items.push({
          title: 'insert row after',
          onclick: () => {
            const selectedRows = worksheet.getSelectedRows();
@@ -359,7 +388,7 @@ export const TableComponent = ({
             }
            worksheet.insertRow(0, newRowNumber);
          }
-       })
+       });
 
        items.push({ type: 'divisor'} as jspreadsheet.ContextmenuItem);
 

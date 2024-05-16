@@ -1,6 +1,8 @@
 import {TableDefaultSettings} from "../constants";
 
 export const FORMULAS_COLUMN_INDEX = [4, 7, 8, 9, 10, 14];
+export const INVOICE_COLUMN_INDEX = [0, 1];
+
 export const UPDATE_COLUMN_INDEX_FOR_SUM = [2, 3, 5, 6];
 export const INIT_CONFIG = {
     ...TableDefaultSettings,

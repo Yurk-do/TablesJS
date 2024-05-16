@@ -13,11 +13,12 @@ export const UndoRedoComponent = ({ undoDisable }: PropsType) => {
   return (
     <Box display="flex" gap="10px">
       <StyledIconWrapper>
-        <UndoIcon onClick={
+        <UndoIcon
+          onClick={
           () => {
             !undoDisable && jspreadsheet.history.undo();
           }}
-                  color={undoDisable ? 'disabled' : 'action'}
+          {...(undoDisable ? {'color': 'disabled'} : {})}
         />
       </StyledIconWrapper>
       <StyledIconWrapper>

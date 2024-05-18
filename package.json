@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.11.5",
     "@jspreadsheet/formula-pro": "^5.1.0",
     "@jspreadsheet/react": "^10.9.4",
+    "@jspreadsheet/render": "^5.0.8",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@testing-library/jest-dom": "^5.17.0",

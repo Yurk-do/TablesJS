@@ -8,11 +8,11 @@ import {
   ARROW_KEYS,
   FORMULAS_COLUMN_INDEX,
   INIT_CONFIG,
-  INVOICE_COLUMN_INDEX,
   UPDATE_COLUMN_INDEX_FOR_SUM
 } from "./constants";
 import styled from "@emotion/styled";
-import {getCellName} from "../helpers/helpers";
+import { getCellName } from "../helpers/helpers";
+import {tagNamesInitial} from "../mocks/tags";
 
 type PropsType = {
   categories: ITableData[];
@@ -26,29 +26,20 @@ type PropsType = {
   updateChapterTotal: (total: number) => void;
   openJModal: () => void;
   selectCell: (coords: CellCoords, worksheet: jspreadsheet.worksheetInstance, tableName: string) => void;
+  tagsDisplayingNames: string[];
 };
+
+const tags: jspreadsheet.ContextmenuItem = {
+  title: 'tags',
+  submenu: Object.keys(tagNamesInitial).map((tag) => ({
+    title: tagNamesInitial[tag],
+  }))
+}
 
 const StyleTableComponent = styled.div`
   position: relative;
-
-  & .jcontextmenu {
-          position: fixed;
-          z-index:10000;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          user-select: none;
-          padding-top:4px;
-          padding-bottom:4px;
-          margin:0px;
-          outline:none;
-      
-        background: black;
-        color: white;
-        border: 1px solid #35354e;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
-        div:hover {
+    & .jcontextmenu {
+        & > div:hover {
           background-color: #7c7c80;
         }
         hr {
@@ -82,9 +73,7 @@ const StyleTableComponent = styled.div`
       }
     }  
     
-    & .jss_cursor {
-        background-color: #9187A1;
-    }
+
 `;
 
 jspreadsheet.setLicense(license)
@@ -119,9 +108,16 @@ export const TableComponent = ({
   openJModal,
   setRowData,
   setCellCoords,
+  tagsDisplayingNames,
 }: PropsType) => {
   const jssRef = useRef<any | null>(null);
   let keydownListener: null | any = null;
+
+   if (tags.submenu) {
+    tags.submenu.forEach((item, index) => {
+      item.title = tagsDisplayingNames[index];
+    })
+  }
 
   const columns = _.cloneDeep(TABLE_COLUMNS);
 
@@ -405,6 +401,13 @@ export const TableComponent = ({
        },
        };
 
+       const save: jspreadsheet.ContextmenuItem = {
+         title: "save",
+         onclick: (o) => {
+            worksheet.download();
+       },
+       };
+
        const mergeCells: jspreadsheet.ContextmenuItem = {
          title: "merge",
          onclick: () => {
@@ -414,7 +417,20 @@ export const TableComponent = ({
        },
        };
 
-       items = [...items, ...colors, readOnlyMode, mergeCells];
+       if (tags.submenu) {
+         tags.submenu.forEach((tag, index) => {
+           tag.onclick = () => {
+             const selectedRow = worksheet.getSelectedRows();
+             const selectedCell = worksheet.getSelected()[0] as { x: number, y: number};
+             worksheet.setMeta(getCellName({ x: selectedCell.x, y: selectedCell.y }), 'tag', `tag${index + 1}`);
+             const meta = worksheet.getMeta(getCellName({ x: selectedCell.x, y: selectedCell.y }), 'tag');
+             console.log(worksheet.getProperty(selectedCell.x));
+             console.log(meta);
+             console.log(worksheet.getRow(selectedRow[0]));
+           }
+         });
+       }
+       items = [...items, ...colors, readOnlyMode, mergeCells, save, tags];
          return  items;
       },
       onbeforeinsertrow: (worksheet: jspreadsheet.worksheetInstance, newRow: jspreadsheet.newRow[]) => {
@@ -423,6 +439,10 @@ export const TableComponent = ({
         return newRow.map((rows) => {
           return { ...rows, data: newData }
         });
+      },
+      onchangemeta: (worksheet, newValue) => {
+        console.log(worksheet);
+        console.log(newValue);
       },
       oncreateeditor: (
           worksheet: jspreadsheet.worksheetInstance,

@@ -1,5 +1,5 @@
 import {Box, Tab, Tabs, FormControlLabel, Switch} from "@mui/material";
-import React, {useState} from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { ContentHeaderTabPanel } from "./ContentHeaderTabPanel";
 import MenuIcon from '@mui/icons-material/Menu';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -48,11 +48,11 @@ export const ContentHeader = ({ formulasVisibilityHandler, showFormulas }: Props
     setValue(newValue);
   };
 
-  const changeVisibility = (index: number) => {
+  const changeVisibility = useCallback((index: number) => {
     setInvisiblePanel(value === index && invisiblePanel !== index ? index : null);
-  };
+  }, [value, invisiblePanel]);
 
-  const tabsData = [
+  const tabsData = useMemo(() => [
     {
       name: 'Departments',
       icon: <MenuIcon/>,
@@ -70,43 +70,47 @@ export const ContentHeader = ({ formulasVisibilityHandler, showFormulas }: Props
         </Box>
       )}
     />
-  ));
+  )), [changeVisibility]);
 
-  const departmentsList = ["Pre-production", "Cast", "Salaries", "Equipment", "Art Dept.", "Studio", "Location", "Data"].map(
-    (item, index, arr) => (
-      <>
-        <Box>
-          {item}
-        </Box>
-        {index !== arr.length -1 && (
-          <Box
-            sx={{
-              width: '1px',
-              margin: 'auto 6px',
-              height: '25px',
-              backgroundColor: 'black',
-            }}
-          />
-        )}
-      </>
-  ));
-
-  const visibilityItemsList = ["International", "Taxes", "Overtime", "%MU", "RK column.", "Position text", "Show formulas"].map(
-    (item, index, arr) => (
-      <FormControlLabel
-        label={item}
-        control={
-          item === 'Show formulas' ? (
-            <Switch
-              checked={showFormulas}
-              onChange={formulasVisibilityHandler}
+  const departmentsList = useMemo(() =>
+    ["Pre-production", "Cast", "Salaries", "Equipment", "Art Dept.", "Studio", "Location", "Data"].map(
+      (item, index, arr) => (
+        <>
+          <Box>
+            {item}
+          </Box>
+          {index !== arr.length -1 && (
+            <Box
+              sx={{
+                width: '1px',
+                margin: 'auto 6px',
+                height: '25px',
+                backgroundColor: 'black',
+              }}
             />
+          )}
+        </>
+      )), []
+  );
+
+  const visibilityItemsList = useMemo(() => {
+    return ["International", "Taxes", "Overtime", "%MU", "RK column.", "Position text", "Show formulas"].map(
+      (item, index, arr) => (
+        <FormControlLabel
+          label={item}
+          control={
+            index === arr.length - 1 ? (
+              <Switch
+                checked={showFormulas}
+                onChange={formulasVisibilityHandler}
+              />
             ) : (
-            <Switch/>
+              <Switch/>
             )
           }
-      />
-  ));
+        />
+      ))
+  }, [showFormulas]);
 
   return (
     <Box sx={{ width: '100%' }}>

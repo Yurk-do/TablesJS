@@ -11,6 +11,10 @@ import styled from "@emotion/styled";
    details: ReactNode;
  };
 
+ const StyledAccordion = styled(Accordion)`
+   background: #232337;
+ `;
+
  const StyledAccordionSummary = styled(AccordionSummary)`
      background: #232337;
      border-bottom: 1px solid white;
@@ -112,7 +116,7 @@ export const Chapter = ({
 
   return (
     <div style={{ display: hide ? 'none' : 'block'}}>
-        <Accordion
+        <StyledAccordion
           onChange={handleChange}
           expanded={isFullScreenMode || expanded}
         >
@@ -137,7 +141,7 @@ export const Chapter = ({
             <StyledAccordionDetails>
               {details}
             </StyledAccordionDetails>
-        </Accordion>
+        </StyledAccordion>
     </div>
   );
 };

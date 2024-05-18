@@ -439,7 +439,7 @@
   pointer-events: initial;
   opacity: 1;
   color: var(--content_color);
-  background-color: var(--content_background);
+  background-color: var(--content_background) !important;
 }
 
 .jss_input[contentEditable=false] {

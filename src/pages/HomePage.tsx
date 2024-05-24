@@ -1,11 +1,10 @@
 import { TableComponent } from "../components/TableComponent";
-import { CHAPTERS } from "../mocks/chapters";
 import _, {isNil} from "lodash";
 import { HIDDEN_CATEGORIES } from "../mocks/hidden-categories";
 import { Chapter } from "../components/Chapter";
-import React, {ReactNode, useCallback, useEffect, useMemo, useRef, useState} from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CellCoords, IChapterInfo, ScrollConfig } from "../types/table";
-import { IChapter } from "../types/chapter";
+import { IChapter, IDataForVizual } from "../types/chapter";
 import { chaptersList } from "../mocks/chapter-mocks";
 import { jspreadsheet } from "@jspreadsheet/react";
 import openArrows from 'assets/open-arrows.svg';
@@ -13,7 +12,7 @@ import closeArrow from 'assets/close-arrows.svg';
 import {
   Box,
   Button,
-  FormControlLabel, Input,
+  FormControlLabel,
   Modal,
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
@@ -21,75 +20,69 @@ import HistoryIcon from '@mui/icons-material/History';
 import { NavigationDrawer } from "../components/NavigationDrawer/NavigationDrawer";
 import { useLayout } from "../components/NavigationDrawer/useLayout";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import { OrderComponent } from "../components/OrderComponent";
-import { VersionComponent } from "../components/VersionComponent";
-import { versions } from "../mocks/versions";
-import { orders, OrderType, VisibilityConfig } from "../mocks/orders";
+import { OrderType, VisibilityConfig } from "../mocks/orders";
 import {
   StyledAppBar,
-  StyledChaptersContainer, StyledContentHeaderWrapper,
+  StyledChaptersContainer, StyledContentHeaderWrapper, StyledFormulaInput,
   StyledHomePage,
   StyledIconWrapper,
   StyledModalContent,
   StyledModalHeader,
   StyledModalTitle,
-  StyledRightPanelHeader,
   StyledTablesContainer
 } from "./StyledHomePage";
 import { TablesContainerHeader } from "../components/TablesContainerHeader";
 import { MainHeader } from "../components/MainHeader";
 import { ContentHeader } from "../components/ContentHeader";
-import styled from "@emotion/styled";
-import { getCellName } from "../helpers/helpers";
+import {
+  addDataHandler,
+  createDataForVizual,
+  getCellName,
+} from "../helpers/helpers";
 import { JModal } from "../components/JModal";
-import { useChapters } from "../hooks/useChapters";
 import TagIcon from '@mui/icons-material/Tag';
-import {IconButton} from "../components/IconButton";
-import {tagNamesInitial, tags} from "../mocks/tags";
-import {TagComponent} from "../components/TagComponent";
-
-const StyledFormulaInput = styled(Input)`
-  min-width: 320px;
-  margin-left: 10px;
-    text-align: start;
-    
-  &.input {
-      box-sizing: border-box;
-      background-color: #fff;
-      font-size: 1em;
-      line-height: initial;
-      border-radius: 2px;
-  }  
-`;
-
-type DrawerContentType = 'versions-history' | 'client-orders' | 'tags';
+import { IconButton} from "../components/IconButton";
+import { defaultTagNames, initialTagsData } from "../mocks/tags";
+import SaveIcon from '@mui/icons-material/Save';
+import { getChapters } from "../services/tableService";
+import { useInterval } from "../hooks/useInterval";
+import { DrawerContentType, useDrawer } from "../hooks/useDrawer";
 
 export const HomePage = () => {
   const hiddenCategories: string[] = _.cloneDeep(HIDDEN_CATEGORIES);
   const chapterList: IChapter[] = _.cloneDeep(chaptersList);
-  const chapters: IChapterInfo[] = _.cloneDeep(CHAPTERS);
 
-  const { createDataForVizual } = useChapters({ chapters, chapterList, hiddenCategories });
+  const [chapters, setChapters] = useState<IChapterInfo[]>([]);
+  const [dataForVizual, setDataForVizual] = useState<IDataForVizual>({});
+
+  useEffect(() => {
+    getChapters().then((data) => {
+      setChapters(data);
+      setDataForVizual(createDataForVizual(data, chapterList, hiddenCategories));
+    })
+  }, []);
 
   const [activeFullScreenChapter, setActiveFullScreenChapter] = useState<IChapterInfo  | null>(null);
   const chaptersContainer = useRef<HTMLDivElement | null>(null);
 
   const [isFullScreenMode, setIsFullScreenMode] = useState(false);
 
-
-  const [dataForVizual, setDataForVizual] = useState(() => createDataForVizual());
   const [visibilityConfig, setVisibilityConfig] = useState<VisibilityConfig | null>(null);
+
+  const [addedTags, setAddedTags] = useState<Record<string, number[]>>(initialTagsData);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const { drawerWidth, openedDrawer, openDrawer, closeDrawer } = useLayout();
   const [ drawerContentType, setDrawerContentType ] = useState<DrawerContentType | null>(null);
 
   const [ showFormulas, setShowFormulas ] = useState(false);
 
-  const [tagsDisplayingNames, setTagsDisplayingNames] = useState<Record<string, string>>(tagNamesInitial);
-
   const formulasVisibilityHandler = useCallback(() => {
     setShowFormulas((prev) => !prev);
   }, []);
+
+
+  const selectedTagsRow = useMemo(() => selectedTags.length ? selectedTags.reduce<number[]>((arr, tag) => [...arr, ...addedTags[tag]], []) : null, [selectedTags])
 
   const closeRightPanel = () => {
     setDrawerContentType(null);
@@ -193,8 +186,36 @@ export const HomePage = () => {
   const [invoiceData, setInvoiceData] = useState<any | null>(null);
   const [cellCoords, setCellCoords] = useState<CellCoords | null>(null);
 
+  const addTag = (tagName: string, row: number) => {
+    setAddedTags((data) => ({
+      ...data, [tagName]: data[tagName].includes(row) ? data[tagName].filter((item) => item !== row) : [...data[tagName], row]
+    }))
+  };
+
+  const selectOrder = (order: OrderType) => {
+    setVisibilityConfig(order.visibilityConfig);
+  };
+
+  const selectTag = (index: number) => {
+    setSelectedTags(     (tags) =>
+      tags.includes(defaultTagNames[index])
+        ? tags.filter((tag) => tag !== defaultTagNames[index])
+        : [...tags, defaultTagNames[index]]);
+  };
+
+  const {
+    drawerContent,
+    tagsDisplayingNames,
+  } = useDrawer({
+    selectOrder,
+    selectedTags,
+    selectTag,
+    drawerContentType,
+    onClose: closeRightPanel,
+  });
+
   const chaptersArray = useMemo(() => {
-    return CHAPTERS.map((chapter) => (
+    return !chapters.length ? null : chapters.map((chapter) => (
       <Chapter
         hide={!!(activeFullScreenChapter && activeFullScreenChapter?.name !== chapter.name) || (!!visibilityConfig && !visibilityConfig?.visibleChapters.includes(chapter.name))}
         key={chapter.name}
@@ -225,6 +246,7 @@ export const HomePage = () => {
           <div className="tables-container">
             <TableComponent
               setCellCoords={setCellCoords}
+              name={chapter.name}
               key={chapter.name}
               setRowData={setInvoiceData}
               openJModal={() => setIsJModalOpen(true)}
@@ -232,9 +254,11 @@ export const HomePage = () => {
               visibleRowsIds={visibilityConfig?.visibleRowsIds || null}
               categories={chapter.categories}
               editable={true}
+              selectedTagsRow={selectedTagsRow}
               isShowFormulas={showFormulas}
+              addTag={addTag}
               isShowZeroValues={true}
-              tagsDisplayingNames={Object.values(tagsDisplayingNames)}
+              tagsDisplayingNames={tagsDisplayingNames}
               updateChapterTotal={(total) => updateChapterTotal(chapter.name, total)}
               selectCell={selectCell}
             />
@@ -242,72 +266,15 @@ export const HomePage = () => {
         }
       />
     )
-  )}, [activeFullScreenChapter, isFullScreenMode, showFormulas, dataForVizual, visibilityConfig?.visibleChapters, tagsDisplayingNames]
-  );
-
-  const selectOrder = (order: OrderType) => {
-      setVisibilityConfig(order.visibilityConfig);
-  };
-
-  const drawerContentTitleMap: Record<DrawerContentType, string> = {
-   'client-orders': 'Client orders',
-   'versions-history': 'Versions history',
-    'tags': 'Tags',
-  };
-
-  const versionsList = useMemo(() =>
-    versions.map(
-      (version) => (
-        <VersionComponent id={version.id} date={version.date} key={version.id}/>
-      )
-    ), []
-  );
-
-  const ordersList = useMemo(() =>
-    orders.map(
-      (order) => (
-        <OrderComponent key={order.id} name={order.name} date={order.date} cost={order.cost } onSelectOrder={() => selectOrder(order)}/>
-      )
-    ), []
-  );
-
-  const tagsList = useMemo(() =>
-    tags.map(
-      (tag) => (
-        <TagComponent
-          key={tag.name}
-          color={tag.color}
-          name={tagsDisplayingNames[tag.name]}
-          onChangeName={(name: string) => {
-            setTagsDisplayingNames({
-             ...tagsDisplayingNames,
-              [tag.name]: name,
-            });
-          }}
-          onSelectTag={() => {}}
-        />
-      )
-    ), [tagsDisplayingNames]
-  );
-
-  const drawerContentListMap: Record<DrawerContentType, ReactNode[]> = {
-    'client-orders': ordersList,
-    'versions-history': versionsList,
-    'tags': tagsList,
-  };
-
-  const drawerContent = useMemo(
-    () => <Box role="presentation" style={{ width: '300px', marginTop: '50px' }}>
-      <StyledRightPanelHeader>
-        {drawerContentType && <h2>{drawerContentTitleMap[drawerContentType]}</h2>}
-        <StyledIconWrapper>
-          <CloseIcon onClick={closeRightPanel} sx={{ cursor: 'pointer' }}/>
-        </StyledIconWrapper>
-      </StyledRightPanelHeader>
-      <Box display="flex" flexDirection="column" gap="12px" padding="12px">
-        {drawerContentType && drawerContentListMap[drawerContentType]}
-      </Box>
-    </Box>, [drawerContentType, tagsDisplayingNames]
+  )}, [
+      activeFullScreenChapter,
+      isFullScreenMode,
+      showFormulas,
+      dataForVizual,
+      visibilityConfig?.visibleChapters,
+      chapters,
+      tagsDisplayingNames
+    ]
   );
 
   const tableWidth = useMemo(() => openedDrawer ? `${document.body.clientWidth - drawerWidth}px` : '100%', [drawerWidth, openedDrawer]);
@@ -334,6 +301,8 @@ export const HomePage = () => {
     reason !== 'backdropClick' && setIsJModalOpen(false);
   }
 
+  const savedRef = useRef<HTMLDivElement | null>(null);
+
   const mainHeaderContent = useMemo(() => (
     <MainHeader
       icons={(
@@ -353,13 +322,26 @@ export const HomePage = () => {
             onClick={() => toggleRightPanel('tags')}
             active={openedDrawer && drawerContentType === 'tags'}
           />
-          <StyledIconWrapper>
-          </StyledIconWrapper>
-
+          <div ref={savedRef}>
+            <SaveIcon />
+          </div>
         </>
       )}
     />
   ), [toggleRightPanel, openedDrawer, drawerContentType]);
+
+  const saveData = () => {
+    if (savedRef.current?.style) {
+      savedRef.current.style.display = 'block';
+    }
+    addDataHandler(jspreadsheet.spreadsheet, chapters).then(() => {
+      if (savedRef.current?.style) {
+        savedRef.current.style.display = 'none';
+      }
+    });
+  }
+
+  useInterval(saveData, 10000, [chapters]);
 
   return (
     <StyledHomePage>

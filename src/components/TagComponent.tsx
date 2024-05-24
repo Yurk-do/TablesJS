@@ -7,16 +7,18 @@ import EditIcon from '@mui/icons-material/Edit';
 type PropsType = {
   name: string;
   color: string;
+  selected: boolean;
   onSelectTag: () => void;
   onChangeName: (name: string) => void;
 };
 
-const StyledTagComponent = styled.div`
+const StyledTagComponent = styled.div<{ selected: boolean }>`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  background-color: ${({ selected }) => selected ? '#61dafb' : 'none'} ;
 `;
 
 const StyledTag = styled.div`
@@ -35,7 +37,11 @@ const StyledTag = styled.div`
   }
 `;
 
-const StyledName = styled(Input)`
+const StyledNameInput = styled(Input)`
+  font-size: 16px;
+`;
+
+const StyledName = styled.div`
   font-size: 16px;
 `;
 
@@ -46,7 +52,7 @@ const StyledColor = styled.div<{ color: string }>`
   background-color: ${({ color }) => color};  
 `;
 
-export const TagComponent = ({ name, color, onSelectTag, onChangeName }: PropsType) => {
+export const TagComponent = ({ name, color, onSelectTag, onChangeName, selected }: PropsType) => {
   const [isEditable, setIsEditable] = useState(false);
 
   const toggleEditable = () => {
@@ -54,13 +60,18 @@ export const TagComponent = ({ name, color, onSelectTag, onChangeName }: PropsTy
   };
 
   return (
-    <StyledTagComponent onClick={onSelectTag}>
+    <StyledTagComponent onClick={onSelectTag} selected={selected}>
       <StyledTag>
-        <StyledName
-          disabled={!isEditable} value={name}
-          onChange={(e) => onChangeName(e.target.value)}
-          onBlur={() => setIsEditable(false)}
-        />
+        {isEditable ? (
+          <StyledNameInput
+            disabled={!isEditable}
+            value={name}
+            onChange={(e) => onChangeName(e.target.value)}
+            onBlur={() => setIsEditable(false)}
+          />
+        ) : (
+          <StyledName>{name}</StyledName>
+        )}
         <StyledColor color={color}/>
       </StyledTag>
       <IconButton

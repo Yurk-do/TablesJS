@@ -12,11 +12,13 @@ import {
 } from "./constants";
 import styled from "@emotion/styled";
 import { getCellName } from "../helpers/helpers";
-import {tagNamesInitial} from "../mocks/tags";
+import {defaultTagNames} from "../mocks/tags";
 
 type PropsType = {
+  name: string;
   categories: ITableData[];
   visibleCategories: string[] | null;
+  selectedTagsRow: number[] | null;
   visibleRowsIds: number[] | null;
   editable: boolean;
   isShowFormulas: boolean;
@@ -25,14 +27,15 @@ type PropsType = {
   setCellCoords: (coords: CellCoords) => void;
   updateChapterTotal: (total: number) => void;
   openJModal: () => void;
+  addTag: (tagName: string, row: number) => void;
   selectCell: (coords: CellCoords, worksheet: jspreadsheet.worksheetInstance, tableName: string) => void;
   tagsDisplayingNames: string[];
 };
 
 const tags: jspreadsheet.ContextmenuItem = {
   title: 'tags',
-  submenu: Object.keys(tagNamesInitial).map((tag) => ({
-    title: tagNamesInitial[tag],
+  submenu: defaultTagNames.map((tagName) => ({
+    title: tagName,
   }))
 }
 
@@ -71,8 +74,51 @@ const StyleTableComponent = styled.div`
       [data-icon='green'], [data-icon='green']:hover {
           background-color: green;
       }
-    }  
+    }
+
+    .jss > tbody > tr > td {
+      position: relative;
+    }    
     
+    .jss > tbody > tr > td.tag:after {
+       content: '';
+       display: block;
+       margin: 0 12px;
+       background-color: red; 
+       width: 10px;
+       height: 10px;
+       border-radius: 100%;
+       position: absolute;
+       top: 8px;
+       right: 0;
+    }
+    
+    .jss > tbody > tr > td.tag.tag1:after {
+       background-color: red; 
+    }    
+    .jss > tbody > tr > td.tag.tag2:after {
+       background-color: blue; 
+    }
+    .jss > tbody > tr > td.tag.tag3:after {
+       background-color: yellow; 
+    }
+    .jss > tbody > tr > td.tag.tag4:after {
+       background-color: green; 
+    }
+    .jss > tbody > tr > td.tag.tag5:after {
+       background-color: orange; 
+    }
+    .jss > tbody > tr > td.tag.tag6:after {
+       background-color: gray; 
+    }
+
+    .jss_input.jss_nowrap.jss_focus.jss_formula {
+        position: fixed;
+        top: 154px !important;
+        left: 50px !important;
+        background-color: white !important;
+        color: black;
+    }
 
 `;
 
@@ -97,6 +143,7 @@ const initialTableData: InitialTableDataType = {
 };
 
 export const TableComponent = ({
+  name,
   categories,
   visibleCategories,
   visibleRowsIds,
@@ -104,20 +151,16 @@ export const TableComponent = ({
   isShowFormulas,
   isShowZeroValues,
   updateChapterTotal,
+  selectedTagsRow,
   selectCell,
   openJModal,
   setRowData,
   setCellCoords,
   tagsDisplayingNames,
+  addTag,
 }: PropsType) => {
   const jssRef = useRef<any | null>(null);
   let keydownListener: null | any = null;
-
-   if (tags.submenu) {
-    tags.submenu.forEach((item, index) => {
-      item.title = tagsDisplayingNames[index];
-    })
-  }
 
   const columns = _.cloneDeep(TABLE_COLUMNS);
 
@@ -156,6 +199,10 @@ export const TableComponent = ({
   }
 
   const  getTableData = (categories: ITableData[], index: number = 1): InitialTableDataType => {
+    if (!categories) {
+      return initialTableData;
+    }
+
     const result: any[] = [];
     const categoryRows: any[] = [];
     let cells = {};
@@ -215,7 +262,20 @@ export const TableComponent = ({
       _.set(mergeCells, rCCellName, [columns.length - 3, 1]);
     });
 
-    const rowsSettings: Record<number, jspreadsheet.Row> = {
+    const makeRowSettings = (size: number, options?: Record<number, Record<string, any>>) => {
+      const rowsSettings: any = {};
+      for (let i = 0; i < size; i++) {
+        rowsSettings[i] = {
+          id: i,
+          ...(options?.[i] ? options[i]  : {})
+        };
+        rowIndex++;
+      }
+
+      return rowsSettings;
+    };
+
+    const options = {
       5: {
         readOnly: true,
       },
@@ -224,13 +284,18 @@ export const TableComponent = ({
       }
     };
 
+    const rowsSettings: Record<number, jspreadsheet.Row> = makeRowSettings(result.length, options);
+
     /* нужно для эмуляции работы с добавлениеим нетепичных строк (может ломать фильрацию) */
     // _.set(mergeCells, 'B6', [5, 2])
+
+
+    // const resultWithRowIds = result.map((resultData, index) => ({ id: index, data: [...resultData]}));
 
     return { rows: result, categoryRows, cells, styles, mergeCells, rowsSettings }
   };
 
-  const [tableData, setTableData] = useState(() => !categories ? initialTableData : getTableData(categories));
+  const [tableData, setTableData] = useState(() => getTableData(categories));
 
   const style = {
     A1:'background-color: orange;',
@@ -238,7 +303,7 @@ export const TableComponent = ({
   };
 
   useEffect(() => {
-    setTableData(!categories ? initialTableData : getTableData(categories));
+    setTableData(getTableData(categories));
   }, [categories, isShowFormulas, isShowZeroValues, visibleCategories, visibleRowsIds]);
 
   const getColumnsConfig = (editMode: boolean) => {
@@ -266,10 +331,19 @@ export const TableComponent = ({
   );
 
   useEffect(() => {
+    if (tags.submenu) {
+      tags.submenu.forEach((item, index) => {
+        item.title = tagsDisplayingNames[index];
+      })
+    }
+  }, [tagsDisplayingNames]);
+
+  useEffect(() => {
     jssRef.current?.jspreadsheet?.[0]?.deleteWorksheet(0);
 
     jspreadsheet(jssRef.current, {
         editable: editable,
+        about: name,
         worksheets: [
           {
             ...INIT_CONFIG,
@@ -284,6 +358,10 @@ export const TableComponent = ({
         onafterchanges: (worksheet, records) => {
           updateTotal(worksheet);
         },
+      onload: (spreadsheet) => {
+        // @ts-ignore
+        updateTotal(spreadsheet.worksheets[0]);
+      },
       onerror: (err) => {
           console.log(err);
       },
@@ -297,6 +375,7 @@ export const TableComponent = ({
 
           keydownListener && document.removeEventListener('keydown', keydownListener);
         },
+
         onchangestyle: (
           worksheet: jspreadsheet.worksheetInstance,
           newValue: object,
@@ -315,15 +394,23 @@ export const TableComponent = ({
           uy: number,
           origin?: object
       ) => {
-          const coords = {x: px, y: py};
+          if (isShowFormulas) {
 
-          const tableName = jssRef.current?.jspreadsheet?.[0].parent.name;
+            const cell = worksheet.getCell(px, py);
 
-          selectCell(coords, worksheet, tableName);
+            cell && worksheet.openEditor(cell)
+          }
 
-        if (!origin) {
-          selectCell(coords, worksheet, tableName);
-        }
+
+        //   const coords = {x: px, y: py};
+        //
+        //   const tableName = jssRef.current?.jspreadsheet?.[0].parent.name;
+        //
+        //   selectCell(coords, worksheet, tableName);
+        //
+        // if (!origin) {
+        //   selectCell(coords, worksheet, tableName);
+        // }
       },
       contextMenu: (worksheet, x, y, e, items, section, section_argument1, section_argument2) => {
 
@@ -358,7 +445,6 @@ export const TableComponent = ({
            openJModal();
          }
        });
-
        items.push({
          title: 'insert row after',
          onclick: () => {
@@ -420,13 +506,14 @@ export const TableComponent = ({
        if (tags.submenu) {
          tags.submenu.forEach((tag, index) => {
            tag.onclick = () => {
-             const selectedRow = worksheet.getSelectedRows();
-             const selectedCell = worksheet.getSelected()[0] as { x: number, y: number};
-             worksheet.setMeta(getCellName({ x: selectedCell.x, y: selectedCell.y }), 'tag', `tag${index + 1}`);
-             const meta = worksheet.getMeta(getCellName({ x: selectedCell.x, y: selectedCell.y }), 'tag');
-             console.log(worksheet.getProperty(selectedCell.x));
-             console.log(meta);
-             console.log(worksheet.getRow(selectedRow[0]));
+             const selectedRows = worksheet.getSelectedRows();
+             selectedRows.forEach((rowIndex) => {
+               const tagName =  `tag${index + 1}`;
+               worksheet.getCell(1, rowIndex)?.classList.add('tag', tagName);
+               worksheet.setMeta(getCellName({ x: 1, y: rowIndex }), 'tag', tagName);
+               const meta = worksheet.getMeta(getCellName({ x: 1, y: rowIndex }), 'tag');
+               addTag(tagName, rowIndex)
+             })
            }
          });
        }
@@ -439,10 +526,6 @@ export const TableComponent = ({
         return newRow.map((rows) => {
           return { ...rows, data: newData }
         });
-      },
-      onchangemeta: (worksheet, newValue) => {
-        console.log(worksheet);
-        console.log(newValue);
       },
       oncreateeditor: (
           worksheet: jspreadsheet.worksheetInstance,
@@ -486,7 +569,11 @@ export const TableComponent = ({
         }
       },
       });
-  }, [tableData]);
+  }, [tableData, name]);
+
+ // jssRef.current?.jspreadsheet?.[0]?.getData().forEach((data: any, index: number) => {
+ //   console.log(jssRef.current?.jspreadsheet?.[0].getRow(index));
+ // });
 
  return <StyleTableComponent ref={jssRef}></StyleTableComponent>;
 };

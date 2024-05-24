@@ -1,6 +1,7 @@
 import { StyledHeaderToolbar, StyledLogo, StyledTabs } from "../pages/StyledHomePage";
 import { Box, Tab } from "@mui/material";
 import React, { ReactNode } from "react";
+import {NetworkStatusIndicator} from "../network/NetworkStatusIndicator";
 
 type PropsType = {
   icons?: ReactNode;
@@ -15,17 +16,22 @@ export const MainHeader = ({ icons }: PropsType ) => {
 
   return (
     <StyledHeaderToolbar>
-      <StyledLogo>
-        SCoPE X
-      </StyledLogo>
-      <StyledTabs value={value} onChange={handleChange} centered>
-        <Tab label="Key Parameters" />
-        <Tab label="Summary" />
-        <Tab label="Calculations" />
-        <Tab label="Cover Letter" />
-      </StyledTabs>
-      <Box display="flex" gap="12px">
-        {icons}
+      <Box display="flex" alignItems="center">
+        <StyledLogo>
+          SCoPE X
+        </StyledLogo>
+        <StyledTabs value={value} onChange={handleChange} centered>
+          <Tab label="Key Parameters" />
+          <Tab label="Summary" />
+          <Tab label="Calculations" />
+          <Tab label="Cover Letter" />
+        </StyledTabs>
+        <Box display="flex" gap="12px">
+          {icons}
+        </Box>
+      </Box>
+      <Box>
+        <NetworkStatusIndicator />
       </Box>
     </StyledHeaderToolbar>
   )

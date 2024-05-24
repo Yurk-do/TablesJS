@@ -5127,6 +5127,5 @@ export const CHAPTERS : IChapterInfo[] = [
       }
     ]
   }
-
   ];
 

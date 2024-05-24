@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { AppBar, Drawer, Tabs, Toolbar } from "@mui/material";
+import {AppBar, Drawer, Input, Tabs, Toolbar} from "@mui/material";
 
 const headerHeight=  48;
 
@@ -13,6 +13,7 @@ export const StyledAppBar = styled(AppBar)`
 
 export const StyledHeaderToolbar = styled(Toolbar)`
     &.MuiToolbar-root {
+      justify-content: space-between;
       min-height: ${headerHeight}px;
     }
 `;
@@ -131,4 +132,18 @@ export const StyledModalContent = styled.div`
     flex-direction: column;
     padding: 20px;
     gap: 20px
-`
+`;
+
+export const StyledFormulaInput = styled(Input)`
+  min-width: 320px;
+  margin-left: 10px;
+    text-align: start;
+    
+  &.input {
+      box-sizing: border-box;
+      background-color: #fff;
+      font-size: 1em;
+      line-height: initial;
+      border-radius: 2px;
+  }  
+`;

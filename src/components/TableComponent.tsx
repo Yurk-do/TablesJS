@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { jspreadsheet } from "@jspreadsheet/react";
 import { license } from "../constants";
 import _ from "lodash";
@@ -11,7 +11,7 @@ import {
   UPDATE_COLUMN_INDEX_FOR_SUM
 } from "./constants";
 import styled from "@emotion/styled";
-import { getCellName } from "../helpers/helpers";
+import { getCellName } from "../helpers/common";
 import {defaultTagNames} from "../mocks/tags";
 
 type PropsType = {
@@ -257,9 +257,6 @@ export const TableComponent = ({
       //rich text editor
       result.push([category.richText]);
       rowIndex = ++rowIndex;
-      const rCCellName = `A${result.length}`;
-      _.set(styles, rCCellName, 'text-align: left;');
-      _.set(mergeCells, rCCellName, [columns.length - 3, 1]);
     });
 
     const makeRowSettings = (size: number, options?: Record<number, Record<string, any>>) => {
@@ -276,10 +273,10 @@ export const TableComponent = ({
     };
 
     const options = {
-      5: {
+      0: {
         readOnly: true,
       },
-      6: {
+      5: {
         readOnly: true,
       }
     };
@@ -348,6 +345,9 @@ export const TableComponent = ({
           {
             ...INIT_CONFIG,
             columns: getColumnsConfig(isShowFormulas),
+            allowInsertColumn: true,
+            allowDeleteColumn: true,
+            allowRenameColumn: true,
             data: tableData.rows,
             rows: tableData.rowsSettings,
             cells: tableData.cells,
@@ -413,6 +413,46 @@ export const TableComponent = ({
         // }
       },
       contextMenu: (worksheet, x, y, e, items, section, section_argument1, section_argument2) => {
+        // console.log(worksheet.getRow(y));
+        // console.log(worksheet.getColumn(x));
+        // console.log(worksheet.getProperty(x, y));
+        // console.log(worksheet.getProperty(x));
+        console.log(worksheet.getValue(getCellName({x, y}), false));
+
+        // // Clicking in the headers
+        // if (section === 'header') {
+        //   // Insert a new column
+        //     items.push({
+        //       title: 'Insert a new column before',
+        //       onclick: function () {
+        //         worksheet.insertColumn(1, parseInt(section_argument1), true);
+        //       }
+        //     });
+        //
+        //     items.push({
+        //       title: 'Insert a new column after',
+        //       onclick: function () {
+        //         worksheet.insertColumn(1, parseInt(section_argument1), false);
+        //       }
+        //     });
+        //   // Delete a column
+        //     items.push({
+        //       title: 'Delete selected columns',
+        //       onclick: function () {
+        //         worksheet.deleteColumn(worksheet.getSelectedColumns());
+        //       }
+        //     });
+        //   // Rename column
+        //     items.push({
+        //       title: 'Rename this column',
+        //       onclick: function () {
+        //         worksheet.setHeader(section_argument1);
+        //       }
+        //     });
+        // }
+        // console.log(items);
+        //
+        // return  items;
 
       const cells = worksheet.getSelected();
 
@@ -425,7 +465,7 @@ export const TableComponent = ({
          }
        };
 
-       items = [];
+       // items = [];
 
        items.push({
          title: 'add invoice',
@@ -518,14 +558,17 @@ export const TableComponent = ({
          });
        }
        items = [...items, ...colors, readOnlyMode, mergeCells, save, tags];
-         return  items;
+       return items;
       },
       onbeforeinsertrow: (worksheet: jspreadsheet.worksheetInstance, newRow: jspreadsheet.newRow[]) => {
-        const newData = worksheet.getRowData((newRow[0].row as number) - 1, false).map((data, index) => FORMULAS_COLUMN_INDEX.includes(index) ? data : "");
-
-        return newRow.map((rows) => {
-          return { ...rows, data: newData }
-        });
+        // const newData = worksheet.getRowData((newRow[0].row as number) - 1, false).map((data, index) => FORMULAS_COLUMN_INDEX.includes(index) ? data : "");
+        //
+        // return newRow.map((rows) => {
+        //   return { ...rows, data: newData }
+        // });
+      },
+      onbeforeinsertcolumn: (worksheet) => {
+         console.log(worksheet.getRowData(0, false));
       },
       oncreateeditor: (
           worksheet: jspreadsheet.worksheetInstance,

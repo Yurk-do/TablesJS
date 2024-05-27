@@ -38,7 +38,7 @@ import {
   addDataHandler,
   createDataForVizual,
   getCellName,
-} from "../helpers/helpers";
+} from "../helpers/common";
 import { JModal } from "../components/JModal";
 import TagIcon from '@mui/icons-material/Tag';
 import { IconButton} from "../components/IconButton";
@@ -341,7 +341,7 @@ export const HomePage = () => {
     });
   }
 
-  useInterval(saveData, 10000, [chapters]);
+  // useInterval(saveData, 10000, [chapters]);
 
   return (
     <StyledHomePage>

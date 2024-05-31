@@ -21,7 +21,7 @@ self.addEventListener('install', event => {
       return cache.addAll(urlsToCache).then(() => {
         console.log("cached!")
         this.skipWaiting();
-      });
+      }).catch((err) => {console.log(err)});
     }),
   );
 });

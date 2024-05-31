@@ -1,32 +1,30 @@
-import {FC, ReactNode, useEffect, useRef, useState} from "react";
+import React, { FC, ReactNode, useEffect, useRef, useState } from 'react';
 
-import { useLayout } from "./useLayout";
+import { useLayout } from './useLayout';
 
 import {
   StyledDraggableSection,
   StyledNavigationDrawer,
   StyledNavigationDrawerContentContainer,
-} from "./NavigationDrawer.consts";
+} from './NavigationDrawer.consts';
 
 export type PropsType = {
   navigationDrawerContent: ReactNode;
   resizable?: boolean;
 };
 
-
 export const NavigationDrawer: FC<PropsType> = ({
   navigationDrawerContent,
-  resizable
+  resizable,
 }) => {
-  const { openedDrawer, drawerWidth, changeDrawerWidth } =
-    useLayout();
+  const { openedDrawer, drawerWidth, changeDrawerWidth } = useLayout();
 
   const [isResizing, setIsResizing] = useState(false);
 
   const modalProps = {
     ModalProps: {
-      keepMounted: true // Better open performance on mobile.
-    }
+      keepMounted: true, // Better open performance on mobile.
+    },
   };
 
   const { current: handleMouseUp } = useRef(() => {
@@ -53,12 +51,12 @@ export const NavigationDrawer: FC<PropsType> = ({
 
   useEffect(() => {
     if (resizable) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
 
       return () => {
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleMouseUp);
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
       };
     }
   });
@@ -67,11 +65,11 @@ export const NavigationDrawer: FC<PropsType> = ({
     <StyledNavigationDrawer
       {...modalProps}
       drawerWidth={drawerWidth}
-      variant={"persistent"}
-      anchor={"right"}
+      variant="persistent"
+      anchor="right"
       open={openedDrawer}
     >
-      {resizable && <StyledDraggableSection onMouseDown={handleMouseDown}/>}
+      {resizable && <StyledDraggableSection onMouseDown={handleMouseDown} />}
       <StyledNavigationDrawerContentContainer>
         {navigationDrawerContent}
       </StyledNavigationDrawerContentContainer>

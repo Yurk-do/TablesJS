@@ -1,7 +1,10 @@
-import {Articles, dbName, dbVersion} from "./db";
+import { Articles, dbName, dbVersion } from './db';
 
-export const updateData = <T>(storeName: string, data: T): Promise<T|string|null> => {
-  return new Promise((resolve) => {
+export const updateData = <T>(
+  storeName: string,
+  data: T,
+): Promise<T | string | null> =>
+  new Promise((resolve) => {
     const request = indexedDB.open(dbName, dbVersion);
 
     request.onsuccess = () => {
@@ -17,7 +20,7 @@ export const updateData = <T>(storeName: string, data: T): Promise<T|string|null
     };
 
     request.onerror = () => {
-      const error = request.error?.message
+      const error = request.error?.message;
       if (error) {
         resolve(error);
       } else {
@@ -25,14 +28,16 @@ export const updateData = <T>(storeName: string, data: T): Promise<T|string|null
       }
     };
   });
-};
 
-export const getIndexedDbData = <T>(storeName: string, article: Articles): Promise<T[]> => {
-  return new Promise((resolve) => {
+export const getIndexedDbData = <T>(
+  storeName: string,
+  article: Articles,
+): Promise<T[]> =>
+  new Promise((resolve) => {
     const request = indexedDB.open(dbName, dbVersion);
 
     request.onsuccess = () => {
-      const  db = request.result;
+      const db = request.result;
       const tx = db.transaction(storeName, 'readonly');
       const store = tx.objectStore(storeName);
       const res = store.getAll(article);
@@ -41,4 +46,3 @@ export const getIndexedDbData = <T>(storeName: string, article: Articles): Promi
       };
     };
   });
-};

@@ -1,6 +1,6 @@
-import { apiService } from "../apiService";
+import { apiService } from '../apiService';
 
-export const getChapters= (): Promise<any> =>
+export const getChapters = (): Promise<any> =>
   apiService.get('/chapters/2').then((respone) => respone.data.data);
 
 export const updateTableData = (data: any): Promise<any> =>

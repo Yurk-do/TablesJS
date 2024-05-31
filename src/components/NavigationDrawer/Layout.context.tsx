@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import React, { createContext, ReactNode, useMemo, useState } from 'react';
 
 export interface IDrawerContext {
   openedDrawer: boolean;
@@ -10,9 +10,13 @@ export interface IDrawerContext {
 
 export const initialDrawerWidth = 300;
 
-export const DrawerContext = createContext<IDrawerContext | undefined>(undefined);
+export const DrawerContext = createContext<IDrawerContext | undefined>(
+  undefined,
+);
 
-export const DrawerProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [openedDrawer, setOpenedDrawer] = useState(false);
 
   const openDrawer = () => setOpenedDrawer(true);
@@ -22,15 +26,17 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
   const changeDrawerWidth = (width: number) => setDrawerWidth(width);
 
+  const contextValue = useMemo(() => ({
+    openedDrawer,
+    openDrawer,
+    closeDrawer,
+    drawerWidth,
+    changeDrawerWidth,
+  }), [openedDrawer, drawerWidth]);
+
   return (
     <DrawerContext.Provider
-      value={{
-        openedDrawer,
-        openDrawer,
-        closeDrawer,
-        drawerWidth,
-        changeDrawerWidth,
-      }}
+      value={contextValue}
     >
       {children}
     </DrawerContext.Provider>

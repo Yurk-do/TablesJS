@@ -10,7 +10,7 @@ export type OrderType = {
   date: string;
   cost: string;
   modified: string;
-  visibilityConfig: VisibilityConfig,
+  visibilityConfig: VisibilityConfig;
 };
 
 export const orders: OrderType[] = [
@@ -24,7 +24,8 @@ export const orders: OrderType[] = [
       visibleRowsIds: [2102, 2103, 2105, 1301, 1302, 3405, 3406, 3407],
       visibleCategories: ['CAMERA CREW', 'PPM | TRAVELCOST', 'PRINCIPALS'],
       visibleChapters: ['Pre-production', 'Salaries', 'Cast'],
-    }},
+    },
+  },
   {
     id: 2,
     name: 'Shooting in Milan',
@@ -45,7 +46,12 @@ export const orders: OrderType[] = [
     modified: 'Ralph Edwards',
     visibilityConfig: {
       visibleRowsIds: [2101, 2105, 2106, 4114, 4115, 4305, 4306, 5104, 5105],
-      visibleCategories: ['CAMERA EQUIPMENT', 'LIGHTNING', 'PRINCIPALS', 'CREW'],
+      visibleCategories: [
+        'CAMERA EQUIPMENT',
+        'LIGHTNING',
+        'PRINCIPALS',
+        'CREW',
+      ],
       visibleChapters: ['Cast', 'Equipment', 'Art Department'],
     },
   },
@@ -56,9 +62,16 @@ export const orders: OrderType[] = [
     cost: '€ 2.250.000',
     modified: 'Ralph Edwards',
     visibilityConfig: {
-      visibleRowsIds: [2102, 2103, 2104, 4104, 4105, 4106, 4307, 4308, 4309, 5201, 5202, 5203],
-      visibleCategories: ['CAMERA EQUIPMENT', 'LIGHTNING', 'PRINCIPALS', 'PROPS + MATERIALS'],
+      visibleRowsIds: [
+        2102, 2103, 2104, 4104, 4105, 4106, 4307, 4308, 4309, 5201, 5202, 5203,
+      ],
+      visibleCategories: [
+        'CAMERA EQUIPMENT',
+        'LIGHTNING',
+        'PRINCIPALS',
+        'PROPS + MATERIALS',
+      ],
       visibleChapters: ['Cast', 'Equipment', 'Art Department'],
     },
-  }
+  },
 ];

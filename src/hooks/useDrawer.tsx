@@ -1,13 +1,16 @@
-import React, { ReactNode, useMemo, useState } from "react";
-import { versions } from "../mocks/versions";
-import { VersionComponent } from "../components/VersionComponent";
-import { orders, OrderType } from "../mocks/orders";
-import { OrderComponent } from "../components/OrderComponent";
-import { defaultTagNames, tagColors } from "../mocks/tags";
-import { TagComponent } from "../components/TagComponent";
-import { Box} from "@mui/material";
-import { StyledIconWrapper, StyledRightPanelHeader } from "../pages/StyledHomePage";
-import CloseIcon from "@mui/icons-material/Close";
+import React, { ReactNode, useMemo, useState } from 'react';
+import { Box } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { versions } from '../mocks/versions';
+import { VersionComponent } from '../components/VersionComponent';
+import { orders, OrderType } from '../mocks/orders';
+import { OrderComponent } from '../components/OrderComponent';
+import { defaultTagNames, tagColors } from '../mocks/tags';
+import { TagComponent } from '../components/TagComponent';
+import {
+  StyledIconWrapper,
+  StyledRightPanelHeader,
+} from '../pages/StyledHomePage';
 
 export type DrawerContentType = 'versions-history' | 'client-orders' | 'tags';
 
@@ -19,34 +22,51 @@ type PropsType = {
   onClose: () => void;
 };
 
-export const useDrawer = ({ selectOrder, selectedTags, selectTag, drawerContentType, onClose }: PropsType ) => {
-  const [tagsDisplayingNames, setTagsDisplayingNames] = useState<string[]>(defaultTagNames);
+export const useDrawer = ({
+  selectOrder,
+  selectedTags,
+  selectTag,
+  drawerContentType,
+  onClose,
+}: PropsType) => {
+  const [tagsDisplayingNames, setTagsDisplayingNames] =
+    useState<string[]>(defaultTagNames);
 
   const drawerContentTitleMap: Record<DrawerContentType, string> = {
     'client-orders': 'Client orders',
     'versions-history': 'Versions history',
-    'tags': 'Tags',
+    tags: 'Tags',
   };
 
-  const versionsList = useMemo(() =>
-    versions.map(
-      (version) => (
-        <VersionComponent id={version.id} date={version.date} key={version.id}/>
-      )
-    ), []
+  const versionsList = useMemo(
+    () =>
+      versions.map((version) => (
+        <VersionComponent
+          id={version.id}
+          date={version.date}
+          key={version.id}
+        />
+      )),
+    [],
   );
 
-  const ordersList = useMemo(() =>
-    orders.map(
-      (order) => (
-        <OrderComponent key={order.id} name={order.name} date={order.date} cost={order.cost } onSelectOrder={() => selectOrder(order)}/>
-      )
-    ), []
+  const ordersList = useMemo(
+    () =>
+      orders.map((order) => (
+        <OrderComponent
+          key={order.id}
+          name={order.name}
+          date={order.date}
+          cost={order.cost}
+          onSelectOrder={() => selectOrder(order)}
+        />
+      )),
+    [],
   );
 
-  const tagsList = useMemo(() =>
-    tagColors.map(
-      (color, index) => (
+  const tagsList = useMemo(
+    () =>
+      tagColors.map((color, index) => (
         <TagComponent
           key={color}
           selected={selectedTags.includes(defaultTagNames[index])}
@@ -54,40 +74,44 @@ export const useDrawer = ({ selectOrder, selectedTags, selectTag, drawerContentT
           name={tagsDisplayingNames[index]}
           onChangeName={(newName: string) => {
             setTagsDisplayingNames(
-              tagsDisplayingNames.map(
-                (oldName, i) => index === i ? newName : oldName
-              )
+              tagsDisplayingNames.map((oldName, i) =>
+                index === i ? newName : oldName,
+              ),
             );
           }}
           onSelectTag={() => selectTag(index)}
         />
-      )
-    ), [tagsDisplayingNames, selectedTags]
+      )),
+    [tagsDisplayingNames, selectedTags],
   );
 
   const drawerContentListMap: Record<DrawerContentType, ReactNode[]> = {
     'client-orders': ordersList,
     'versions-history': versionsList,
-    'tags': tagsList,
+    tags: tagsList,
   };
 
   const drawerContent = useMemo(
-    () => <Box role="presentation" style={{ width: '300px', marginTop: '50px' }}>
-      <StyledRightPanelHeader>
-        {drawerContentType && <h2>{drawerContentTitleMap[drawerContentType]}</h2>}
-        <StyledIconWrapper>
-          <CloseIcon onClick={onClose} sx={{ cursor: 'pointer' }}/>
-        </StyledIconWrapper>
-      </StyledRightPanelHeader>
-      <Box display="flex" flexDirection="column" gap="12px" padding="12px">
-        {drawerContentType && drawerContentListMap[drawerContentType]}
+    () => (
+      <Box role="presentation" style={{ width: '300px', marginTop: '50px' }}>
+        <StyledRightPanelHeader>
+          {drawerContentType && (
+            <h2>{drawerContentTitleMap[drawerContentType]}</h2>
+          )}
+          <StyledIconWrapper>
+            <CloseIcon onClick={onClose} sx={{ cursor: 'pointer' }} />
+          </StyledIconWrapper>
+        </StyledRightPanelHeader>
+        <Box display="flex" flexDirection="column" gap="12px" padding="12px">
+          {drawerContentType && drawerContentListMap[drawerContentType]}
+        </Box>
       </Box>
-    </Box>, [drawerContentType, tagsDisplayingNames, selectedTags]
+    ),
+    [drawerContentType, tagsDisplayingNames, selectedTags],
   );
 
   return {
     drawerContent,
     tagsDisplayingNames,
-  }
-}
-
+  };
+};

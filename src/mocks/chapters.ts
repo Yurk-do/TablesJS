@@ -1,1717 +1,9 @@
-import { IChapterInfo } from "../types/table";
+import { IChapterInfo } from '../types/table';
 
 export const EMPTY_RICH_TEXT_VALUE = '<div><br></div>';
-export const CHAPTERS : IChapterInfo[] = [
-    {
-      name: 'Pre-production',
-      categories: [
-        {
-          name: 'PPM | TRAVELCOST',
-          data: [
-            {
-              id: 1301,
-              name: 'Flight Director (ex: xxCITYxx)',
-              nationalMQ: 2,
-              nationalTD: 3,
-              price: 400,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 1302,
-              name: 'Flight Director\'s Producer',
-              nationalMQ: 3,
-              nationalTD: 3,
-              price: 450,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 550,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 1303,
-              name: 'Flight Producer, PM',
-              nationalMQ: 1,
-              nationalTD: 2,
-              price: 500,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 600,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            },
-            {
-              id: 1304,
-              name: 'Fares (2 x Airport)',
-              nationalMQ: 3,
-              nationalTD: 1,
-              price: 200,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 355,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: false
-            },
-            {
-              id: 1305,
-              name: 'Hotel(s)',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 275,
-              nationalOT: 0,
-              internationalMQ: 3,
-              internationalTD: 3,
-              internationalRate: 300,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            },
-            {
-              id: 1306,
-              name: 'Incidentals',
-              nationalMQ: 1,
-              nationalTD: 2,
-              price: 300,
-              nationalOT: 0,
-              internationalMQ: 2,
-              internationalTD: 3,
-              internationalRate: 350,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: false
-            },
-            {
-              id: 1307,
-              name: 'Train Director',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 150,
-              nationalOT: 0,
-              internationalMQ: 2,
-              internationalTD: 3,
-              internationalRate: 250,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            },
-            {
-              id: 1308,
-              name: 'Train Producer, PM',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 375,
-              nationalOT: 0,
-              internationalMQ: 2,
-              internationalTD: 3,
-              internationalRate: 450,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            }
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        },
-        {
-          name: 'MISCELLANEOUS',
-          data: [
-            {
-              id: 1401,
-              name: 'Concepts',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 300,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 450,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 1402,
-              name: 'Shootingboard per day',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 550,
-              nationalOT: 0,
-              internationalMQ: 3,
-              internationalTD: 3,
-              internationalRate: 600,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 1403,
-              name: 'Shootingboard per picture',
-              nationalMQ: 1,
-              nationalTD: 80,
-              price: 50,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 60,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            },
-            {
-              id: 1404,
-              name: 'AGA on fees (social contrib.)',
-              nationalMQ: 0.25,
-              nationalTD: 1,
-              price: 3000,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 3200,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: false
-            },
-            {
-              id: 1405,
-              name: 'KSK | Fees (artists\' social ins.)',
-              nationalMQ: 0.05,
-              nationalTD: 1,
-              price: 1000,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 1100,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: false
-            },
-            {
-              id: 1406,
-              name: '50 a | Rights (withholding tax)',
-              nationalMQ: 0.2,
-              nationalTD: 1,
-              price: 4000,
-              nationalOT: 0,
-              internationalMQ: 0.2,
-              internationalTD: 1,
-              internationalRate: 3500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: false
-            },
-            {
-              id: 1407,
-              name: 'Photo- | Videoboard',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 400,
-              nationalOT: 0,
-              internationalMQ: 2,
-              internationalTD: 3,
-              internationalRate: 250,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 1408,
-              name: 'Presentation costs',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 400,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 450,
-              internationalOT: 0,
-              remark: '',
-              count: 0,
-              splitting: true
-            }
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        }
-      ]
-    },
-    {
-      name: 'Salaries',
-      categories: [
-        {
-          name: 'DIRECTOR\'S UNIT',
-          data: [
-            {
-              id: 3301,
-              name: '1st AD',
-              nationalMQ: 3,
-              nationalTD: 1,
-              price: 700,
-              nationalOT: 2660,
-              internationalMQ: 3,
-              internationalTD: 1,
-              internationalRate: 300,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3302,
-              name: '2nd AD',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 400,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 450,
-              internationalOT: 0,
-              remark: '',
-              count: 0,
-              splitting: false
-            },
-            {
-              id: 3303,
-              name: '3rd AD',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 500,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 550,
-              internationalOT: 0,
-              remark: '',
-              count: 0,
-              splitting: false
-            },
-            {
-              id: 3304,
-              name: 'AGA on fees (social contrib.)',
-              nationalMQ: 0.25,
-              nationalTD: 1,
-              price: 2500,
-              nationalOT: 0,
-              internationalMQ: 0.25,
-              internationalTD: 1,
-              internationalRate: 2500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: false
-            },
-            {
-              id: 3305,
-              name: 'KSK | Fees (artists\' social ins.)',
-              nationalMQ: 0.05,
-              nationalTD: 1,
-              price: 1000,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 1100,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3306,
-              name: '50 a | Rights (withholding tax)',
-              nationalMQ: 0.2,
-              nationalTD: 1,
-              price: 2000,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 2200,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            }
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        },
-        {
-          name: 'CAMERA CREW',
-          data: [
-            {
-              id: 3401,
-              name: 'DoP',
-              nationalMQ: 5,
-              nationalTD: 6,
-              price: 3750,
-              nationalOT: 14250,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 4000,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3402,
-              name: 'Operator | Gimbal',
-              nationalMQ: 1,
-              nationalTD: 0,
-              price: 600,
-              nationalOT: 2280,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 120,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            },
-            {
-              id: 3403,
-              name: 'Focus Puller incl. Test',
-              nationalMQ: 2,
-              nationalTD: 4,
-              price: 550,
-              nationalOT: 2090,
-              internationalMQ: 3,
-              internationalTD: 3,
-              internationalRate: 300,
-              internationalOT: 0,
-              remark: '',
-              count: 3,
-              splitting: true
-            },
-            {
-              id: 3404,
-              name: 'Clapper Loader incl. Test',
-              nationalMQ: 2,
-              nationalTD: 3,
-              price: 450,
-              nationalOT: 1710,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 120,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3405,
-              name: 'Data Wrangler | Transcoding',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 440,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 460,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3406,
-              name: 'DIT',
-              nationalMQ: 2,
-              nationalTD: 4,
-              price: 600,
-              nationalOT: 2280,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 700,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            },
-            {
-              id: 3407,
-              name: 'Digital VTR Operator',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 460,
-              nationalOT: 1710,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 100,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3408,
-              name: 'HSpeed Operator | Phantom',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 450,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 550,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            }
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        },
-        {
-          name: 'ELECTRICIANS | GRIP',
-          data: [
-            {
-              id: 3501,
-              name: 'Key Grip',
-              nationalMQ: 3,
-              nationalTD: 1,
-              price: 500,
-              nationalOT: 0,
-              internationalMQ: 3,
-              internationalTD: 1,
-              internationalRate: 500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3502,
-              name: 'Best Boy Grip',
-              nationalMQ: 1,
-              nationalTD: 4,
-              price: 400,
-              nationalOT: 0,
-              internationalMQ: 4,
-              internationalTD: 1,
-              internationalRate: 450,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3503,
-              name: 'Crane Grip',
-              nationalMQ: 2,
-              nationalTD: 1,
-              price: 100,
-              nationalOT: 0,
-              internationalMQ: 4,
-              internationalTD: 3,
-              internationalRate: 150,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3504,
-              name: 'Super-Techno-Crew',
-              nationalMQ: 3,
-              nationalTD: 3,
-              price: 500,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 600,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3505,
-              name: 'Gaffer',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 800,
-              nationalOT: 0,
-              internationalMQ: 2,
-              internationalTD: 4,
-              internationalRate: 850,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3506,
-              name: 'Best Boy Light',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 560,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 650,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3507,
-              name: 'Electricians',
-              nationalMQ: 3,
-              nationalTD: 3,
-              price: 500,
-              nationalOT: 0,
-              internationalMQ: 3,
-              internationalTD: 3,
-              internationalRate: 550,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3508,
-              name: 'Electricians loading',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 500,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 5,
-              internationalRate: 650,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3509,
-              name: 'Helping Hand',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 215,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 4,
-              internationalRate: 225,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 3510,
-              name: 'Genny Operator',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 215,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 225,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            }
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        }
-      ]
-    },
-    {
-      name: 'Cast',
-      categories: [
-        {
-          name: 'PRINCIPALS',
-          data: [
-            {
-              id: 2101,
-              name: 'Principal 1',
-              nationalMQ: 1,
-              nationalTD: 5,
-              price: 5750,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 4500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 2102,
-              name: 'Travel Fee Principal 1',
-              nationalMQ: 1,
-              nationalTD: 2,
-              price: 575,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 600,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 2103,
-              name: 'Principal 2',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 3450,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 3500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 2104,
-              name: 'Fitting',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 1000,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 1100,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 2105,
-              name: 'Agency commission',
-              nationalMQ: 0.2,
-              nationalTD: 1,
-              price: 1955,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 2010,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            }
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        }
-      ]
-    },
-    {
-      name: 'Equipment',
-      categories: [
-        {
-          name: 'CAMERA EQUIPMENT',
-          data: [
-            {
-              id: 4101,
-              name: 'Arri Alexa | 60fps',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 8750,
-              nationalOT: 0,
-              internationalMQ: 2,
-              internationalTD: 3,
-              internationalRate: 1500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4102,
-              name: 'Arri Alexa HS | 120fps',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 400,
-              nationalOT: 0,
-              internationalMQ: 2,
-              internationalTD: 3,
-              internationalRate: 300,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4103,
-              name: '4K Camerasystem',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 2150,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 2300,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4104,
-              name: 'Red Epic',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 350,
-              nationalOT: 0,
-              internationalMQ: 2,
-              internationalTD: 3,
-              internationalRate: 250,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4105,
-              name: 'Canon 5D | 7D | Full Package',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 115,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 100,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4106,
-              name: 'Canon 5D | 7D | Small',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 200,
-              nationalOT: 0,
-              internationalMQ: 2,
-              internationalTD: 3,
-              internationalRate: 150,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4107,
-              name: 'Canon 5D | 7D | Full Package',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 350,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 475,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4108,
-              name: 'Phantom Flex',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 1150,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 1250,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4109,
-              name: '',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 275,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 300,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4110,
-              name: 'Lenses (Primes + Zooms)',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 150,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 175,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4111,
-              name: 'Filters',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 100,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 100,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4112,
-              name: 'Accessories',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 350,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 450,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4113,
-              name: 'Digital Videoequipment',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 215,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 230,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4114,
-              name: 'Steadicam, Operator | SocSec',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 650,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 690,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4115,
-              name: 'DIT Equipment',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 115,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 125,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            }
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        },
-        {
-          name: 'CAMERA | GRIP',
-          data: [
-            {
-              id: 4201,
-              name: 'Dolly | Fisher incl. Tracks',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 750,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4202,
-              name: 'Crane (max. 11m)',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 2000,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 2500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4203,
-              name: 'Super-Techno 30 incl. RHead',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 2500,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 1500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4204,
-              name: 'Remote Head | 2 Axis',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 160,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 250,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4205,
-              name: 'Remote Head | 3 Axis',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 115,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 150,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4206,
-              name: 'Flight Head',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 750,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 1000,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4207,
-              name: 'Gyro grips',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 350,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 475,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4208,
-              name: 'Special-Grips and Car-Rigs',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 250,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 250,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4209,
-              name: 'RArm | Flight Head | ArmCar',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 275,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 350,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            }
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        },
-        {
-          name: 'LIGHTNING',
-          data: [
-            {
-              id: 4301,
-              name: 'HMI incl. Riggs & trusses',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 3500,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 16250,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4302,
-              name: 'Additional lighting',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 2000,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4303,
-              name: 'Special lighting gear',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 550,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 300,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4304,
-              name: 'Genny + Mileage',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 1600,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 2050,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4305,
-              name: 'Genny fuel consumption',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 115,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 150,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4306,
-              name: 'Consumption',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 115,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 150,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4307,
-              name: 'Wind | Haze | Fog',
-              nationalMQ: 1,
-              nationalTD: 1,
-              price: 105,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 150,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4308,
-              name: 'Bagolight incl. Transport',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 215,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 2,
-              internationalRate: 250,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4309,
-              name: 'Kinoflos',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 115,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 150,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4310,
-              name: 'Working hours',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 115,
-              nationalOT: 0,
-              internationalMQ: 20,
-              internationalTD: 1,
-              internationalRate: 100,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        },
-        {
-          name: 'HELICOPTER | DRONES | RIGS',
-          data: [
-            {
-              id: 4401,
-              name: 'Helicopter per hour',
-              nationalMQ: 1,
-              nationalTD: 1,
-              price: 1500,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 1250,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4402,
-              name: 'Drone',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 350,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 1,
-              internationalRate: 450,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4403,
-              name: 'Tyler Side Mount',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 250,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 350,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4404,
-              name: 'Tyler Mini Gyro',
-              nationalMQ: 1,
-              nationalTD: 4,
-              price: 650,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 650,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4405,
-              name: 'Stab-C | Wescam',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 560,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 650,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4406,
-              name: 'Fuel Truck Helicopter',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 970,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 1,
-              internationalRate: 1140,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4407,
-              name: 'Fuel | JP Fuel consumption',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 560,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 2,
-              internationalRate: 650,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            }
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        },
-        {
-          name: 'TRANSPORTS | MISC',
-          data: [
-            {
-              id: 4501,
-              name: 'Camera car',
-              nationalMQ: 1,
-              nationalTD: 4,
-              price: 150,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 969,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4502,
-              name: 'Lights + Grips truck',
-              nationalMQ: 2,
-              nationalTD: 4,
-              price: 275,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 350,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4503,
-              name: 'Minivan',
-              nationalMQ: 1,
-              nationalTD: 4,
-              price: 150,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 250,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4504,
-              name: 'Crane | Special truck',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 5500,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 650,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 4505,
-              name: 'Fuel consumption',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 560,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 375,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: false
-            },
-            {
-              id: 4506,
-              name: 'Radios (Set)',
-              nationalMQ: 25,
-              nationalTD: 3,
-              price: 11,
-              nationalOT: 0,
-              internationalMQ: 30,
-              internationalTD: 3,
-              internationalRate: 6,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            }
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        }
-      ]
-    },
-    {
-      name: 'Art Department',
-      categories: [
-        {
-          name: 'CREW',
-          data: [
-            {
-              id: 5101,
-              name: 'Production Designer ex UK',
-              nationalMQ: 4,
-              nationalTD: 1,
-              price: 1563,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 1600,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 5102,
-              name: 'Art Director',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 1000,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 1,
-              internationalRate: 4500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 5103,
-              name: 'Art Director Assistant',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 438,
-              nationalOT: 1663,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 550,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            },
-            {
-              id: 5104,
-              name: 'Props Master',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 563,
-              nationalOT: 2138,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 200,
-              internationalOT: 0,
-              remark: '',
-              count: 3,
-              splitting: true
-            },
-            {
-              id: 5105,
-              name: 'Props Master',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 100,
-              nationalOT: 0,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 120,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 5106,
-              name: 'Props Master Assistant',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 438,
-              nationalOT: 1663,
-              internationalMQ: 5,
-              internationalTD: 3,
-              internationalRate: 110,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 5107,
-              name: 'Stylist',
-              nationalMQ: 1,
-              nationalTD: 6,
-              price: 1500,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 1600,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 5108,
-              name: 'Assistant Stylist',
-              nationalMQ: 1,
-              nationalTD: 3,
-              price: 500,
-              nationalOT: 1900,
-              internationalMQ: 1,
-              internationalTD: 3,
-              internationalRate: 500,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: false
-            }
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        },
-        {
-          name: 'PROPS + MATERIALS',
-          data: [
-            {
-              id: 5201,
-              name: 'Props rental 4 worlds',
-              nationalMQ: 4,
-              nationalTD: 1,
-              price: 4375,
-              nationalOT: 0,
-              internationalMQ: 2,
-              internationalTD: 3,
-              internationalRate: 1500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 5202,
-              name: 'Set construction 4 worlds',
-              nationalMQ: 4,
-              nationalTD: 1,
-              price: 18750,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 15500,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 5203,
-              name: 'Floor materials',
-              nationalMQ: 1,
-              nationalTD: 1,
-              price: 25000,
-              nationalOT: 5750,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 20100,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 5204,
-              name: 'Vehicles in picture',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 5050,
-              nationalOT: 0,
-              internationalMQ: 0,
-              internationalTD: 0,
-              internationalRate: 6000,
-              internationalOT: 0,
-              remark: '',
-              count: 1,
-              splitting: true
-            },
-            {
-              id: 5205,
-              name: 'Props 3 worlds',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 5030,
-              nationalOT: 0,
-              internationalMQ: 3,
-              internationalTD: 1,
-              internationalRate: 4000,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            },
-            {
-              id: 5206,
-              name: 'Setbuild materials 3 worlds',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 5030,
-              nationalOT: 0,
-              internationalMQ: 3,
-              internationalTD: 1,
-              internationalRate: 21875,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            },
-            {
-              id: 5207,
-              name: '(Special) Liquids',
-              nationalMQ: 0,
-              nationalTD: 0,
-              price: 1030,
-              nationalOT: 0,
-              internationalMQ: 3,
-              internationalTD: 1,
-              internationalRate: 1400,
-              internationalOT: 0,
-              remark: '',
-              count: 2,
-              splitting: true
-            },
-          ],
-          richText: EMPTY_RICH_TEXT_VALUE,
-        }
-      ]
-    },
+export const CHAPTERS: IChapterInfo[] = [
   {
-    name: 'Pre-production2',
+    name: 'Pre-production',
     categories: [
       {
         name: 'PPM | TRAVELCOST',
@@ -1729,11 +21,11 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1302,
-            name: 'Flight Director\'s Producer',
+            name: "Flight Director's Producer",
             nationalMQ: 3,
             nationalTD: 3,
             price: 450,
@@ -1744,7 +36,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1303,
@@ -1759,7 +51,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1304,
@@ -1774,7 +66,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: false
+            splitting: false,
           },
           {
             id: 1305,
@@ -1789,7 +81,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1306,
@@ -1804,7 +96,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: false
+            splitting: false,
           },
           {
             id: 1307,
@@ -1819,7 +111,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1308,
@@ -1834,8 +126,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -1855,7 +147,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1402,
@@ -1870,7 +162,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1403,
@@ -1885,7 +177,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1404,
@@ -1900,11 +192,11 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: false
+            splitting: false,
           },
           {
             id: 1405,
-            name: 'KSK | Fees (artists\' social ins.)',
+            name: "KSK | Fees (artists' social ins.)",
             nationalMQ: 0.05,
             nationalTD: 1,
             price: 1000,
@@ -1915,7 +207,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: false
+            splitting: false,
           },
           {
             id: 1406,
@@ -1930,7 +222,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: false
+            splitting: false,
           },
           {
             id: 1407,
@@ -1945,7 +237,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1408,
@@ -1960,18 +252,18 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 0,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
-      }
-    ]
+      },
+    ],
   },
   {
-    name: 'Salaries2',
+    name: 'Salaries',
     categories: [
       {
-        name: 'DIRECTOR\'S UNIT',
+        name: "DIRECTOR'S UNIT",
         data: [
           {
             id: 3301,
@@ -1986,7 +278,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3302,
@@ -2001,7 +293,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 0,
-            splitting: false
+            splitting: false,
           },
           {
             id: 3303,
@@ -2016,7 +308,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 0,
-            splitting: false
+            splitting: false,
           },
           {
             id: 3304,
@@ -2031,11 +323,11 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: false
+            splitting: false,
           },
           {
             id: 3305,
-            name: 'KSK | Fees (artists\' social ins.)',
+            name: "KSK | Fees (artists' social ins.)",
             nationalMQ: 0.05,
             nationalTD: 1,
             price: 1000,
@@ -2046,7 +338,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3306,
@@ -2061,8 +353,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -2082,7 +374,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3402,
@@ -2097,7 +389,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3403,
@@ -2112,7 +404,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 3,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3404,
@@ -2127,7 +419,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3405,
@@ -2142,7 +434,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3406,
@@ -2157,7 +449,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3407,
@@ -2172,7 +464,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3408,
@@ -2187,8 +479,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -2208,7 +500,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3502,
@@ -2223,7 +515,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3503,
@@ -2238,7 +530,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3504,
@@ -2253,7 +545,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3505,
@@ -2268,7 +560,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3506,
@@ -2283,7 +575,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3507,
@@ -2298,7 +590,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3508,
@@ -2313,7 +605,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3509,
@@ -2328,7 +620,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3510,
@@ -2343,15 +635,15 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
-      }
-    ]
+      },
+    ],
   },
   {
-    name: 'Cast2',
+    name: 'Cast',
     categories: [
       {
         name: 'PRINCIPALS',
@@ -2369,7 +661,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 2102,
@@ -2384,7 +676,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 2103,
@@ -2399,7 +691,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 2104,
@@ -2414,7 +706,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 2105,
@@ -2429,15 +721,15 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
-      }
-    ]
+      },
+    ],
   },
   {
-    name: 'Equipment2',
+    name: 'Equipment',
     categories: [
       {
         name: 'CAMERA EQUIPMENT',
@@ -2455,7 +747,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4102,
@@ -2470,7 +762,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4103,
@@ -2485,7 +777,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4104,
@@ -2500,7 +792,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4105,
@@ -2515,7 +807,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4106,
@@ -2530,7 +822,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4107,
@@ -2545,7 +837,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4108,
@@ -2560,7 +852,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4109,
@@ -2575,7 +867,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4110,
@@ -2590,7 +882,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4111,
@@ -2605,7 +897,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4112,
@@ -2620,7 +912,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4113,
@@ -2635,7 +927,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4114,
@@ -2650,7 +942,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4115,
@@ -2665,8 +957,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -2686,7 +978,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4202,
@@ -2701,7 +993,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4203,
@@ -2716,7 +1008,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4204,
@@ -2731,7 +1023,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4205,
@@ -2746,7 +1038,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4206,
@@ -2761,7 +1053,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4207,
@@ -2776,7 +1068,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4208,
@@ -2791,7 +1083,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4209,
@@ -2806,8 +1098,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -2827,7 +1119,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4302,
@@ -2842,7 +1134,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4303,
@@ -2857,7 +1149,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4304,
@@ -2872,7 +1164,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4305,
@@ -2887,7 +1179,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4306,
@@ -2902,7 +1194,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4307,
@@ -2917,7 +1209,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4308,
@@ -2932,7 +1224,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4309,
@@ -2947,7 +1239,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4310,
@@ -2962,7 +1254,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
@@ -2983,7 +1275,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4402,
@@ -2998,7 +1290,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4403,
@@ -3013,7 +1305,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4404,
@@ -3028,7 +1320,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4405,
@@ -3043,7 +1335,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4406,
@@ -3058,7 +1350,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4407,
@@ -3073,8 +1365,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -3094,7 +1386,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4502,
@@ -3109,7 +1401,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4503,
@@ -3124,7 +1416,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4504,
@@ -3139,7 +1431,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4505,
@@ -3154,7 +1446,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: false
+            splitting: false,
           },
           {
             id: 4506,
@@ -3169,12 +1461,1720 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
-      }
-    ]
+      },
+    ],
+  },
+  {
+    name: 'Art Department',
+    categories: [
+      {
+        name: 'CREW',
+        data: [
+          {
+            id: 5101,
+            name: 'Production Designer ex UK',
+            nationalMQ: 4,
+            nationalTD: 1,
+            price: 1563,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 1600,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 5102,
+            name: 'Art Director',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 1000,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 1,
+            internationalRate: 4500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 5103,
+            name: 'Art Director Assistant',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 438,
+            nationalOT: 1663,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 550,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+          {
+            id: 5104,
+            name: 'Props Master',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 563,
+            nationalOT: 2138,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 200,
+            internationalOT: 0,
+            remark: '',
+            count: 3,
+            splitting: true,
+          },
+          {
+            id: 5105,
+            name: 'Props Master',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 100,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 120,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 5106,
+            name: 'Props Master Assistant',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 438,
+            nationalOT: 1663,
+            internationalMQ: 5,
+            internationalTD: 3,
+            internationalRate: 110,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 5107,
+            name: 'Stylist',
+            nationalMQ: 1,
+            nationalTD: 6,
+            price: 1500,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 1600,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 5108,
+            name: 'Assistant Stylist',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 500,
+            nationalOT: 1900,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 500,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: false,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+      {
+        name: 'PROPS + MATERIALS',
+        data: [
+          {
+            id: 5201,
+            name: 'Props rental 4 worlds',
+            nationalMQ: 4,
+            nationalTD: 1,
+            price: 4375,
+            nationalOT: 0,
+            internationalMQ: 2,
+            internationalTD: 3,
+            internationalRate: 1500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 5202,
+            name: 'Set construction 4 worlds',
+            nationalMQ: 4,
+            nationalTD: 1,
+            price: 18750,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 15500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 5203,
+            name: 'Floor materials',
+            nationalMQ: 1,
+            nationalTD: 1,
+            price: 25000,
+            nationalOT: 5750,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 20100,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 5204,
+            name: 'Vehicles in picture',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 5050,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 6000,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 5205,
+            name: 'Props 3 worlds',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 5030,
+            nationalOT: 0,
+            internationalMQ: 3,
+            internationalTD: 1,
+            internationalRate: 4000,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+          {
+            id: 5206,
+            name: 'Setbuild materials 3 worlds',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 5030,
+            nationalOT: 0,
+            internationalMQ: 3,
+            internationalTD: 1,
+            internationalRate: 21875,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+          {
+            id: 5207,
+            name: '(Special) Liquids',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 1030,
+            nationalOT: 0,
+            internationalMQ: 3,
+            internationalTD: 1,
+            internationalRate: 1400,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+    ],
+  },
+  {
+    name: 'Pre-production2',
+    categories: [
+      {
+        name: 'PPM | TRAVELCOST',
+        data: [
+          {
+            id: 1301,
+            name: 'Flight Director (ex: xxCITYxx)',
+            nationalMQ: 2,
+            nationalTD: 3,
+            price: 400,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 1302,
+            name: "Flight Director's Producer",
+            nationalMQ: 3,
+            nationalTD: 3,
+            price: 450,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 550,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 1303,
+            name: 'Flight Producer, PM',
+            nationalMQ: 1,
+            nationalTD: 2,
+            price: 500,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 600,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+          {
+            id: 1304,
+            name: 'Fares (2 x Airport)',
+            nationalMQ: 3,
+            nationalTD: 1,
+            price: 200,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 355,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: false,
+          },
+          {
+            id: 1305,
+            name: 'Hotel(s)',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 275,
+            nationalOT: 0,
+            internationalMQ: 3,
+            internationalTD: 3,
+            internationalRate: 300,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+          {
+            id: 1306,
+            name: 'Incidentals',
+            nationalMQ: 1,
+            nationalTD: 2,
+            price: 300,
+            nationalOT: 0,
+            internationalMQ: 2,
+            internationalTD: 3,
+            internationalRate: 350,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: false,
+          },
+          {
+            id: 1307,
+            name: 'Train Director',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 150,
+            nationalOT: 0,
+            internationalMQ: 2,
+            internationalTD: 3,
+            internationalRate: 250,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+          {
+            id: 1308,
+            name: 'Train Producer, PM',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 375,
+            nationalOT: 0,
+            internationalMQ: 2,
+            internationalTD: 3,
+            internationalRate: 450,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+      {
+        name: 'MISCELLANEOUS',
+        data: [
+          {
+            id: 1401,
+            name: 'Concepts',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 300,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 450,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 1402,
+            name: 'Shootingboard per day',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 550,
+            nationalOT: 0,
+            internationalMQ: 3,
+            internationalTD: 3,
+            internationalRate: 600,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 1403,
+            name: 'Shootingboard per picture',
+            nationalMQ: 1,
+            nationalTD: 80,
+            price: 50,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 60,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+          {
+            id: 1404,
+            name: 'AGA on fees (social contrib.)',
+            nationalMQ: 0.25,
+            nationalTD: 1,
+            price: 3000,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 3200,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: false,
+          },
+          {
+            id: 1405,
+            name: "KSK | Fees (artists' social ins.)",
+            nationalMQ: 0.05,
+            nationalTD: 1,
+            price: 1000,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 1100,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: false,
+          },
+          {
+            id: 1406,
+            name: '50 a | Rights (withholding tax)',
+            nationalMQ: 0.2,
+            nationalTD: 1,
+            price: 4000,
+            nationalOT: 0,
+            internationalMQ: 0.2,
+            internationalTD: 1,
+            internationalRate: 3500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: false,
+          },
+          {
+            id: 1407,
+            name: 'Photo- | Videoboard',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 400,
+            nationalOT: 0,
+            internationalMQ: 2,
+            internationalTD: 3,
+            internationalRate: 250,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 1408,
+            name: 'Presentation costs',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 400,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 450,
+            internationalOT: 0,
+            remark: '',
+            count: 0,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+    ],
+  },
+  {
+    name: 'Salaries2',
+    categories: [
+      {
+        name: "DIRECTOR'S UNIT",
+        data: [
+          {
+            id: 3301,
+            name: '1st AD',
+            nationalMQ: 3,
+            nationalTD: 1,
+            price: 700,
+            nationalOT: 2660,
+            internationalMQ: 3,
+            internationalTD: 1,
+            internationalRate: 300,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3302,
+            name: '2nd AD',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 400,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 450,
+            internationalOT: 0,
+            remark: '',
+            count: 0,
+            splitting: false,
+          },
+          {
+            id: 3303,
+            name: '3rd AD',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 500,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 550,
+            internationalOT: 0,
+            remark: '',
+            count: 0,
+            splitting: false,
+          },
+          {
+            id: 3304,
+            name: 'AGA on fees (social contrib.)',
+            nationalMQ: 0.25,
+            nationalTD: 1,
+            price: 2500,
+            nationalOT: 0,
+            internationalMQ: 0.25,
+            internationalTD: 1,
+            internationalRate: 2500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: false,
+          },
+          {
+            id: 3305,
+            name: "KSK | Fees (artists' social ins.)",
+            nationalMQ: 0.05,
+            nationalTD: 1,
+            price: 1000,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 1100,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3306,
+            name: '50 a | Rights (withholding tax)',
+            nationalMQ: 0.2,
+            nationalTD: 1,
+            price: 2000,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 2200,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+      {
+        name: 'CAMERA CREW',
+        data: [
+          {
+            id: 3401,
+            name: 'DoP',
+            nationalMQ: 5,
+            nationalTD: 6,
+            price: 3750,
+            nationalOT: 14250,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 4000,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3402,
+            name: 'Operator | Gimbal',
+            nationalMQ: 1,
+            nationalTD: 0,
+            price: 600,
+            nationalOT: 2280,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 120,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+          {
+            id: 3403,
+            name: 'Focus Puller incl. Test',
+            nationalMQ: 2,
+            nationalTD: 4,
+            price: 550,
+            nationalOT: 2090,
+            internationalMQ: 3,
+            internationalTD: 3,
+            internationalRate: 300,
+            internationalOT: 0,
+            remark: '',
+            count: 3,
+            splitting: true,
+          },
+          {
+            id: 3404,
+            name: 'Clapper Loader incl. Test',
+            nationalMQ: 2,
+            nationalTD: 3,
+            price: 450,
+            nationalOT: 1710,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 120,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3405,
+            name: 'Data Wrangler | Transcoding',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 440,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 460,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3406,
+            name: 'DIT',
+            nationalMQ: 2,
+            nationalTD: 4,
+            price: 600,
+            nationalOT: 2280,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 700,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+          {
+            id: 3407,
+            name: 'Digital VTR Operator',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 460,
+            nationalOT: 1710,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 100,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3408,
+            name: 'HSpeed Operator | Phantom',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 450,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 550,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+      {
+        name: 'ELECTRICIANS | GRIP',
+        data: [
+          {
+            id: 3501,
+            name: 'Key Grip',
+            nationalMQ: 3,
+            nationalTD: 1,
+            price: 500,
+            nationalOT: 0,
+            internationalMQ: 3,
+            internationalTD: 1,
+            internationalRate: 500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3502,
+            name: 'Best Boy Grip',
+            nationalMQ: 1,
+            nationalTD: 4,
+            price: 400,
+            nationalOT: 0,
+            internationalMQ: 4,
+            internationalTD: 1,
+            internationalRate: 450,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3503,
+            name: 'Crane Grip',
+            nationalMQ: 2,
+            nationalTD: 1,
+            price: 100,
+            nationalOT: 0,
+            internationalMQ: 4,
+            internationalTD: 3,
+            internationalRate: 150,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3504,
+            name: 'Super-Techno-Crew',
+            nationalMQ: 3,
+            nationalTD: 3,
+            price: 500,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 600,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3505,
+            name: 'Gaffer',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 800,
+            nationalOT: 0,
+            internationalMQ: 2,
+            internationalTD: 4,
+            internationalRate: 850,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3506,
+            name: 'Best Boy Light',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 560,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 650,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3507,
+            name: 'Electricians',
+            nationalMQ: 3,
+            nationalTD: 3,
+            price: 500,
+            nationalOT: 0,
+            internationalMQ: 3,
+            internationalTD: 3,
+            internationalRate: 550,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3508,
+            name: 'Electricians loading',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 500,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 5,
+            internationalRate: 650,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3509,
+            name: 'Helping Hand',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 215,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 4,
+            internationalRate: 225,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 3510,
+            name: 'Genny Operator',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 215,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 225,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+    ],
+  },
+  {
+    name: 'Cast2',
+    categories: [
+      {
+        name: 'PRINCIPALS',
+        data: [
+          {
+            id: 2101,
+            name: 'Principal 1',
+            nationalMQ: 1,
+            nationalTD: 5,
+            price: 5750,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 4500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 2102,
+            name: 'Travel Fee Principal 1',
+            nationalMQ: 1,
+            nationalTD: 2,
+            price: 575,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 600,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 2103,
+            name: 'Principal 2',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 3450,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 3500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 2104,
+            name: 'Fitting',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 1000,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 1100,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 2105,
+            name: 'Agency commission',
+            nationalMQ: 0.2,
+            nationalTD: 1,
+            price: 1955,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 2010,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+    ],
+  },
+  {
+    name: 'Equipment2',
+    categories: [
+      {
+        name: 'CAMERA EQUIPMENT',
+        data: [
+          {
+            id: 4101,
+            name: 'Arri Alexa | 60fps',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 8750,
+            nationalOT: 0,
+            internationalMQ: 2,
+            internationalTD: 3,
+            internationalRate: 1500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4102,
+            name: 'Arri Alexa HS | 120fps',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 400,
+            nationalOT: 0,
+            internationalMQ: 2,
+            internationalTD: 3,
+            internationalRate: 300,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4103,
+            name: '4K Camerasystem',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 2150,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 2300,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4104,
+            name: 'Red Epic',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 350,
+            nationalOT: 0,
+            internationalMQ: 2,
+            internationalTD: 3,
+            internationalRate: 250,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4105,
+            name: 'Canon 5D | 7D | Full Package',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 115,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 100,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4106,
+            name: 'Canon 5D | 7D | Small',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 200,
+            nationalOT: 0,
+            internationalMQ: 2,
+            internationalTD: 3,
+            internationalRate: 150,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4107,
+            name: 'Canon 5D | 7D | Full Package',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 350,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 475,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4108,
+            name: 'Phantom Flex',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 1150,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 1250,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4109,
+            name: '',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 275,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 300,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4110,
+            name: 'Lenses (Primes + Zooms)',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 150,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 175,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4111,
+            name: 'Filters',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 100,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 100,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4112,
+            name: 'Accessories',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 350,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 450,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4113,
+            name: 'Digital Videoequipment',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 215,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 230,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4114,
+            name: 'Steadicam, Operator | SocSec',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 650,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 690,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4115,
+            name: 'DIT Equipment',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 115,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 125,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+      {
+        name: 'CAMERA | GRIP',
+        data: [
+          {
+            id: 4201,
+            name: 'Dolly | Fisher incl. Tracks',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 750,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4202,
+            name: 'Crane (max. 11m)',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 2000,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 2500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4203,
+            name: 'Super-Techno 30 incl. RHead',
+            nationalMQ: 1,
+            nationalTD: 3,
+            price: 2500,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 1500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4204,
+            name: 'Remote Head | 2 Axis',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 160,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 250,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4205,
+            name: 'Remote Head | 3 Axis',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 115,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 150,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4206,
+            name: 'Flight Head',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 750,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 1000,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4207,
+            name: 'Gyro grips',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 350,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 475,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4208,
+            name: 'Special-Grips and Car-Rigs',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 250,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 250,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4209,
+            name: 'RArm | Flight Head | ArmCar',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 275,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 350,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+      {
+        name: 'LIGHTNING',
+        data: [
+          {
+            id: 4301,
+            name: 'HMI incl. Riggs & trusses',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 3500,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 16250,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4302,
+            name: 'Additional lighting',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 2000,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 500,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4303,
+            name: 'Special lighting gear',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 550,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 300,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4304,
+            name: 'Genny + Mileage',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 1600,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 2050,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4305,
+            name: 'Genny fuel consumption',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 115,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 150,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4306,
+            name: 'Consumption',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 115,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 150,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4307,
+            name: 'Wind | Haze | Fog',
+            nationalMQ: 1,
+            nationalTD: 1,
+            price: 105,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 150,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4308,
+            name: 'Bagolight incl. Transport',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 215,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 2,
+            internationalRate: 250,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4309,
+            name: 'Kinoflos',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 115,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 150,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4310,
+            name: 'Working hours',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 115,
+            nationalOT: 0,
+            internationalMQ: 20,
+            internationalTD: 1,
+            internationalRate: 100,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+      {
+        name: 'HELICOPTER | DRONES | RIGS',
+        data: [
+          {
+            id: 4401,
+            name: 'Helicopter per hour',
+            nationalMQ: 1,
+            nationalTD: 1,
+            price: 1500,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 1250,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4402,
+            name: 'Drone',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 350,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 1,
+            internationalRate: 450,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4403,
+            name: 'Tyler Side Mount',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 250,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 350,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4404,
+            name: 'Tyler Mini Gyro',
+            nationalMQ: 1,
+            nationalTD: 4,
+            price: 650,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 650,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4405,
+            name: 'Stab-C | Wescam',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 560,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 650,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4406,
+            name: 'Fuel Truck Helicopter',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 970,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 1,
+            internationalRate: 1140,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4407,
+            name: 'Fuel | JP Fuel consumption',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 560,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 2,
+            internationalRate: 650,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+      {
+        name: 'TRANSPORTS | MISC',
+        data: [
+          {
+            id: 4501,
+            name: 'Camera car',
+            nationalMQ: 1,
+            nationalTD: 4,
+            price: 150,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 969,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4502,
+            name: 'Lights + Grips truck',
+            nationalMQ: 2,
+            nationalTD: 4,
+            price: 275,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 350,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4503,
+            name: 'Minivan',
+            nationalMQ: 1,
+            nationalTD: 4,
+            price: 150,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 250,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4504,
+            name: 'Crane | Special truck',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 5500,
+            nationalOT: 0,
+            internationalMQ: 0,
+            internationalTD: 0,
+            internationalRate: 650,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+          {
+            id: 4505,
+            name: 'Fuel consumption',
+            nationalMQ: 0,
+            nationalTD: 0,
+            price: 560,
+            nationalOT: 0,
+            internationalMQ: 1,
+            internationalTD: 3,
+            internationalRate: 375,
+            internationalOT: 0,
+            remark: '',
+            count: 2,
+            splitting: false,
+          },
+          {
+            id: 4506,
+            name: 'Radios (Set)',
+            nationalMQ: 25,
+            nationalTD: 3,
+            price: 11,
+            nationalOT: 0,
+            internationalMQ: 30,
+            internationalTD: 3,
+            internationalRate: 6,
+            internationalOT: 0,
+            remark: '',
+            count: 1,
+            splitting: true,
+          },
+        ],
+        richText: EMPTY_RICH_TEXT_VALUE,
+      },
+    ],
   },
   {
     name: 'Art Department2',
@@ -3195,7 +3195,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5102,
@@ -3210,7 +3210,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5103,
@@ -3225,7 +3225,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5104,
@@ -3240,7 +3240,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 3,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5105,
@@ -3255,7 +3255,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5106,
@@ -3270,7 +3270,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5107,
@@ -3285,7 +3285,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5108,
@@ -3300,8 +3300,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: false
-          }
+            splitting: false,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -3321,7 +3321,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5202,
@@ -3336,7 +3336,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5203,
@@ -3351,7 +3351,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5204,
@@ -3366,7 +3366,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5205,
@@ -3381,7 +3381,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5206,
@@ -3396,7 +3396,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5207,
@@ -3411,12 +3411,12 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
-      }
-    ]
+      },
+    ],
   },
 
   {
@@ -3438,11 +3438,11 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1302,
-            name: 'Flight Director\'s Producer',
+            name: "Flight Director's Producer",
             nationalMQ: 3,
             nationalTD: 3,
             price: 450,
@@ -3453,7 +3453,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1303,
@@ -3468,7 +3468,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1304,
@@ -3483,7 +3483,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: false
+            splitting: false,
           },
           {
             id: 1305,
@@ -3498,7 +3498,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1306,
@@ -3513,7 +3513,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: false
+            splitting: false,
           },
           {
             id: 1307,
@@ -3528,7 +3528,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1308,
@@ -3543,8 +3543,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -3564,7 +3564,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1402,
@@ -3579,7 +3579,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1403,
@@ -3594,7 +3594,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1404,
@@ -3609,11 +3609,11 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: false
+            splitting: false,
           },
           {
             id: 1405,
-            name: 'KSK | Fees (artists\' social ins.)',
+            name: "KSK | Fees (artists' social ins.)",
             nationalMQ: 0.05,
             nationalTD: 1,
             price: 1000,
@@ -3624,7 +3624,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: false
+            splitting: false,
           },
           {
             id: 1406,
@@ -3639,7 +3639,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: false
+            splitting: false,
           },
           {
             id: 1407,
@@ -3654,7 +3654,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 1408,
@@ -3669,18 +3669,18 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 0,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
-      }
-    ]
+      },
+    ],
   },
   {
     name: 'Salaries3',
     categories: [
       {
-        name: 'DIRECTOR\'S UNIT',
+        name: "DIRECTOR'S UNIT",
         data: [
           {
             id: 3301,
@@ -3695,7 +3695,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3302,
@@ -3710,7 +3710,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 0,
-            splitting: false
+            splitting: false,
           },
           {
             id: 3303,
@@ -3725,7 +3725,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 0,
-            splitting: false
+            splitting: false,
           },
           {
             id: 3304,
@@ -3740,11 +3740,11 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: false
+            splitting: false,
           },
           {
             id: 3305,
-            name: 'KSK | Fees (artists\' social ins.)',
+            name: "KSK | Fees (artists' social ins.)",
             nationalMQ: 0.05,
             nationalTD: 1,
             price: 1000,
@@ -3755,7 +3755,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3306,
@@ -3770,8 +3770,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -3791,7 +3791,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3402,
@@ -3806,7 +3806,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3403,
@@ -3821,7 +3821,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 3,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3404,
@@ -3836,7 +3836,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3405,
@@ -3851,7 +3851,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3406,
@@ -3866,7 +3866,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3407,
@@ -3881,7 +3881,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3408,
@@ -3896,8 +3896,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -3917,7 +3917,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3502,
@@ -3932,7 +3932,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3503,
@@ -3947,7 +3947,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3504,
@@ -3962,7 +3962,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3505,
@@ -3977,7 +3977,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3506,
@@ -3992,7 +3992,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3507,
@@ -4007,7 +4007,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3508,
@@ -4022,7 +4022,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3509,
@@ -4037,7 +4037,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 3510,
@@ -4052,12 +4052,12 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
-      }
-    ]
+      },
+    ],
   },
   {
     name: 'Cast3',
@@ -4078,7 +4078,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 2102,
@@ -4093,7 +4093,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 2103,
@@ -4108,7 +4108,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 2104,
@@ -4123,7 +4123,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 2105,
@@ -4138,12 +4138,12 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
-      }
-    ]
+      },
+    ],
   },
   {
     name: 'Equipment3',
@@ -4164,7 +4164,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4102,
@@ -4179,7 +4179,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4103,
@@ -4194,7 +4194,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4104,
@@ -4209,7 +4209,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4105,
@@ -4224,7 +4224,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4106,
@@ -4239,7 +4239,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4107,
@@ -4254,7 +4254,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4108,
@@ -4269,7 +4269,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4109,
@@ -4284,7 +4284,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4110,
@@ -4299,7 +4299,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4111,
@@ -4314,7 +4314,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4112,
@@ -4329,7 +4329,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4113,
@@ -4344,7 +4344,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4114,
@@ -4359,7 +4359,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4115,
@@ -4374,8 +4374,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -4395,7 +4395,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4202,
@@ -4410,7 +4410,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4203,
@@ -4425,7 +4425,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4204,
@@ -4440,7 +4440,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4205,
@@ -4455,7 +4455,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4206,
@@ -4470,7 +4470,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4207,
@@ -4485,7 +4485,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4208,
@@ -4500,7 +4500,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4209,
@@ -4515,8 +4515,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -4536,7 +4536,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4302,
@@ -4551,7 +4551,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4303,
@@ -4566,7 +4566,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4304,
@@ -4581,7 +4581,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4305,
@@ -4596,7 +4596,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4306,
@@ -4611,7 +4611,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4307,
@@ -4626,7 +4626,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4308,
@@ -4641,7 +4641,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4309,
@@ -4656,7 +4656,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4310,
@@ -4671,7 +4671,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
@@ -4692,7 +4692,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4402,
@@ -4707,7 +4707,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4403,
@@ -4722,7 +4722,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4404,
@@ -4737,7 +4737,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4405,
@@ -4752,7 +4752,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4406,
@@ -4767,7 +4767,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4407,
@@ -4782,8 +4782,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -4803,7 +4803,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4502,
@@ -4818,7 +4818,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4503,
@@ -4833,7 +4833,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4504,
@@ -4848,7 +4848,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 4505,
@@ -4863,7 +4863,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: false
+            splitting: false,
           },
           {
             id: 4506,
@@ -4878,12 +4878,12 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
-          }
+            splitting: true,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
-      }
-    ]
+      },
+    ],
   },
   {
     name: 'Art Department3',
@@ -4904,7 +4904,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5102,
@@ -4919,7 +4919,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5103,
@@ -4934,7 +4934,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5104,
@@ -4949,7 +4949,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 3,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5105,
@@ -4964,7 +4964,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5106,
@@ -4979,7 +4979,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5107,
@@ -4994,7 +4994,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5108,
@@ -5009,8 +5009,8 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: false
-          }
+            splitting: false,
+          },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
       },
@@ -5030,7 +5030,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5202,
@@ -5045,7 +5045,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5203,
@@ -5060,7 +5060,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5204,
@@ -5075,7 +5075,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 1,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5205,
@@ -5090,7 +5090,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5206,
@@ -5105,7 +5105,7 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
           {
             id: 5207,
@@ -5120,12 +5120,11 @@ export const CHAPTERS : IChapterInfo[] = [
             internationalOT: 0,
             remark: '',
             count: 2,
-            splitting: true
+            splitting: true,
           },
         ],
         richText: EMPTY_RICH_TEXT_VALUE,
-      }
-    ]
-  }
-  ];
-
+      },
+    ],
+  },
+];

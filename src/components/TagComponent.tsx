@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import styled from "@emotion/styled";
-import { Input } from "@mui/material";
-import {IconButton} from "./IconButton";
+import React, { useState } from 'react';
+import styled from '@emotion/styled';
+import { Input } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import { IconButton } from './IconButton';
 
 type PropsType = {
   name: string;
@@ -18,7 +18,7 @@ const StyledTagComponent = styled.div<{ selected: boolean }>`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  background-color: ${({ selected }) => selected ? '#61dafb' : 'none'} ;
+  background-color: ${({ selected }) => (selected ? '#61dafb' : 'none')};
 `;
 
 const StyledTag = styled.div`
@@ -27,13 +27,13 @@ const StyledTag = styled.div`
   align-items: center;
   width: 200px;
   cursor: pointer;
-    
-  & > .MuiInputBase-root.Mui-disabled  {
+
+  & > .MuiInputBase-root.Mui-disabled {
     cursor: pointer;
-      
-      & > input:disabled {
-        cursor: pointer; 
-      }
+
+    & > input:disabled {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -49,10 +49,16 @@ const StyledColor = styled.div<{ color: string }>`
   height: 20px;
   width: 20px;
   border-radius: 100%;
-  background-color: ${({ color }) => color};  
+  background-color: ${({ color }) => color};
 `;
 
-export const TagComponent = ({ name, color, onSelectTag, onChangeName, selected }: PropsType) => {
+export const TagComponent = ({
+  name,
+  color,
+  onSelectTag,
+  onChangeName,
+  selected,
+}: PropsType) => {
   const [isEditable, setIsEditable] = useState(false);
 
   const toggleEditable = () => {
@@ -72,10 +78,10 @@ export const TagComponent = ({ name, color, onSelectTag, onChangeName, selected 
         ) : (
           <StyledName>{name}</StyledName>
         )}
-        <StyledColor color={color}/>
+        <StyledColor color={color} />
       </StyledTag>
       <IconButton
-        icon={<EditIcon/>}
+        icon={<EditIcon />}
         onClick={toggleEditable}
         active={isEditable}
       />

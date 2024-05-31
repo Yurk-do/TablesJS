@@ -5164,7 +5164,7 @@
                   "internationalTD": 0,
                   "internationalRate": 500,
                   "internationalOT": 0,
-                  "remark": "",
+                  "remark": "3",
                   "count": 1,
                   "splitting": true
                 },
@@ -5179,7 +5179,7 @@
                   "internationalTD": 0,
                   "internationalRate": 550,
                   "internationalOT": 0,
-                  "remark": "",
+                  "remark": "5.063",
                   "count": 1,
                   "splitting": true
                 },
@@ -5194,7 +5194,7 @@
                   "internationalTD": 0,
                   "internationalRate": 600,
                   "internationalOT": 0,
-                  "remark": "",
+                  "remark": "1.25",
                   "count": 2,
                   "splitting": true
                 },
@@ -5209,7 +5209,7 @@
                   "internationalTD": 0,
                   "internationalRate": 355,
                   "internationalOT": 0,
-                  "remark": "",
+                  "remark": "750",
                   "count": 2,
                   "splitting": false
                 },
@@ -5224,7 +5224,7 @@
                   "internationalTD": 3,
                   "internationalRate": 300,
                   "internationalOT": 0,
-                  "remark": "",
+                  "remark": "3.375",
                   "count": 2,
                   "splitting": true
                 },
@@ -5239,7 +5239,7 @@
                   "internationalTD": 3,
                   "internationalRate": 350,
                   "internationalOT": 0,
-                  "remark": "",
+                  "remark": "3.375",
                   "count": 1,
                   "splitting": false
                 },
@@ -5254,7 +5254,7 @@
                   "internationalTD": 3,
                   "internationalRate": 250,
                   "internationalOT": 0,
-                  "remark": "",
+                  "remark": "1.875",
                   "count": 2,
                   "splitting": true
                 },
@@ -5269,7 +5269,7 @@
                   "internationalTD": 3,
                   "internationalRate": 450,
                   "internationalOT": 0,
-                  "remark": "",
+                  "remark": "3.375",
                   "count": 2,
                   "splitting": true
                 }
@@ -10325,7 +10325,7 @@
               "0",
               "0",
               "3.000",
-              "",
+              "3",
               "1",
               "true",
               "2 x Flight Director (ex: xxCITYxx) for 3 days (Germany) and null x Flight Director (ex: xxCITYxx) for null days (Abroad)"
@@ -10342,7 +10342,7 @@
               "0",
               "0",
               "5.063",
-              "",
+              "5.063",
               "1",
               "true",
               "3 x Flight Director's Producer for 3 days (Germany) and null x Flight Director's Producer for null days (Abroad)"
@@ -10359,7 +10359,7 @@
               "0",
               "0",
               "1.250",
-              "",
+              "1.25",
               "2",
               "true",
               "1 x Flight Producer, PM for 2 weeks (Germany) and null x Flight Producer, PM for null weeks (Abroad)"
@@ -10376,7 +10376,7 @@
               "0",
               "0",
               "750",
-              "",
+              "750",
               "2",
               "false",
               "3 x Fares (2 x Airport) for 1 weeks"
@@ -10393,7 +10393,7 @@
               "0",
               "3.375",
               "3.375",
-              "",
+              "3.375",
               "2",
               "true",
               "null x Hotel(s) for null weeks (Germany) and 3 x Hotel(s) for 3 weeks (Abroad)"
@@ -10410,7 +10410,7 @@
               "0",
               "2.625",
               "3.375",
-              "",
+              "3.375",
               "1",
               "false",
               "3 x Incidentals for 5 days"
@@ -10427,7 +10427,7 @@
               "0",
               "1.875",
               "1.875",
-              "",
+              "1.875",
               "2",
               "true",
               "null x Train Director for null weeks (Germany) and 2 x Train Director for 3 weeks (Abroad)"
@@ -10444,7 +10444,7 @@
               "0",
               "3.375",
               "3.375",
-              "",
+              "3.375",
               "2",
               "true",
               "null x Train Producer, PM for null weeks (Germany) and 2 x Train Producer, PM for 3 weeks (Abroad)"
@@ -10667,7 +10667,7 @@
               "=ROUND(0*(1+(M2*0.01)),0)",
               "=ROUND((F2*G2*500+0)*1.25,0)",
               "=ROUND(E2+J2,0)",
-              "",
+              3,
               1,
               true,
               "=IF(C2+F2==0,\"\",IF(C2==0,F2+\" x \"+B2+IF(M2==1,\" for \"+G2+\" days (Abroad)\",IF(M2==2,\" for \"+G2+\" weeks (Abroad)\",\" (Abroad)\")),IF(F2==0,IF(M2==1,\" for \"+D2+\" days (Germany)\",IF(M2==2,\" for \"+D2+\" weeks (Germany)\",\" (Germany)\")),IF(N2==0,C2+F2+\" x \"+B2+IF(M2==1,\" for \"+(D2+G2)+\" days\",IF(M2==2,\" for \"+(D2+G2)+\" weeks\",\"\")),C2+\" x \"+B2+IF(M2==1,\" for \"+D2+\" days (Germany)\",IF(M2==2,\" for \"+D2+\" weeks (Germany)\",\" (Germany)\"))+\" and \"+F2+\" x \"+B2+IF(M2==1,\" for \"+G2+\" days (Abroad)\",IF(M2==2,\" for \"+G2+\" weeks (Abroad)\",\" (Abroad)\"))))))"
@@ -10684,7 +10684,7 @@
               "=ROUND(0*(1+(M3*0.01)),0)",
               "=ROUND((F3*G3*550+0)*1.25,0)",
               "=ROUND(E3+J3,0)",
-              "",
+              5.063,
               1,
               true,
               "=IF(C3+F3==0,\"\",IF(C3==0,F3+\" x \"+B3+IF(M3==1,\" for \"+G3+\" days (Abroad)\",IF(M3==2,\" for \"+G3+\" weeks (Abroad)\",\" (Abroad)\")),IF(F3==0,IF(M3==1,\" for \"+D3+\" days (Germany)\",IF(M3==2,\" for \"+D3+\" weeks (Germany)\",\" (Germany)\")),IF(N3==0,C3+F3+\" x \"+B3+IF(M3==1,\" for \"+(D3+G3)+\" days\",IF(M3==2,\" for \"+(D3+G3)+\" weeks\",\"\")),C3+\" x \"+B3+IF(M3==1,\" for \"+D3+\" days (Germany)\",IF(M3==2,\" for \"+D3+\" weeks (Germany)\",\" (Germany)\"))+\" and \"+F3+\" x \"+B3+IF(M3==1,\" for \"+G3+\" days (Abroad)\",IF(M3==2,\" for \"+G3+\" weeks (Abroad)\",\" (Abroad)\"))))))"
@@ -10701,7 +10701,7 @@
               "=ROUND(0*(1+(M4*0.01)),0)",
               "=ROUND((F4*G4*600+0)*1.25,0)",
               "=ROUND(E4+J4,0)",
-              "",
+              1.25,
               2,
               true,
               "=IF(C4+F4==0,\"\",IF(C4==0,F4+\" x \"+B4+IF(M4==1,\" for \"+G4+\" days (Abroad)\",IF(M4==2,\" for \"+G4+\" weeks (Abroad)\",\" (Abroad)\")),IF(F4==0,IF(M4==1,\" for \"+D4+\" days (Germany)\",IF(M4==2,\" for \"+D4+\" weeks (Germany)\",\" (Germany)\")),IF(N4==0,C4+F4+\" x \"+B4+IF(M4==1,\" for \"+(D4+G4)+\" days\",IF(M4==2,\" for \"+(D4+G4)+\" weeks\",\"\")),C4+\" x \"+B4+IF(M4==1,\" for \"+D4+\" days (Germany)\",IF(M4==2,\" for \"+D4+\" weeks (Germany)\",\" (Germany)\"))+\" and \"+F4+\" x \"+B4+IF(M4==1,\" for \"+G4+\" days (Abroad)\",IF(M4==2,\" for \"+G4+\" weeks (Abroad)\",\" (Abroad)\"))))))"
@@ -10718,7 +10718,7 @@
               "=ROUND(0*(1+(M5*0.01)),0)",
               "=ROUND((F5*G5*355+0)*1.25,0)",
               "=ROUND(E5+J5,0)",
-              "",
+              750,
               2,
               false,
               "=IF(C5+F5==0,\"\",IF(C5==0,F5+\" x \"+B5+IF(M5==1,\" for \"+G5+\" days (Abroad)\",IF(M5==2,\" for \"+G5+\" weeks (Abroad)\",\" (Abroad)\")),IF(F5==0,IF(M5==1,\" for \"+D5+\" days (Germany)\",IF(M5==2,\" for \"+D5+\" weeks (Germany)\",\" (Germany)\")),IF(N5==0,C5+F5+\" x \"+B5+IF(M5==1,\" for \"+(D5+G5)+\" days\",IF(M5==2,\" for \"+(D5+G5)+\" weeks\",\"\")),C5+\" x \"+B5+IF(M5==1,\" for \"+D5+\" days (Germany)\",IF(M5==2,\" for \"+D5+\" weeks (Germany)\",\" (Germany)\"))+\" and \"+F5+\" x \"+B5+IF(M5==1,\" for \"+G5+\" days (Abroad)\",IF(M5==2,\" for \"+G5+\" weeks (Abroad)\",\" (Abroad)\"))))))"
@@ -10735,7 +10735,7 @@
               "=ROUND(0*(1+(M6*0.01)),0)",
               "=ROUND((F6*G6*300+0)*1.25,0)",
               "=ROUND(E6+J6,0)",
-              "",
+              3.375,
               2,
               true,
               "=IF(C6+F6==0,\"\",IF(C6==0,F6+\" x \"+B6+IF(M6==1,\" for \"+G6+\" days (Abroad)\",IF(M6==2,\" for \"+G6+\" weeks (Abroad)\",\" (Abroad)\")),IF(F6==0,IF(M6==1,\" for \"+D6+\" days (Germany)\",IF(M6==2,\" for \"+D6+\" weeks (Germany)\",\" (Germany)\")),IF(N6==0,C6+F6+\" x \"+B6+IF(M6==1,\" for \"+(D6+G6)+\" days\",IF(M6==2,\" for \"+(D6+G6)+\" weeks\",\"\")),C6+\" x \"+B6+IF(M6==1,\" for \"+D6+\" days (Germany)\",IF(M6==2,\" for \"+D6+\" weeks (Germany)\",\" (Germany)\"))+\" and \"+F6+\" x \"+B6+IF(M6==1,\" for \"+G6+\" days (Abroad)\",IF(M6==2,\" for \"+G6+\" weeks (Abroad)\",\" (Abroad)\"))))))"
@@ -10752,7 +10752,7 @@
               "=ROUND(0*(1+(M7*0.01)),0)",
               "=ROUND((F7*G7*350+0)*1.25,0)",
               "=ROUND(E7+J7,0)",
-              "",
+              3.375,
               1,
               false,
               "=IF(C7+F7==0,\"\",IF(C7==0,F7+\" x \"+B7+IF(M7==1,\" for \"+G7+\" days (Abroad)\",IF(M7==2,\" for \"+G7+\" weeks (Abroad)\",\" (Abroad)\")),IF(F7==0,IF(M7==1,\" for \"+D7+\" days (Germany)\",IF(M7==2,\" for \"+D7+\" weeks (Germany)\",\" (Germany)\")),IF(N7==0,C7+F7+\" x \"+B7+IF(M7==1,\" for \"+(D7+G7)+\" days\",IF(M7==2,\" for \"+(D7+G7)+\" weeks\",\"\")),C7+\" x \"+B7+IF(M7==1,\" for \"+D7+\" days (Germany)\",IF(M7==2,\" for \"+D7+\" weeks (Germany)\",\" (Germany)\"))+\" and \"+F7+\" x \"+B7+IF(M7==1,\" for \"+G7+\" days (Abroad)\",IF(M7==2,\" for \"+G7+\" weeks (Abroad)\",\" (Abroad)\"))))))"
@@ -10769,7 +10769,7 @@
               "=ROUND(0*(1+(M8*0.01)),0)",
               "=ROUND((F8*G8*250+0)*1.25,0)",
               "=ROUND(E8+J8,0)",
-              "",
+              1.875,
               2,
               true,
               "=IF(C8+F8==0,\"\",IF(C8==0,F8+\" x \"+B8+IF(M8==1,\" for \"+G8+\" days (Abroad)\",IF(M8==2,\" for \"+G8+\" weeks (Abroad)\",\" (Abroad)\")),IF(F8==0,IF(M8==1,\" for \"+D8+\" days (Germany)\",IF(M8==2,\" for \"+D8+\" weeks (Germany)\",\" (Germany)\")),IF(N8==0,C8+F8+\" x \"+B8+IF(M8==1,\" for \"+(D8+G8)+\" days\",IF(M8==2,\" for \"+(D8+G8)+\" weeks\",\"\")),C8+\" x \"+B8+IF(M8==1,\" for \"+D8+\" days (Germany)\",IF(M8==2,\" for \"+D8+\" weeks (Germany)\",\" (Germany)\"))+\" and \"+F8+\" x \"+B8+IF(M8==1,\" for \"+G8+\" days (Abroad)\",IF(M8==2,\" for \"+G8+\" weeks (Abroad)\",\" (Abroad)\"))))))"
@@ -10786,7 +10786,7 @@
               "=ROUND(0*(1+(M9*0.01)),0)",
               "=ROUND((F9*G9*450+0)*1.25,0)",
               "=ROUND(E9+J9,0)",
-              "",
+              3.375,
               2,
               true,
               "=IF(C9+F9==0,\"\",IF(C9==0,F9+\" x \"+B9+IF(M9==1,\" for \"+G9+\" days (Abroad)\",IF(M9==2,\" for \"+G9+\" weeks (Abroad)\",\" (Abroad)\")),IF(F9==0,IF(M9==1,\" for \"+D9+\" days (Germany)\",IF(M9==2,\" for \"+D9+\" weeks (Germany)\",\" (Germany)\")),IF(N9==0,C9+F9+\" x \"+B9+IF(M9==1,\" for \"+(D9+G9)+\" days\",IF(M9==2,\" for \"+(D9+G9)+\" weeks\",\"\")),C9+\" x \"+B9+IF(M9==1,\" for \"+D9+\" days (Germany)\",IF(M9==2,\" for \"+D9+\" weeks (Germany)\",\" (Germany)\"))+\" and \"+F9+\" x \"+B9+IF(M9==1,\" for \"+G9+\" days (Abroad)\",IF(M9==2,\" for \"+G9+\" weeks (Abroad)\",\" (Abroad)\"))))))"

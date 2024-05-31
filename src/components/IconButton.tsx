@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React from 'react';
+import styled from '@emotion/styled';
 
 export const StyledIconButton = styled.span<{ active: boolean }>`
   cursor: pointer;
   & > svg {
-    color: ${({ active}) => active ? '#9c27b0' : '#1976d2' }  
-  }  
+    color: ${({ active }) => (active ? '#9c27b0' : '#1976d2')};
+  }
 `;
 
 type PropsType = {

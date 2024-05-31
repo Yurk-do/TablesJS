@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const getOnLineStatus = () =>
   typeof navigator !== 'undefined' && typeof navigator.onLine === 'boolean'

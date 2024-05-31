@@ -1,15 +1,14 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 export const useInterval = (
   handler: () => void,
-  time: number = 10000,
-  dependencies: any[] = []
+  time = 10000,
+  dependencies: any[] = [],
 ) => {
   useEffect(() => {
     const saveInterval = setInterval(() => {
-      handler()
+      handler();
     }, time);
     return () => clearInterval(saveInterval);
-  },
-    [...dependencies]);
-}
+  }, [...dependencies]);
+};

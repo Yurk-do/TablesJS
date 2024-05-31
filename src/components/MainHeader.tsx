@@ -1,13 +1,17 @@
-import { StyledHeaderToolbar, StyledLogo, StyledTabs } from "../pages/StyledHomePage";
-import { Box, Tab } from "@mui/material";
-import React, { ReactNode } from "react";
-import {NetworkStatusIndicator} from "../network/NetworkStatusIndicator";
+import { Box, Tab } from '@mui/material';
+import React, { ReactNode } from 'react';
+import {
+  StyledHeaderToolbar,
+  StyledLogo,
+  StyledTabs,
+} from '../pages/StyledHomePage';
+import { NetworkStatusIndicator } from '../network/NetworkStatusIndicator';
 
 type PropsType = {
   icons?: ReactNode;
 };
 
-export const MainHeader = ({ icons }: PropsType ) => {
+export const MainHeader = ({ icons }: PropsType) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -17,9 +21,7 @@ export const MainHeader = ({ icons }: PropsType ) => {
   return (
     <StyledHeaderToolbar>
       <Box display="flex" alignItems="center">
-        <StyledLogo>
-          SCoPE X
-        </StyledLogo>
+        <StyledLogo>SCoPE X</StyledLogo>
         <StyledTabs value={value} onChange={handleChange} centered>
           <Tab label="Key Parameters" />
           <Tab label="Summary" />
@@ -34,5 +36,5 @@ export const MainHeader = ({ icons }: PropsType ) => {
         <NetworkStatusIndicator />
       </Box>
     </StyledHeaderToolbar>
-  )
+  );
 };

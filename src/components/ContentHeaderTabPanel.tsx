@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import styled from "@emotion/styled";
+import React, { ReactNode } from 'react';
+import styled from '@emotion/styled';
 
 type PropsType = {
   children?: ReactNode;
@@ -10,19 +10,23 @@ type PropsType = {
 
 const StyledContentHeaderTabPanel = styled.div`
   height: 44px;
-  background-color: #DEECF9;
+  background-color: #deecf9;
 `;
 
-export const ContentHeaderTabPanel = ( { children, value, index, isInvisible, ...other }: PropsType ) => {
-  return (
-    <StyledContentHeaderTabPanel
-      role="tabpanel"
-      hidden={value !== index || isInvisible}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {children}
-    </StyledContentHeaderTabPanel>
-  )
-};
+export const ContentHeaderTabPanel = ({
+  children,
+  value,
+  index,
+  isInvisible,
+  ...other
+}: PropsType) => (
+  <StyledContentHeaderTabPanel
+    role="tabpanel"
+    hidden={value !== index || isInvisible}
+    id={`simple-tabpanel-${index}`}
+    aria-labelledby={`simple-tab-${index}`}
+    {...other}
+  >
+    {children}
+  </StyledContentHeaderTabPanel>
+);

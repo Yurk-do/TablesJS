@@ -1,9 +1,9 @@
-import {Box, Tab, Tabs, FormControlLabel, Switch} from "@mui/material";
-import React, { useCallback, useMemo, useState } from "react";
-import { ContentHeaderTabPanel } from "./ContentHeaderTabPanel";
+import { Box, Tab, Tabs, FormControlLabel, Switch } from '@mui/material';
+import React, { useCallback, useMemo, useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
+import { ContentHeaderTabPanel } from './ContentHeaderTabPanel';
 
 type PropsType = {
   formulasVisibilityHandler: () => void;
@@ -12,8 +12,8 @@ type PropsType = {
 
 const StyledTabs = styled(Tabs)`
   & .MuiTabs-indicator {
-      display: none;
-  }  
+    display: none;
+  }
 `;
 
 const StyledTab = styled(Tab)`
@@ -24,23 +24,26 @@ const StyledTab = styled(Tab)`
   margin: 0;
   border: none;
   width: max-content;
-    
+
   &:hover {
     background-color: transparent;
   }
-    
+
   &.Mui-selected {
-      color: #027472;
-      background-color: #DEECF9;  
+    color: #027472;
+    background-color: #deecf9;
   }
 
   &:focus {
     color: #027472;
-    background-color: #DEECF9;
+    background-color: #deecf9;
   }
 `;
 
-export const ContentHeader = ({ formulasVisibilityHandler, showFormulas }: PropsType) => {
+export const ContentHeader = ({
+  formulasVisibilityHandler,
+  showFormulas,
+}: PropsType) => {
   const [value, setValue] = useState(0);
   const [invisiblePanel, setInvisiblePanel] = useState<number | null>(null);
 
@@ -48,38 +51,60 @@ export const ContentHeader = ({ formulasVisibilityHandler, showFormulas }: Props
     setValue(newValue);
   };
 
-  const changeVisibility = useCallback((index: number) => {
-    setInvisiblePanel(value === index && invisiblePanel !== index ? index : null);
-  }, [value, invisiblePanel]);
-
-  const tabsData = useMemo(() => [
-    {
-      name: 'Departments',
-      icon: <MenuIcon/>,
+  const changeVisibility = useCallback(
+    (index: number) => {
+      setInvisiblePanel(
+        value === index && invisiblePanel !== index ? index : null,
+      );
     },
-    {
-      name: 'Visibility',
-      icon: <VisibilityIcon/>,
-    }
-  ].map((item, index) => (
-    <StyledTab
-      label={(
-        <Box display="flex" gap="8px" alignItems="center" onClick={() => changeVisibility(index)}>
-          {item.icon}
-          {item.name}
-        </Box>
-      )}
-    />
-  )), [changeVisibility]);
+    [value, invisiblePanel],
+  );
 
-  const departmentsList = useMemo(() =>
-    ["Pre-production", "Cast", "Salaries", "Equipment", "Art Dept.", "Studio", "Location", "Data"].map(
-      (item, index, arr) => (
-        <>
-          <Box>
-            {item}
-          </Box>
-          {index !== arr.length -1 && (
+  const tabsData = useMemo(
+    () =>
+      [
+        {
+          name: 'Departments',
+          icon: <MenuIcon />,
+        },
+        {
+          name: 'Visibility',
+          icon: <VisibilityIcon />,
+        },
+      ].map((item, index) => (
+        <StyledTab
+          key={item.name}
+          label={
+            <Box
+              display="flex"
+              gap="8px"
+              alignItems="center"
+              onClick={() => changeVisibility(index)}
+            >
+              {item.icon}
+              {item.name}
+            </Box>
+          }
+        />
+      )),
+    [changeVisibility],
+  );
+
+  const departmentsList = useMemo(
+    () =>
+      [
+        'Pre-production',
+        'Cast',
+        'Salaries',
+        'Equipment',
+        'Art Dept.',
+        'Studio',
+        'Location',
+        'Data',
+      ].map((item, index, arr) => (
+        <React.Fragment key={item}>
+          <Box>{item}</Box>
+          {index !== arr.length - 1 && (
             <Box
               sx={{
                 width: '1px',
@@ -89,14 +114,24 @@ export const ContentHeader = ({ formulasVisibilityHandler, showFormulas }: Props
               }}
             />
           )}
-        </>
-      )), []
+        </React.Fragment>
+      )),
+    [],
   );
 
-  const visibilityItemsList = useMemo(() => {
-    return ["International", "Taxes", "Overtime", "%MU", "RK column.", "Position text", "Show formulas"].map(
-      (item, index, arr) => (
+  const visibilityItemsList = useMemo(
+    () =>
+      [
+        'International',
+        'Taxes',
+        'Overtime',
+        '%MU',
+        'RK column.',
+        'Position text',
+        'Show formulas',
+      ].map((item, index, arr) => (
         <FormControlLabel
+          key={item}
           label={item}
           control={
             index === arr.length - 1 ? (
@@ -105,32 +140,57 @@ export const ContentHeader = ({ formulasVisibilityHandler, showFormulas }: Props
                 onChange={formulasVisibilityHandler}
               />
             ) : (
-              <Switch/>
+              <Switch />
             )
           }
         />
-      ))
-  }, [showFormulas]);
+      )),
+    [showFormulas],
+  );
 
   return (
     <Box sx={{ width: '100%' }}>
       <Box>
-        <StyledTabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <StyledTabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
           {tabsData}
         </StyledTabs>
       </Box>
       <Box>
-        <ContentHeaderTabPanel value={value} index={0} isInvisible={invisiblePanel === 0}>
-          <Box display="flex" gap="10px" height="44px" alignItems="center" margin="0 10px" >
+        <ContentHeaderTabPanel
+          value={value}
+          index={0}
+          isInvisible={invisiblePanel === 0}
+        >
+          <Box
+            display="flex"
+            gap="10px"
+            height="44px"
+            alignItems="center"
+            margin="0 10px"
+          >
             {departmentsList}
           </Box>
         </ContentHeaderTabPanel>
-        <ContentHeaderTabPanel value={value} index={1} isInvisible={invisiblePanel === 1}>
-          <Box display="flex" gap="10px" height="44px" alignItems="center" margin="0 10px" >
+        <ContentHeaderTabPanel
+          value={value}
+          index={1}
+          isInvisible={invisiblePanel === 1}
+        >
+          <Box
+            display="flex"
+            gap="10px"
+            height="44px"
+            alignItems="center"
+            margin="0 10px"
+          >
             {visibilityItemsList}
           </Box>
         </ContentHeaderTabPanel>
       </Box>
     </Box>
-  )
-}
+  );
+};

@@ -1,4 +1,5 @@
-import { IChapter } from "../types/chapter";
+import { IChapter } from '../types/chapter';
+
 export const chaptersList: IChapter[] = [
   {
     id: 1,
@@ -34,7 +35,8 @@ export const chaptersList: IChapter[] = [
     completed: true,
     indicatorColor: '#BB86FC',
     initOpen: false,
-  },  {
+  },
+  {
     id: 21,
     name: 'Pre-production2',
     completed: true,
@@ -68,7 +70,8 @@ export const chaptersList: IChapter[] = [
     completed: true,
     indicatorColor: '#BB86FC',
     initOpen: false,
-  },  {
+  },
+  {
     id: 31,
     name: 'Pre-production3',
     completed: true,

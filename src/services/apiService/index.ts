@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { stringify } from 'qs';
-import { apiErrorHandler } from "./errorHandler";
+import { apiErrorHandler } from './errorHandler';
 
 export const apiService = axios.create({
   baseURL: process.env.REACT_APP_BASE_API_URL,
@@ -9,13 +9,9 @@ export const apiService = axios.create({
     stringify(params, {
       arrayFormat: 'brackets',
       encode: false,
-    })
+    }),
 });
 
-apiService.interceptors.request.use(
-  (request) => {
-    return request;
-  }
-);
+apiService.interceptors.request.use((request) => request);
 
 apiService.interceptors.response.use((res) => res, apiErrorHandler);

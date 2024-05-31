@@ -26,13 +26,8 @@ self.addEventListener('activate', event => {
     caches.keys().then(
       (keyList) => Promise.all(
         keyList
-          .filter(() => {})
-          .map(
-          (key) => {
-            if (cacheKeeplist.indexOf(key) === -1) {
-              return caches.delete(key);
-            }
-          }
+          .filter((key) =>!cacheKeeplist.includes(key))
+          .map((key) => caches.delete(key)
         )
       ),
     ),

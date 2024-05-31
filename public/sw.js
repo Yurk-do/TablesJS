@@ -7,6 +7,12 @@ const urlsToCache = [
     'manifest.json',
     'index.html',
     'static/js/bundle.js',
+    'static/js/main.58e014ad.js',
+    'static/js/main.58e014ad.js.map',
+    'static/css/main.07a8b673.css',
+    'static/css/main.07a8b673.css.map',
+    'static/media/close-arrows.6ae5e270b018476f8058aefe5e8261ba.svg',
+    'static/media/open-arrows.14d26bc26fb6813090a22ceb7a2043de.svg',
 ];
 
 self.addEventListener('install', event => {

@@ -62,7 +62,7 @@ export const HomePage = () => {
     getChapters().then((data) => {
       setChapters(data);
       setDataForVizual(
-        createDataForVizual(data, chapterList, hiddenCategories),
+        createDataForVizual(data, chapterList, hiddenCategories)
       );
     });
   }, []);
@@ -95,10 +95,10 @@ export const HomePage = () => {
       selectedTags.length
         ? selectedTags.reduce<number[]>(
             (arr, tag) => [...arr, ...addedTags[tag]],
-            [],
+            []
           )
         : null,
-    [selectedTags],
+    [selectedTags]
   );
 
   const closeRightPanel = () => {
@@ -116,7 +116,7 @@ export const HomePage = () => {
         openDrawer();
       }
     },
-    [drawerContentType],
+    [drawerContentType]
   );
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -139,7 +139,7 @@ export const HomePage = () => {
   const commonCounter = useMemo(() => {
     const total = Object.values(dataForVizual).reduce(
       (result, item) => result + item.total,
-      0,
+      0
     );
     return Number(isNil(total) ? 0 : total).toLocaleString('de-DE');
   }, [dataForVizual]);
@@ -174,7 +174,7 @@ export const HomePage = () => {
   const selectCell = (
     coords: { x: number; y: number },
     worksheet: jspreadsheet.worksheetInstance,
-    tableName: string,
+    tableName: string
   ) => {
     const activeCell = worksheet.getCell(coords.x, coords.y) as HTMLElement;
 
@@ -227,7 +227,7 @@ export const HomePage = () => {
     setSelectedTags((tags) =>
       tags.includes(defaultTagNames[index])
         ? tags.filter((tag) => tag !== defaultTagNames[index])
-        : [...tags, defaultTagNames[index]],
+        : [...tags, defaultTagNames[index]]
     );
   };
 
@@ -311,7 +311,7 @@ export const HomePage = () => {
       dataForVizual,
       visibilityConfig?.visibleChapters,
       chapters,
-      tagsDisplayingNames
+      tagsDisplayingNames,
     ]
   );
 
@@ -376,7 +376,7 @@ export const HomePage = () => {
         }
       />
     ),
-    [toggleRightPanel, openedDrawer, drawerContentType],
+    [toggleRightPanel, openedDrawer, drawerContentType]
   );
 
   const saveData = () => {

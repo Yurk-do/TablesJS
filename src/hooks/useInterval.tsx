@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 export const useInterval = (
   handler: () => void,
   time = 10000,
-  dependencies: any[] = [],
+  dependencies: any[] = []
 ) => {
   useEffect(() => {
     const saveInterval = setInterval(() => {

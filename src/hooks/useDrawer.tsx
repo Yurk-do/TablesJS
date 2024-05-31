@@ -47,7 +47,7 @@ export const useDrawer = ({
           key={version.id}
         />
       )),
-    [],
+    []
   );
 
   const ordersList = useMemo(
@@ -61,7 +61,7 @@ export const useDrawer = ({
           onSelectOrder={() => selectOrder(order)}
         />
       )),
-    [],
+    []
   );
 
   const tagsList = useMemo(
@@ -75,14 +75,14 @@ export const useDrawer = ({
           onChangeName={(newName: string) => {
             setTagsDisplayingNames(
               tagsDisplayingNames.map((oldName, i) =>
-                index === i ? newName : oldName,
-              ),
+                index === i ? newName : oldName
+              )
             );
           }}
           onSelectTag={() => selectTag(index)}
         />
       )),
-    [tagsDisplayingNames, selectedTags],
+    [tagsDisplayingNames, selectedTags]
   );
 
   const drawerContentListMap: Record<DrawerContentType, ReactNode[]> = {
@@ -107,7 +107,7 @@ export const useDrawer = ({
         </Box>
       </Box>
     ),
-    [drawerContentType, tagsDisplayingNames, selectedTags],
+    [drawerContentType, tagsDisplayingNames, selectedTags]
   );
 
   return {

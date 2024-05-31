@@ -11,7 +11,7 @@ export interface IDrawerContext {
 export const initialDrawerWidth = 300;
 
 export const DrawerContext = createContext<IDrawerContext | undefined>(
-  undefined,
+  undefined
 );
 
 export const DrawerProvider: React.FC<{ children: ReactNode }> = ({

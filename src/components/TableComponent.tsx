@@ -35,7 +35,7 @@ type PropsType = {
   selectCell: (
     coords: CellCoords,
     worksheet: jspreadsheet.worksheetInstance,
-    tableName: string,
+    tableName: string
   ) => void;
   tagsDisplayingNames: string[];
 };
@@ -206,7 +206,7 @@ export const TableComponent = ({
 
   const getTableData = (
     tableDataCategories: ITableData[],
-    index = 1,
+    index = 1
   ): InitialTableDataType => {
     if (!tableDataCategories) {
       return initialTableData;
@@ -222,7 +222,7 @@ export const TableComponent = ({
 
     const filteredCategories = visibleCategories
       ? tableDataCategories.filter((category) =>
-          visibleCategories.includes(category.name),
+          visibleCategories.includes(category.name)
         )
       : tableDataCategories;
 
@@ -272,7 +272,7 @@ export const TableComponent = ({
 
     const makeRowSettings = (
       size: number,
-      options?: Record<number, Record<string, any>>,
+      options?: Record<number, Record<string, any>>
     ) => {
       const rowsSettings: any = {};
       for (let i = 0; i < size; i += 1) {
@@ -297,7 +297,7 @@ export const TableComponent = ({
 
     const rowsSettings: Record<number, jspreadsheet.Row> = makeRowSettings(
       result.length,
-      options,
+      options
     );
 
     /* нужно для эмуляции работы с добавлениеим нетепичных строк (может ломать фильрацию) */
@@ -407,7 +407,7 @@ export const TableComponent = ({
 
       onchangestyle: (
         worksheet: jspreadsheet.worksheetInstance,
-        newValue: object,
+        newValue: object
       ) => {
         Object.entries(newValue).forEach((el) => {
           // const newValueRowIndex = Number(el[0].slice(1, el[0].length));
@@ -418,7 +418,7 @@ export const TableComponent = ({
       onselection: (
         worksheet: jspreadsheet.worksheetInstance,
         px: number,
-        py: number,
+        py: number
       ) => {
         if (isShowFormulas) {
           const cell = worksheet.getCell(px, py);
@@ -489,7 +489,7 @@ export const TableComponent = ({
         const changeCellColor = (
           worksh: jspreadsheet.worksheetInstance,
           cellsCoords: CellCoords[],
-          color: string,
+          color: string
         ) => {
           if (cellsCoords.length) {
             cellsCoords.forEach((cell) => {
@@ -530,7 +530,7 @@ export const TableComponent = ({
             const lastSelectedRowNumber = selectedRows.at(-1) as number;
 
             const lastSelectedRowData = worksheet.getRow(
-              lastSelectedRowNumber,
+              lastSelectedRowNumber
             ) as jspreadsheet.Row;
 
             if (lastSelectedRowData.readOnly) {
@@ -586,7 +586,7 @@ export const TableComponent = ({
               worksheet.setMerge(
                 getCellName(cells[0]),
                 cells.at(-1).x - cells[0].x + 1,
-                cells.at(-1).y - cells[0].y + 1,
+                cells.at(-1).y - cells[0].y + 1
               );
             }
           },
@@ -602,7 +602,7 @@ export const TableComponent = ({
                 worksheet.setMeta(
                   getCellName({ x: 1, y: rowIndex }),
                   'tag',
-                  tagName,
+                  tagName
                 );
                 // const meta = worksheet.getMeta(
                 //   getCellName({ x: 1, y: rowIndex }),
@@ -637,7 +637,7 @@ export const TableComponent = ({
         cell: HTMLElement,
         x: number,
         y: number,
-        element: HTMLElement,
+        element: HTMLElement
       ) => {
         const cellClass = cell.getAttribute('class');
         if (cellClass && cellClass.includes('jss_richtext')) {

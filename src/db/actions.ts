@@ -2,7 +2,7 @@ import { Articles, dbName, dbVersion } from './db';
 
 export const updateData = <T>(
   storeName: string,
-  data: T,
+  data: T
 ): Promise<T | string | null> =>
   new Promise((resolve) => {
     const request = indexedDB.open(dbName, dbVersion);
@@ -31,7 +31,7 @@ export const updateData = <T>(
 
 export const getIndexedDbData = <T>(
   storeName: string,
-  article: Articles,
+  article: Articles
 ): Promise<T[]> =>
   new Promise((resolve) => {
     const request = indexedDB.open(dbName, dbVersion);

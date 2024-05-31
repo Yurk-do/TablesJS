@@ -73,7 +73,8 @@
       {
         "singleQuote": true,
         "parser": "typescript",
-        "usePrettierrc": false
+        "usePrettierrc": false,
+        "trailingComma": "es5"
       }
     ],
     "import/no-extraneous-dependencies": 0,

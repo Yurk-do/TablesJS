@@ -99,7 +99,7 @@ export const Chapter = ({
     _.values(chapt?.categories).filter((item) => item.completed).length;
 
   const [totalCount, setTotalCount] = useState(
-    getChapterTotalCount(chapter) || 0,
+    getChapterTotalCount(chapter) || 0
   );
 
   const categoriesTitle = totalCount > 1 ? 'categories' : 'category';
@@ -107,7 +107,7 @@ export const Chapter = ({
   const chapterTotal = useMemo(
     () =>
       Number(isNil(chapter.total) ? 0 : chapter.total).toLocaleString('de-DE'),
-    [chapter.total],
+    [chapter.total]
   );
 
   const [expanded, setExpanded] = React.useState(false);

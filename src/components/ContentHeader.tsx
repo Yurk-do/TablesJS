@@ -54,10 +54,10 @@ export const ContentHeader = ({
   const changeVisibility = useCallback(
     (index: number) => {
       setInvisiblePanel(
-        value === index && invisiblePanel !== index ? index : null,
+        value === index && invisiblePanel !== index ? index : null
       );
     },
-    [value, invisiblePanel],
+    [value, invisiblePanel]
   );
 
   const tabsData = useMemo(
@@ -87,7 +87,7 @@ export const ContentHeader = ({
           }
         />
       )),
-    [changeVisibility],
+    [changeVisibility]
   );
 
   const departmentsList = useMemo(
@@ -116,7 +116,7 @@ export const ContentHeader = ({
           )}
         </React.Fragment>
       )),
-    [],
+    []
   );
 
   const visibilityItemsList = useMemo(
@@ -145,7 +145,7 @@ export const ContentHeader = ({
           }
         />
       )),
-    [showFormulas],
+    [showFormulas]
   );
 
   return (

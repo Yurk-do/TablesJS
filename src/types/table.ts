@@ -46,7 +46,7 @@ export interface TableSettings {
     containerElement: HTMLElement,
     data: any[],
     x: number,
-    y: number,
+    y: number
   ) => void;
   oncopy?: (containerElement: HTMLElement, rows: string[]) => void;
   updateTable?: (
@@ -56,7 +56,7 @@ export interface TableSettings {
     row: number,
     val: string,
     label: string,
-    cellName: string,
+    cellName: string
   ) => void;
 }
 export interface TableAfterChanges {

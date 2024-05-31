@@ -19,7 +19,7 @@ export const getCellName = (cell: { x: number; y: number }) =>
 export const createDataForVizual = (
   chapters: IChapterInfo[],
   chapterList: IChapter[],
-  hiddenCategories: string[],
+  hiddenCategories: string[]
 ): IDataForVizual => {
   const result = chapterList.reduce<Record<string, any>>((data, chapter) => {
     data[chapter.name] = {
@@ -47,12 +47,12 @@ export const createDataForVizual = (
         .reduce((acc, row) => {
           const totalLeft = Math.round(
             (row.nationalMQ * row.nationalTD * row.price + row.nationalOT) *
-              1.25,
+              1.25
           );
           const totalRight = Math.round(
             (row.internationalMQ * row.internationalTD * row.internationalRate +
               row.internationalOT) *
-              1.25,
+              1.25
           );
           return acc + Math.round(totalLeft + totalRight);
         }, 0)
@@ -77,7 +77,7 @@ export const updateChaptersData = (
 
   tableData.forEach((tableDataItem) => {
     const chapter = chaptersData.find(
-      (chapterDataItem) => chapterDataItem.name === tableDataItem.name,
+      (chapterDataItem) => chapterDataItem.name === tableDataItem.name
     );
     if (chapter) {
       tableDataItem.dataValues.forEach((value) => {
@@ -89,7 +89,7 @@ export const updateChaptersData = (
           for (let i = 0; i < chapter.categories.length; i += 1) {
             const row = chapter.categories[i].data.find(
               (categoryData: { id: string }) =>
-                categoryData.id.toString() === rowValuesId,
+                categoryData.id.toString() === rowValuesId
             );
             if (!row) {
               break;
@@ -110,7 +110,7 @@ export const updateChaptersData = (
 
 export const addDataHandler = async (
   data: jspreadsheet.Spreadsheet[],
-  chapters: any,
+  chapters: any
 ) => {
   const tableData = [];
 
@@ -120,13 +120,13 @@ export const addDataHandler = async (
     const dataValues = // @ts-ignore
       (spreadsheet.worksheets?.[0] as jspreadsheet.worksheetInstance).getData(
         false,
-        true,
+        true
       );
     // @ts-ignore
     const dataFormulas = // @ts-ignore
       (spreadsheet.worksheets?.[0] as jspreadsheet.worksheetInstance).getData(
         false,
-        false,
+        false
       );
     // @ts-ignore
     const styles = // @ts-ignore

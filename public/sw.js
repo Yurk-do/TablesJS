@@ -1,4 +1,4 @@
-const CACHE_NAME = 'scope-cache-v1';
+const CACHE_NAME = 'scope-cache-v2';
 const urlsToCache = [
     '/',
     'favicon.ico',

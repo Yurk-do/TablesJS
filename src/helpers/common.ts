@@ -66,7 +66,7 @@ export const createDataForVizual = (
 
 export const updateChaptersData = (
   tableData: TableDataItemType[],
-  chaptersData: any[],
+  chaptersData: any[]
 ) => {
   const convertValueToNumber = (value: string | number) =>
     typeof value === 'number'

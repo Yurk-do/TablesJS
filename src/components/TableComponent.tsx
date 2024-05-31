@@ -436,13 +436,7 @@ export const TableComponent = ({
         //   selectCell(coords, worksheet, tableName);
         // }
       },
-      contextMenu: (
-        worksheet,
-        x,
-        y,
-        __,
-        items,
-      ) => {
+      contextMenu: (worksheet, x, y, __, items) => {
         // console.log(worksheet.getRow(y));
         // console.log(worksheet.getColumn(x));
         // console.log(worksheet.getProperty(x, y));

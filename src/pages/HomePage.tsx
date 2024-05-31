@@ -239,81 +239,78 @@ export const HomePage = () => {
     onClose: closeRightPanel,
   });
 
-  const chaptersArray = useMemo(
-    () =>
-      !chapters.length
-        ? null
-        : chapters.map((chapter) => (
-          <Chapter
-            hide={
-              !!(
-                activeFullScreenChapter &&
-                activeFullScreenChapter?.name !== chapter.name
-              ) ||
-              (!!visibilityConfig &&
-                !visibilityConfig?.visibleChapters.includes(chapter.name))
-            }
-            key={chapter.name}
-            chapter={dataForVizual[chapter.name]}
-            isFullScreenMode={activeFullScreenChapter?.name === chapter.name}
-            actions={
-              <div className="chapter-action-panel">
-                {!isFullScreenMode ? (
-                  <img
-                    onClick={() => changeFullScreenMode(chapter)}
-                    src={openArrows}
-                    alt=""
-                    style={{ cursor: 'pointer' }}
-                  />
-                ) : (
-                  <img
-                    onClick={() => changeFullScreenMode(null)}
-                    src={closeArrow}
-                    style={{ cursor: 'pointer' }}
-                    alt=""
-                  />
-                )}
-                <div className="category-menu" />
-              </div>
-            }
-            details={
-              <div className="tables-container">
-                <TableComponent
-                  setCellCoords={setCellCoords}
-                  name={chapter.name}
-                  key={chapter.name}
-                  setRowData={setInvoiceData}
-                  openJModal={() => setIsJModalOpen(true)}
-                  visibleCategories={
-                    visibilityConfig?.visibleCategories || null
-                  }
-                  visibleRowsIds={visibilityConfig?.visibleRowsIds || null}
-                  categories={chapter.categories}
-                  editable
-                  selectedTagsRow={selectedTagsRow}
-                  isShowFormulas={showFormulas}
-                  addTag={addTag}
-                  isShowZeroValues
-                  tagsDisplayingNames={tagsDisplayingNames}
-                  updateChapterTotal={(total) =>
-                    updateChapterTotal(chapter.name, total)
-                  }
-                  selectCell={selectCell}
+  const chaptersArray = useMemo(() =>
+    !chapters.length
+      ? null
+      : chapters.map((chapter) => (
+        <Chapter
+          hide={
+            !!(
+              activeFullScreenChapter &&
+              activeFullScreenChapter?.name !== chapter.name
+            ) ||
+            (!!visibilityConfig &&
+              !visibilityConfig?.visibleChapters.includes(chapter.name))
+          }
+          key={chapter.name}
+          chapter={dataForVizual[chapter.name]}
+          isFullScreenMode={activeFullScreenChapter?.name === chapter.name}
+          actions={
+            <div className="chapter-action-panel">
+              {!isFullScreenMode ? (
+                <img
+                  onClick={() => changeFullScreenMode(chapter)}
+                  src={openArrows}
+                  alt=""
+                  style={{ cursor: 'pointer' }}
                 />
-              </div>
-            }
-          />
-        )),
-    [
-      activeFullScreenChapter,
-      isFullScreenMode,
-      showFormulas,
-      dataForVizual,
-      visibilityConfig?.visibleChapters,
-      chapters,
-      tagsDisplayingNames,
-    ]
-  );
+              ) : (
+                <img
+                  onClick={() => changeFullScreenMode(null)}
+                  src={closeArrow}
+                  style={{ cursor: 'pointer' }}
+                  alt=""
+                />
+              )}
+              <div className="category-menu" />
+            </div>
+          }
+          details={
+            <div className="tables-container">
+              <TableComponent
+                setCellCoords={setCellCoords}
+                name={chapter.name}
+                key={chapter.name}
+                setRowData={setInvoiceData}
+                openJModal={() => setIsJModalOpen(true)}
+                visibleCategories={
+                  visibilityConfig?.visibleCategories || null
+                }
+                visibleRowsIds={visibilityConfig?.visibleRowsIds || null}
+                categories={chapter.categories}
+                editable
+                selectedTagsRow={selectedTagsRow}
+                isShowFormulas={showFormulas}
+                addTag={addTag}
+                isShowZeroValues
+                tagsDisplayingNames={tagsDisplayingNames}
+                updateChapterTotal={(total) =>
+                  updateChapterTotal(chapter.name, total)
+                }
+                selectCell={selectCell}
+              />
+            </div>
+          }
+        />
+    )), [
+    activeFullScreenChapter,
+    isFullScreenMode,
+    showFormulas,
+    dataForVizual,
+    visibilityConfig?.visibleChapters,
+    chapters,
+    tagsDisplayingNames,
+  ]);
 
   const tableWidth = useMemo(
     () =>

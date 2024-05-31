@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { HomePage } from './pages/HomePage';

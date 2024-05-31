@@ -26,18 +26,19 @@ export const DrawerProvider: React.FC<{ children: ReactNode }> = ({
 
   const changeDrawerWidth = (width: number) => setDrawerWidth(width);
 
-  const contextValue = useMemo(() => ({
-    openedDrawer,
-    openDrawer,
-    closeDrawer,
-    drawerWidth,
-    changeDrawerWidth,
-  }), [openedDrawer, drawerWidth]);
+  const contextValue = useMemo(
+    () => ({
+      openedDrawer,
+      openDrawer,
+      closeDrawer,
+      drawerWidth,
+      changeDrawerWidth,
+    }),
+    [openedDrawer, drawerWidth]
+  );
 
   return (
-    <DrawerContext.Provider
-      value={contextValue}
-    >
+    <DrawerContext.Provider value={contextValue}>
       {children}
     </DrawerContext.Provider>
   );

@@ -390,7 +390,7 @@ export const HomePage = () => {
     });
   };
 
-  // useInterval(saveData, 10000, [chapters]);
+  useInterval(saveData, 10000, [chapters]);
 
   return (
     <StyledHomePage>

@@ -1,7 +1,12 @@
 const CACHE_NAME = 'scope-cache-v1';
 const urlsToCache = [
+    '/',
+    'favicon.ico',
+    'logo192.png',
+    'logo512.png',
+    'manifest.json',
     'index.html',
-    './src/index.css',
+    'static/js/bundle.js',
 ];
 
 self.addEventListener('install', event => {
@@ -37,9 +42,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', (event) => {
   console.log('Fetch intercepted for:', event.request);
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
+    caches.match(event.request.url).then((cachedResponse) => {
       console.log(cachedResponse);
-
       if (cachedResponse) {
         return cachedResponse;
       }

@@ -34,7 +34,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch db.json --port 5000",
+    "server": ". ~/.nvm/nvm.sh && nvm use && json-server --watch db.json --port 5000",
     "lint": "eslint --cache --ext ts,tsx,js,jsx src",
     "lint:fix": "eslint --cache --fix --ext ts,tsx,js,jsx src"
   },

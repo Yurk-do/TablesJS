@@ -6,7 +6,6 @@ const urlsToCache = [
   // 'logo512.png',
   // 'manifest.json',
   // 'index.html',
-  '/',
   'favicon.ico',
   'logo192.png',
   'logo512.png',

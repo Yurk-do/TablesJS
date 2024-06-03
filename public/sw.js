@@ -21,14 +21,17 @@ const urlsToCache = [
   'static/media/open-arrows.14d26bc26fb6813090a22ceb7a2043de.svg',
 ];
 
+const filesUpdate = cache => {
+  const stack = [];
+  urlsToCache.forEach(file => stack.push(
+    cache.add(file).catch(()=> console.error(`can't load ${file} to cache`))
+  ));
+  return Promise.all(stack);
+};
+
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(urlsToCache).then(() => {
-        console.log("cached!")
-        this.skipWaiting();
-      }).catch((err) => {console.log(err)});
-    }),
+    caches.open(CACHE_NAME).then(filesUpdate).catch((err) => {console.log(err)})
   );
 });
 

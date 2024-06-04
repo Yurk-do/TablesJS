@@ -1,11 +1,6 @@
 const CACHE_NAME = 'scope-cache-v2';
-const urlsToCache = [
-  // '/',
-  // 'favicon.ico',
-  // 'logo192.png',
-  // 'logo512.png',
-  // 'manifest.json',
-  // 'index.html',
+
+const productionUrls = [
   'https://yurk-do.github.io/TablesJS/',
   'favicon.ico',
   'logo192.png',
@@ -13,15 +8,26 @@ const urlsToCache = [
   'asset-manifest.json',
   'manifest.json',
   'index.html',
-  'static/js/main.774e40eb.js',
-  'static/js/main.774e40eb.js.map',
-  'static/css/main.07a8b673.css',
-  'static/css/main.07a8b673.css.map',
-  'static/media/close-arrows.6ae5e270b018476f8058aefe5e8261ba.svg',
-  'static/media/open-arrows.14d26bc26fb6813090a22ceb7a2043de.svg',
+  // 'static/js/main.774e40eb.js',
+  // 'static/css/main.07a8b673.css',
+  // 'static/media/close-arrows.6ae5e270b018476f8058aefe5e8261ba.svg',
+  // 'static/media/open-arrows.14d26bc26fb6813090a22ceb7a2043de.svg',
 ];
 
-const filesUpdate = cache => {
+const localUrls = [
+  '/',
+  'favicon.ico',
+  'logo192.png',
+  'logo512.png',
+  'manifest.json',
+  'index.html',
+];
+
+const urlsToCache = process.env.REACT_APP_STAND === 'production'
+  ? productionUrls
+  : localUrls;
+
+const filesUpdate = (cache) => {
   const stack = [];
   urlsToCache.forEach(file => stack.push(
     cache.add(file).catch(()=> console.error(`can't load ${file} to cache`))
@@ -50,13 +56,21 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', (event) => {
-  console.log('Fetch intercepted for:', event.request);
   event.respondWith(
     caches.match(event.request.url).then((cachedResponse) => {
-      console.log(cachedResponse);
-      if (cachedResponse) {
+      if (cachedResponse && !navigator.onLine) {
         return cachedResponse;
       }
+
+      const regex = '/static\/(js|css|media)\/main/';
+      if (regex.test(event.request.url)) {
+        caches.open(CACHE_NAME)
+          .then((cache) => {
+            cache.add(event.request.url)
+              .catch(()=> console.error(`can't load ${event.request.url} to cache`))
+          })
+      }
+
       return fetch(event.request);
     }),
   );

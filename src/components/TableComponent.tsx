@@ -441,7 +441,7 @@ export const TableComponent = ({
         // console.log(worksheet.getColumn(x));
         // console.log(worksheet.getProperty(x, y));
         // console.log(worksheet.getProperty(x));
-        console.log(worksheet.getValue(getCellName({ x, y }), false));
+        // console.log(worksheet.getValue(getCellName({ x, y }), false));
 
         // // Clicking in the headers
         // if (section === 'header') {
@@ -624,7 +624,7 @@ export const TableComponent = ({
           // });
       },
       onbeforeinsertcolumn: (worksheet) => {
-        console.log(worksheet.getRowData(0, false));
+        // console.log(worksheet.getRowData(0, false));
       },
       oncreateeditor: (
         worksheet: jspreadsheet.worksheetInstance,

@@ -67,16 +67,6 @@ self.addEventListener('fetch', (event) => {
       if (cachedResponse && !navigator.onLine) {
         return cachedResponse;
       }
-
-      const regex = '/static\/(js|css|media)\/main/';
-      if (regex.test(event.request.url)) {
-        caches.open(CACHE_NAME)
-          .then((cache) => {
-            cache.add(event.request.url)
-              .catch(()=> console.error(`can't load ${event.request.url} to cache`))
-          })
-      }
-
       return fetch(event.request);
     }),
   );

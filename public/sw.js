@@ -1,9 +1,9 @@
 const CACHE_NAME = 'scope-cache-v2';
 
 const isLocalhost = Boolean(
-  window.location.hostname === 'localhost' ||
-  window.location.hostname === '[::1]' ||
-  window.location.hostname.match(
+  self.location.hostname === 'localhost' ||
+  self.location.hostname === '[::1]' ||
+  self.location.hostname.match(
     /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/,
   ),
 );
@@ -67,16 +67,6 @@ self.addEventListener('fetch', (event) => {
       if (cachedResponse && !navigator.onLine) {
         return cachedResponse;
       }
-
-      const regex = '/static\/(js|css|media)\/main/';
-      if (regex.test(event.request.url)) {
-        caches.open(CACHE_NAME)
-          .then((cache) => {
-            cache.add(event.request.url)
-              .catch(()=> console.error(`can't load ${event.request.url} to cache`))
-          })
-      }
-
       return fetch(event.request);
     }),
   );

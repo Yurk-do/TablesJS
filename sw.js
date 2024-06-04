@@ -1,5 +1,13 @@
 const CACHE_NAME = 'scope-cache-v2';
 
+const isLocalhost = Boolean(
+  window.location.hostname === 'localhost' ||
+  window.location.hostname === '[::1]' ||
+  window.location.hostname.match(
+    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/,
+  ),
+);
+
 const productionUrls = [
   'https://yurk-do.github.io/TablesJS/',
   'favicon.ico',
@@ -23,9 +31,7 @@ const localUrls = [
   'index.html',
 ];
 
-const urlsToCache = process.env.REACT_APP_STAND === 'production'
-  ? productionUrls
-  : localUrls;
+const urlsToCache = isLocalhost ? localUrls : productionUrls;
 
 const filesUpdate = (cache) => {
   const stack = [];

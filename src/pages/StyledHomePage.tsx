@@ -18,7 +18,7 @@ export const StyledHeaderToolbar = styled(Toolbar)`
 `;
 
 export const StyledTabs = styled(Tabs)`
-  background-color: red;
+  background-color: #deecf9;
   color: black;
 `;
 

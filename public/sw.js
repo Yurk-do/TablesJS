@@ -23,7 +23,6 @@ const productionUrls = [
 ];
 
 const localUrls = [
-  '/',
   'favicon.ico',
   'logo192.png',
   'logo512.png',

@@ -22,6 +22,7 @@ const App = () => {
   serviceWorkerRegistration?.then((registration) => {
     if (registration) {
       registration.onupdatefound = () => {
+        console.log('New content is available; please refresh.');
         setModalOpen(true);
       };
       update = registration.update;

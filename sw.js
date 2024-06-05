@@ -23,7 +23,6 @@ const productionUrls = [
 ];
 
 const localUrls = [
-  '/',
   'favicon.ico',
   'logo192.png',
   'logo512.png',
@@ -60,6 +59,7 @@ self.addEventListener('activate', event => {
     ),
   );
 });
+
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(

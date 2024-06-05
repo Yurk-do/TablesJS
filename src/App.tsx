@@ -35,7 +35,7 @@ const App = () => {
         <DrawerProvider>
           <HomePage />
           <Modal
-            open={modalOpen && update}
+            open={modalOpen}
             onClose={() => setModalOpen(false)}
           >
             <>

@@ -23,26 +23,28 @@ const productionUrls = [
 ];
 
 const localUrls = [
+  '/',
+  'index.html',
   'favicon.ico',
   'logo192.png',
   'logo512.png',
   'manifest.json',
-  'index.html',
 ];
 
 const urlsToCache = isLocalhost ? localUrls : productionUrls;
 
-const filesUpdate = (cache) => {
+const filesUpdate = (cache, urls) => {
   const stack = [];
-  urlsToCache.forEach(file => stack.push(
+  urls.forEach(file => stack.push(
     cache.add(file).catch(()=> console.error(`can't load ${file} to cache`))
   ));
   return Promise.all(stack);
 };
 
 self.addEventListener('install', event => {
+  console.log('[Service Worker] Install');
   event.waitUntil(
-    caches.open(CACHE_NAME).then(filesUpdate).catch((err) => {console.log(err)})
+    caches.open(CACHE_NAME).then((cache) => filesUpdate(cache, urlsToCache)).catch((err) => {console.log(err)})
   );
 });
 

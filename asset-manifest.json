@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "https://yurk-do.github.io/TablesJS/static/css/main.07a8b673.css",
-    "main.js": "https://yurk-do.github.io/TablesJS/static/js/main.a3f91c8c.js",
+    "main.js": "https://yurk-do.github.io/TablesJS/static/js/main.2d98abf1.js",
     "static/media/close-arrows.svg": "https://yurk-do.github.io/TablesJS/static/media/close-arrows.6ae5e270b018476f8058aefe5e8261ba.svg",
     "index.html": "https://yurk-do.github.io/TablesJS/index.html",
     "static/media/open-arrows.svg": "https://yurk-do.github.io/TablesJS/static/media/open-arrows.14d26bc26fb6813090a22ceb7a2043de.svg",
     "main.07a8b673.css.map": "https://yurk-do.github.io/TablesJS/static/css/main.07a8b673.css.map",
-    "main.a3f91c8c.js.map": "https://yurk-do.github.io/TablesJS/static/js/main.a3f91c8c.js.map"
+    "main.2d98abf1.js.map": "https://yurk-do.github.io/TablesJS/static/js/main.2d98abf1.js.map"
   },
   "entrypoints": [
     "static/css/main.07a8b673.css",
-    "static/js/main.a3f91c8c.js"
+    "static/js/main.2d98abf1.js"
   ]
 }

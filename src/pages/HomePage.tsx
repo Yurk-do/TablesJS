@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react';
 import { jspreadsheet } from '@jspreadsheet/react';
+import render from '@jspreadsheet/render';
 import openArrows from 'assets/open-arrows.svg';
 import closeArrow from 'assets/close-arrows.svg';
 import { Box, Button, FormControlLabel, Modal } from '@mui/material';
@@ -50,6 +51,17 @@ import { defaultTagNames, initialTagsData } from '../mocks/tags';
 import { getChapters } from '../services/tableService';
 import { useInterval } from '../hooks/useInterval';
 import { DrawerContentType, useDrawer } from '../hooks/useDrawer';
+
+jspreadsheet.setExtensions({ render });
+
+const download = () => {
+  const sheet = jspreadsheet.spreadsheet?.[0] as unknown as jspreadsheet.spreadsheetInstance;
+  if (sheet?.element) {
+    jspreadsheet.render(sheet.element, {
+      filename: 'file.xlsx',
+    });
+  }
+};
 
 export const HomePage = () => {
   const hiddenCategories: string[] = _.cloneDeep(HIDDEN_CATEGORIES);
@@ -420,16 +432,27 @@ export const HomePage = () => {
             undoDisable={undoDisable}
             counter={commonCounter}
             rightPart={
-              !openedDrawer && (
+              <>
+                {!openedDrawer && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={openModal}
+                    sx={{ cursor: 'pointer' }}
+                  >
+                    Create Project
+                  </Button>
+                )}
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={openModal}
+                  onClick={download}
                   sx={{ cursor: 'pointer' }}
                 >
-                  Create Project
+                  Download
                 </Button>
-              )
+              </>
+
             }
           />
         )}

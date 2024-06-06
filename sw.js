@@ -1,4 +1,4 @@
-const CACHE_NAME = 'scope-cache-v22';
+const CACHE_NAME = 'scope-cache-v23';
 
 const isLocalhost = Boolean(
   self.location.hostname === 'localhost' ||

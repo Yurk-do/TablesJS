@@ -1,4 +1,4 @@
-const CACHE_NAME = 'scope-cache-v4';
+const CACHE_NAME = 'scope-cache-v16';
 
 const isLocalhost = Boolean(
   self.location.hostname === 'localhost' ||
@@ -61,6 +61,13 @@ self.addEventListener('activate', event => {
     ),
   );
 });
+
+self.addEventListener('message', (event) => {
+  if (event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+})
+
 
 
 self.addEventListener('fetch', (event) => {
